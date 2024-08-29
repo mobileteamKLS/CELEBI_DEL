@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .login__block__btn_margin {
+            margin-top: 3px !important;
+        }
+
+        a {
+            color: #fff !important;
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body data-ma-theme="green">
+    <main class="main">
+        <div class="page-loader">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navigation-trigger hidden-xl-up">
+                <div class="navigation-trigger__inner">
+                    <!--<i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
+                    <a href="ImportOperations.html"><i style="font-size:2rem !important;" class="zmdi zmdi-chevron-left zmdi-hc-2x"></i></a>
+
+                </div>
+            </div>
+            <div class="header-title" id="lblPageName">Document Upload</div>
+            <ul class="top-nav">
+                <!--<li class="hidden-xl-up"><a href="Dashboard.html" style="color:#fff;"><i class="zmdi zmdi-home zmdi-hc-2x"></i></a></li>-->
+                <!--<li class="hidden-xl-up"><a class="" data-toggle="modal" data-target="#modalhelp"><i class="zmdi zmdi-pin-help"></i></a></li>-->
+                <li class="hidden-xl-up"><a href="Login.html"><i class="zmdi zmdi zmdi-sign-in"></i></a></li>
+            </ul>
+        </header>
+        <aside class="sidebar">
+            <div class="scrollbar-inner">
+                <div class="user">
+                    <div class="user__info" data-toggle="dropdown">
+                        <div>
+                            <div class="user__name" id="loginUserName"></div>
+                            <div class="user__email" id="loginUserEmail"></div>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+                <ul class="navigation">
+                    <li class="navigation__active"><a href="Dashboard.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                </ul>
+            </div>
+        </aside>
+        <section class="content" style="margin-top:30px;">
+            <div class="contacts row contacts__itemfortext" style="margin-bottom: 0px;">
+                <div class="col-6">
+                    <div class="form-group vtMargin">
+                        <label class="lbl" id="lblMAWBNo">MAWB No</label>&nbsp;<font color="red">*</font>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <!-- <input type="text" id="txtScanMAWB"  onkeyup="ChkMaxLength(this, '30');" autofocus style="height: 30px;color:#2196F3;font-weight:bold;" class="textfieldClass" placeholder=""> -->
+                        <input type="text" inputmode="text" enterkeyhint="Go" id="txtScanMAWB" onkeyup="ChkMaxLength(this, '30');" autofocus style="height: 30px;color:#2196F3;font-weight:bold;" class="textfieldClass" placeholder="">
+                    </div>
+                </div>
+                <!--<div class="col-3">
+                    <button type="button" onclick="GetFileUploadDetails();" id="btnSearch" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-search"></i></button>
+                    <button onclick="openScanner();" class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i class="zmdi zmdi-scanner"></i></button>
+                </div>-->
+
+                <div class="col-6">
+                    <div class="form-group vtMargin">
+                        <label class="lbl" id="lblHAWBNo">HAWB No</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <!--<input type="text" ID="txtHAWBNo" onkeypress="return blockSpecialChar(event)" style="height: 30px;" class="textfieldClass" placeholder="">-->
+                        <select class="textfieldClass" id="ddlHAWBList"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contacts row contacts__itemfortext" id="tblAirWayBillInfo">
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblfltDetal">Flight Details</label>&nbsp;<font color="red">*</font>
+                </div>
+                <div class="col-6">
+                    <select class="textfieldClass" id="ddlFlightNoandDate"></select>
+                </div>
+
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblDesc">Description</label>
+                    <!--&nbsp;<font color="red">*</font>-->
+                </div>
+                <div class="col-6">
+                    <!--<textarea id="txtDescription" class="col-12" style="height:70px;"></textarea>-->
+                    <input type="text" id="txtDescription" style="height: 30px;" class="textfieldClass" placeholder="">
+                </div>
+                <div class="col-12">
+                    <label class="ibiSuccessMsg"></label>
+                </div>
+
+            </div>
+
+            <div class="contacts row contacts__itemfortext" id="btndiv">
+                <div class="col-4">
+                    <div class="form-group">
+                        <button type="button" id="btnExit" onclick="exitFunction();" class="btnClass btn-primary">EXIT</button>
+                    </div>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnClear" onclick="clearFunction();" class="btnClass btn-primary">CLEAR</button>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button"  id="cameraTakePicture" class="btnClass btn-primary">UPLOAD</button>
+                </div>
+            </div>
+            <!--<footer>FOOTER</footer>-->
+        </section>
+        <div class="modal fade" id="modalhelp" tabindex="-1" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="border:solid thin #000;">
+                    <div class="modal-header">
+                        <h5 class="modal-title pull-left">Record POD</h5><button type="button" class="" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body row">
+                        <div class="col-12" style="text-align:justify;text-transform:initial;">This feature Is used for the final delivery of the shipments. The GHA enters the AWB details and clicks on the search icons. All the details of the shipments for that particular AWB is displayed and then the GHA can confirm the delivery of the shipments.GHA capture driver photo by click camera icon and signiture of the driver its optional. </div>
+                        <div class="col-12" style="text-align:justify;"><img src="img/RecorPOD.png" style="width: 99.33%;" /></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div>
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/alert.mob.js"></script>
+    <script src="js/LoaderShow-Hide.js"></script>
+    <script src="js/LoadingModel.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="script/General.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="script/Import/IMP_DocsUpload.js"></script>
+    <script language="javascript" type="text/javascript">
+        $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+    </script>
+</body>
+</html>

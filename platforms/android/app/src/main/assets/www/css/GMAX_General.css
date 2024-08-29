@@ -1,0 +1,486 @@
+﻿/*body {
+}*/
+.dialog-background {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    -moz-opacity: 0.8;
+}
+
+.dialog-loading-wrapper {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    height: 100px;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    position: fixed;
+    top: 50%;
+    width: 100px;
+    z-index: 9999999;
+}
+
+.dialog-loading-icon {
+    border-radius: 13px;
+    display: block;
+    height: 150px;
+    line-height: 150px;
+    margin: 0;
+    padding: 1px;
+    text-align: center;
+    width: 100px;
+}
+
+.form-controlForButtons {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.segmented {
+    padding: 0px;
+}
+
+    .segmented input[type=radio] {
+        display: none;
+    }
+
+    .segmented label {
+        border: outset 1px silver;
+        padding: 2px 16px;
+        margin-right: -5px;
+        background: #ddd;
+        cursor: pointer;
+    }
+
+    .segmented input:checked + label {
+        border: inset 1px silver;
+        background: #aaa;
+    }
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0.4em 0.4em 0.4em 0.4em !important;
+    margin: 0 1em 0.5em 1em !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.StepCss {
+    padding: 2px 2px 2px 2px;
+    display: none;
+    border: 1px solid wheat;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    background-color: cornsilk;
+}
+
+.labelCssHelpSec {
+    font-size: small;
+    padding: 0px 2px 0px 2px;
+}
+
+.RoundButton {
+    border-radius: 10px;
+}
+
+.TableLableStyle {
+    /*border-right: 2px solid white;*/
+    padding-right: 7px;
+    padding-left: 5px;
+    width: 80%;
+}
+
+.TbllblStyWithBorder {
+    border-right: 2px solid white;
+    padding-right: 7px;
+    padding-left: 5px;
+    width: 80%;
+}
+
+.TableTextBoxStyle {
+    border-left: 3px solid whitesmoke;
+    width: 15%;
+    margin: 1%;
+    text-align: right;
+}
+
+.BoldLabel {
+    font-weight: bold;
+}
+/*Radio Button in Popup Window*/
+.RadioForPopup {
+    margin-left: -20px;
+}
+
+.ButtonColor {
+    background-color: #abc823;
+    /*height: 36px;*/
+    border-radius: 3px;
+}
+
+.navbarImage {
+    height: 30px;
+    width: 40px;
+    padding-left: 10px;
+    margin-top: 5px;
+    margin-bottom:3px;
+}
+
+.TextAndLable {
+    padding-top: 5px;
+}
+
+.requiredtext {
+    /*border-color: red;*/
+}
+
+.requiredlbltxt {
+    color: red;
+    vertical-align: bottom;
+}
+
+table.sortable thead {
+    background-color: #eee;
+    color: #666666;
+    font-weight: bold;
+    cursor: default;
+}
+
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+    content: " \25B4\25BE";
+}
+
+.txtHover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.img-wrap {
+    position: relative;
+    display: inline-block;
+    /*border: 1px black solid;*/
+    font-size: 0;
+}
+
+    .img-wrap .close {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        z-index: 100;
+        background-color: #FFF;
+        padding: 5px 2px 2px;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: .5;
+        text-align: center;
+        font-size: 22px;
+        line-height: 10px;
+        border-radius: 50%;
+    }
+
+    .img-wrap:hover .close {
+        opacity: 1;
+    }
+.rslides {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+    .rslides li {
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        display: none;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+
+        .rslides li:first-child {
+            position: relative;
+            display: block;
+            float: left;
+        }
+
+    .rslides img {
+        display: block;
+        height: auto;
+        float: left;
+        width: 100%;
+        border: 0;
+    }
+
+.BoldAnchertag {
+    font-weight: bold;
+}
+/*td.highlight {
+        font-weight: bold;
+        color: blue;
+    }
+.loading {
+  background: transparent url('http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif') center no-repeat;
+}*/
+label {
+    font-weight: 700;
+}
+
+
+.ButtonColor {
+    background-color: #bcd233;
+    color: white;
+}
+
+.col-form-label {
+    padding-left: 5px;
+    padding-right: 10px;
+}
+.NoPadding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.ImageSize {
+    width:100%;
+}
+.VerticallyCenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+body {
+    background-color: beige;
+}
+
+input{
+    text-transform:uppercase;
+}
+
+
+.button {
+  padding: 10px 22px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: orange;
+  /*background-color: #4CAF50;*/
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.btn-Expgroup button {
+    background-color: orange; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 100%; /* Set a width if needed */
+    border-radius: 15px;
+   
+    /*display: block;*/ /* Make the buttons appear below each other */
+    /*margin:auto;*/
+}
+
+.btn-Expgroup button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-Expgroup button:hover {
+    background-color: #3e8e41;
+}
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 5px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 14px;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ccc;
+}
+
+button.accordion:after {
+    /*content: '\002B';*/
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    /*content: "\2212";*/
+}
+
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+/* The container */
+.Checkcontainer {
+   display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.Checkcontainer input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: darkorange;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.Checkcontainer:hover input ~ .checkmark {
+    /*background-color: #ccc;*/
+    background-color: #2196F3;
+}
+
+/* When the radio button is checked, add a blue background */
+.Checkcontainer input:checked ~ .checkmark {
+    /*background-color: #2196F3;*/
+    background-color: red;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.Checkcontainer input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.Checkcontainer .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
+
+/* Style the tab */
+div.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 30%;
+    height: 300px;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 5px 5px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+}
+
+.specialLabel {
+    font-size:16px;
+}
+
+.specialLblLocation {
+    font-size:25px;
+    font:bold;
+    color:red;
+}
+
+
+
+

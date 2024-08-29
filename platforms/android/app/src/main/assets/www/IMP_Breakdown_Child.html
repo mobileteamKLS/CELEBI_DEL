@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+    <link href="css/index_signiturepad.css" rel="stylesheet" />
+    <style type="text/css">
+        .login__block__btn_margin {
+            margin-top: 3px !important;
+        }
+
+        a {
+            color: #fff !important;
+            background-color: transparent;
+        }
+
+        .table-bordered,
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #ccc;
+            padding: 3px;
+            text-transform: initial;
+        }
+
+        .table td, .table th {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body data-ma-theme="green">
+    <main class="main">
+        <div class="page-loader">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navigation-trigger hidden-xl-up">
+                <div class="navigation-trigger__inner">
+                    <!--<i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
+                    <a href="ImportOperations.html">
+                        <i style="font-size:2rem !important;"
+                           class="zmdi zmdi-chevron-left zmdi-hc-2x"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="header-title" id="lblIntMvmnt">Breakdown</div>
+            <ul class="top-nav">
+                <!--<li class="hidden-xl-up"><a href="Dashboard.html" style="color:#fff;"><i class="zmdi zmdi-home zmdi-hc-2x"></i></a></li>-->
+                <!--<li class="hidden-xl-up"><a class="" data-toggle="modal" data-target="#modalhelp"><i class="zmdi zmdi-pin-help"></i></a></li>-->
+                <li class="hidden-xl-up"><a href="Login.html"><i class="zmdi zmdi zmdi-sign-in"></i></a></li>
+            </ul>
+        </header>
+        <aside class="sidebar">
+            <div class="scrollbar-inner">
+                <div class="user">
+                    <div class="user__info" data-toggle="dropdown">
+                        <div>
+                            <div class="user__name" id="loginUserName"></div>
+                            <div class="user__email" id="loginUserEmail"></div>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+                <ul class="navigation">
+                    <li class="navigation__active"><a href="Dashboard.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                </ul>
+            </div>
+        </aside>
+        <section class="content" style="margin-top:30px;">
+            <div class="contacts  contacts__itemfortext" style="margin-bottom: 0px;">
+
+                <div class="row contacts  contacts__itemfortext" id="" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                    <div class="col-5">
+                        <label>Flight No. Date </label><br />
+
+                    </div>
+                    <div class="col-7">
+                        <label id="txtFltNo"></label>&nbsp;&nbsp;<label id="txtFltDate"></label>
+
+                    </div>
+
+                    <div style="" class="col-5">
+                        <label id="lblULDNo" for="txtULDNo" class="lbl">
+                            Scan ULD
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" id="txtScanULD" autocomplete="off" class="textfieldClass" maxlength="20" autofocus oninput="this.value = this.value.toUpperCase()">
+                    </div>
+
+
+                    <div style="" class="col-5">
+                        <div class="form-group vtMargin">
+                            <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                ULD
+                                No.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group vtMargin">
+                            <select class="textfieldClass" id="ddlULDNo"
+                                    onchange="GetAWBDetailsForULD($('#ddlULDNo').val())"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group">
+                            <input type="button" id="btnModify"
+                                   class="btnClass btn-primary" value="BULK/ULD Complete" onclick="UpdateImportULDClose()">
+                        </div>
+                    </div>
+                    <label id="successMsg"></label>
+                </div>
+
+
+                <div class="row contacts  contacts__itemfortext" id="divNormalCargo" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+
+                    <div style="" class="col-5">
+                        <label id="lblULDNo" for="txtULDNo" class="lbl">
+                            Scan MAWB No.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="number" id="txtScanAWBNo" class="textfieldClass" onkeyup="ChkMaxLength(this, '12');">
+                    </div>
+
+                    <div style="" class="col-5">
+                        <label id="lblAwbNo" for="txtAwbNo" class="lbl">
+                            MAWB
+                            No.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <select class="textfieldClass" id="ddlAWBNo"
+                                onchange="GetHAWBDetails($('#ddlAWBNo').val())">
+                            <!--<option value="0">Select</option>-->
+                        </select>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+                <div class="row contacts  contacts__itemfortext" id="divNormalCargoHawb" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                    <div style="" class="col-5">
+                        <label id="lblULDNo" for="txtULDNo" class="lbl">
+                            Scan HAWB No.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <!--<input type="text" id="txtScanHAWBNo" class="form-control" maxlength="11">-->
+                        <input type="text" id="hawbLists" class="textfieldClass" maxlength="11">
+                    </div>
+
+                    <div style="" class="col-5">
+                        <label id="lblHAWBNo" for="ddlHAWBNo" class="lbl">
+                            HAWB
+                            No.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <select class="textfieldClass" id="ddlHAWBNo"
+                                onchange="GetHAWBLevelPiecesDetails($('#ddlHAWBNo').val())">
+                            <option value="0">Select</option>
+                        </select>
+                        <!--<input class="form-control" id="hawbLists" style="display: none;">-->
+                    </div>
+                </div>
+
+
+
+
+                <div class="row contacts  contacts__itemfortext" id="divFoundCargo" style="display:none;box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                    <div class="col-5">
+                        <label id="lblAwbNo" for="txtAwbNo" class="lbl">
+                            MAWB
+                            No.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" id="txtFoundMAWB" class="textfieldClass" maxlength="11">
+                    </div>
+                    <div class="col-5">
+                        <label id="lblHAWBNo" for="txtFoundHAWB" class="lbl">
+                            HAWB
+                            No.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" id="txtFoundHAWB" class="textfieldClass" maxlength="11">
+                    </div>
+                </div>
+                <div class="row contacts">
+                    <div class="col-5">
+                        <label id="lblMnifestedPkg" for="txtMnifestedPkg"
+                               class="lbl">Manifested NoP</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="number" style="text-align:right;" id="txtMnifestedPkg"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '4');" disabled>
+                    </div>
+
+                    <div class="col-5">
+                        <label id="lblReceivedRemainingPkgs" for="txtReceivedRemainingPkgs"
+                               class="lbl">Rcvd./Rem. NoP</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="number" style="text-align:right;" id="txtReceivedPkgs"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '4');" disabled>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" style="text-align:right;" id="txtRemainingPkgs"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '7');" disabled>
+                    </div>
+                </div>
+
+                <div class="row  contacts" id="divArrivedPkgs">
+
+                    <div class="">
+                        <table class="table" id="TextBoxDiv">
+                        </table>
+                    </div>
+
+                    <div class="col-5">
+                        <label id="lblULDNo" for="txtULDNo" class="lbl">
+                            Group Id.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="number" id="txtScanGroupId" class="textfieldClass" onkeyup="ChkMaxLength(this, '14'); onFocusGroupId()" onblur="checkLocation(); onFocusGroupId();">
+                    </div>
+
+                    <div class="col-5">
+                        <label id="lblArrivedPkgs" for="txtArrivedPkgs"
+                               class="lbl">Arrived NoP</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="number" style="text-align:right;" id="txtArrivedPkgs"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                    </div>
+                </div>
+                <div class="row contacts" id="divFoundCgoDetails" style="display:none">
+
+                    <div class="col-5">
+                        <label id="lblULDNo" for="txtULDNo" class="lbl">
+                            Group Id.
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="number" id="txtScanGroupIdFoundCargo" onkeyup="ChkMaxLength(this, '14'); foundCargo();" class="textfieldClass" maxlength="20" onblur="    checkLocation();">
+                    </div>
+
+                    <div class="col-5">
+                        <label id="lblArrivedPkgs" for="txtFoundPkgs"
+                               class="lbl">Found NoP</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="number" style="text-align:right;" id="txtFoundPkgs"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                    </div>
+                    <div class="col-5">
+                        <label id="lblArrivedPkgs" for="txtFoundPkgsWt"
+                               class="lbl">Found NoP Wt</label>
+                    </div>
+                    <div class="col-7">
+                        <input type="number" style="text-align:right;" id="txtFoundPkgsWt"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '10');">
+                    </div>
+                </div>
+
+                <div class="row contacts">
+
+                    <div class="col-5">
+                        <label id="lblDamagePkgs" for="txtDamagePkgs"
+                               class="lbl">Damage NoP</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="number" style="text-align:right;" id="txtDamagePkgs"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                    </div>
+                    <div class="col-3">
+                        <input type="number" style="text-align:right;" id="txtDamagePkgsView"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '4');" disabled>
+                    </div>
+
+                    <div class="col-5">
+                        <label id="lblDamagePkgs" for="txtDamagePkgs"
+                               class="lbl">Damage Weight</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="number" style="text-align:right;" id="txtDamageWt"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '10');">
+                    </div>
+                    <div class="col-3">
+                        <input type="number" style="text-align:right;" id="txtDamageWtView"
+                               class="textfieldClass" onkeyup="ChkMaxLength(this, '7');" disabled>
+                    </div>
+
+                    <div class="col-5">
+                        <label id="lblDamageType" for="ddlDamageType"
+                               class="lbl">Damage Type</label>
+                    </div>
+                    <div class="col-7">
+                        <select class="textfieldClass" id="ddlDamageType">
+                            <option value="0">Select</option>'
+                        </select>
+                    </div>
+                </div>
+                <div class="row contacts">
+                    <div class="col-4">
+                        <!--<label class="checkbox-inline">
+                            <input type="checkbox" id="chkFoundCgo"
+                                   onclick="EnableFoundCargo()">Found Cargo
+                        </label>-->
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkFoundCgo">
+                            <label class="checkbox__label" id="lblchkFoundCgo" onclick="EnableFoundCargo()" for="chkFoundCgo">Found Cargo</label>
+                        </div>
+                    </div>
+                    <div class="col-4" style="display:none;">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="chkModify"
+                                   onclick="">Modify
+                        </label>
+                    </div>
+                    <div class="col-4">
+                        <!--<label class="checkbox-inline">
+                            <input type="checkbox" id="chkShowAll"
+                                   onclick="ShowALLRefresh()">Show All
+                        </label>-->
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkShowAll">
+                            <label class="checkbox__label" id="lblchkFoundCgo" onclick="ShowALLRefresh()" for="chkShowAll">Show All</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row contacts" id="foundCargoHint" style="display:none">
+                    <div class="col-12">
+                        <font color="red" size="1">* MLM for master label missing</font>
+                    </div>
+                    <div class="col-12">
+                        <font color="red" size="1">* MLH for house label missing</font>
+                    </div>
+                </div>
+                <div class="row  contacts" style="margin-top:10px;">
+                    <div class="col-4">
+                        <input type="button" id="btnModify" class="btnClass btn-primary" value="Submit"
+                               onclick="UpdateAWBDetails();">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" id="btnClear" class="btnClass btn-primary" value="Clear"
+                               onclick="clearALL();">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" id="btnModify" class="btnClass btn-primary" value="Back"
+                               onclick="BacktoFlightCheck()">
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!--<div>
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/alert.mob.js"></script>
+    <script src="js/LoaderShow-Hide.js"></script>
+    <script src="js/LoadingModel.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="js/index_signiturepad.js"></script>
+    <script src="js/signature_pad.umd.js"></script>
+    <script src="js/app.js"></script>
+    <script src="script/General.js"></script>
+    <script src="script/amplify.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="script/Import/IMP_Breakdown_Child.js"></script>
+    <script language="javascript" type="text/javascript">
+        $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+    </script>
+</body>
+
+</html>

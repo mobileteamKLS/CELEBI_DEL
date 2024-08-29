@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="scripts/jquery-ui.js"></script>
+
+    <!--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+
+    <script src="js/select2.min.js"></script>
+    <link href="css/select2.min.css" rel="stylesheet" />
+
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+    <script src="js/Import/IMP_Inventory_Found_Damage.js"></script>
+    <style>
+        td.foo:nth-child(7n+1) {
+            background-color: rgb(177, 112, 136);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+2) {
+            background-color: rgb(27, 81, 141);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+3) {
+            background-color: rgb(13, 150, 68);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+4) {
+            background-color: rgb(35, 29, 31);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+5) {
+            background-color: rgb(157, 124, 43);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+6) {
+            background-color: rgb(14, 76, 166);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+7) {
+            background-color: rgb(206, 84, 209);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+8) {
+            background-color: rgb(143, 74, 219);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        td.foo:nth-child(7n+9) {
+            background-color: rgb(198, 139, 74);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        .table > tbody > tr > td,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > td,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > thead > tr > th {
+            font-size: 12px;
+        }
+
+        .table {
+            margin-bottom: 0px !important;
+            margin-top: 5px;
+        }
+
+        .blink_me {
+            animation: blinker 1s linear infinite;
+            background-color: yellow;
+            padding: 15px;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bolder
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .table > tbody > tr > td,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > td,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > thead > tr > th {
+            vertical-align: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
+                        data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
+                <img class="navbarImage" id="imgClear" src="images/Logo.png" onclick="ShowHomePage();">
+                <a href="#" id="navhdr" class="loggedinUser"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+
+
+                        <div class="row"
+                             style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+
+                                <div class="col-xs-3 col-form-label" style="display:none;">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="chkModify" onclick="" autocomplete="off">Modify
+                                    </label>
+                                </div>
+                                <div class="col-xs-5 col-form-label NoPadding">
+                                    <!--<label class="checkbox-inline" checked style="line-height: 1.7;">
+                                        <input type="checkbox" id="chkFoundCgo"
+                                               onclick="EnableFoundCargo()">Found Cargo
+                                    </label>-->
+                                    <input type="radio" name="radSize" id="rdoFoundCargo" value="FoundCargo" onchange="EnableFoundCargo()" checked>
+                                    <label for="sizeLarge">Found Cargo</label>
+                                </div>
+
+                                <div class="col-xs-5 col-form-label NoPadding">
+                                    <label style="line-height: 1.7;" class="checkbox-inline">
+                                        <input type="radio" name="radSize" id="rdoDamageCargo" value="DamageCargo" onchange="EnableFoundCargo()">
+                                        Damage Cargo
+                                    </label>
+                                </div>
+
+                                <!--<div class="col-xs-2 col-form-label NoPadding">
+                                    <label style="line-height: 1.7;" class="checkbox-inline">
+                                        <input type="checkbox" checked id="chkAuto" onclick="EnableAutoManual()">Auto
+                                    </label>
+                                </div>-->
+
+
+
+                            </div>
+                            <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="margin-top: 10px;;">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input type="button" id="btnModify" class="form-control ButtonColor"
+                                           value="BULK/ULD Complete" onclick="UpdateImportULDClose()">
+                                </div>
+                            </div>-->
+                            <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <label id="successMsg"></label>
+                            </div>-->
+                        </div>
+
+                        <!--<div class="row" id="divFoundCargo" style="display:none;box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">-->
+                        <div class="row" id="divFoundCargo" >
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblAwbNo" for="txtAwbNo" class="control-label labelFont">
+                                        MAWB
+                                        No.
+                                    </label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input type="text" id="txtFoundMAWB" autocomplete="off" class="form-control" maxlength="11">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblHAWBNo" for="txtFoundHAWB" class="control-label labelFont">
+                                        HAWB
+                                        No.
+                                    </label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input type="text" id="txtFoundHAWB" autocomplete="off" class="form-control" maxlength="30">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblGroupID" for="txtGroupID"
+                                           class="control-label labelFont">GroupID</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input  type="text" id="txtGroupID"
+                                           class="form-control" onkeyup="ChkMaxLength(this, '40');">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="divFoundCgoDetails" >
+
+                            <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div class="col-xs-6 col-form-label">
+                                    <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                        Group Id.
+                                    </label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input type="number" id="txtScanGroupIdFoundCargo" onkeyup="ChkMaxLength(this, '14'); foundCargo();" class="form-control" maxlength="20" onblur="    checkLocation();">
+                                </div>
+                            </div>-->
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblArrivedPkgs" for="txtFoundPkgs"
+                                           class="control-label labelFont">Found NoP</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input type="number" style="text-align:right;" id="txtFoundPkgs"
+                                           class="form-control" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblArrivedPkgs" for="txtFoundPkgsWt"
+                                           class="control-label labelFont">Found NoP Wt</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input type="number" style="text-align:right;" id="txtFoundPkgsWt"
+                                           class="form-control" onkeyup="ChkMaxLength(this, '10');">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblDamagePkgs" for="txtDamagePkgs"
+                                           class="control-label labelFont">Damage NoP</label>
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input type="text" style="text-align:right;" id="txtDamagePkgs" 
+                                           class="form-control" onblur="checkDamagePcs();" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input type="text" style="text-align:right;" id="txtDamagePkgsView" disabled
+                                           class="form-control" onkeyup="ChkMaxLength(this, '4');" >
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblDamagePkgs" for="txtDamagePkgs"
+                                           class="control-label labelFont">Damage Weight</label>
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input type="number" onblur="checkDamageWt();" style="text-align:right;" id="txtDamageWt"
+                                           class="form-control" onkeyup="ChkMaxLength(this, '10');">
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input type="number" style="text-align:right;" id="txtDamageWtView"
+                                           class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                    <label id="lblDamageType" for="ddlDamageType"
+                                           class="control-label labelFont">Damage Type</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <select class="form-control" id="ddlDamageType" >
+                                        <!--<option value="0">Select</option>'-->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div class="col-xs-6 col-form-label">
+                                    <label id="lblcopy" for="">No. of Copy</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txtPrintCopy" class="form-control" type="number" value="1"
+                                           autofocus onkeyup="ChkMaxLength(this, '1');">
+                                </div>
+                            </div>-->
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+
+                                <label>Status : </label>   <label id="spnStatus"></label>
+                                <label id="spnErrormsg"></label>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="row" id="foundCargoHint" style="display:none">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div class="col-xs-12 col-form-label">
+                                    <font color="red" size="1">* MLM for master label missing</font>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <font color="red" size="1">* MLH for house label missing</font>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row" id="divbutton">
+            <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                <input type="button" id="btnBack" class="form-control ButtonColor" value="Back"
+                       onclick="goToDamage();">
+            </div>
+
+
+            <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear"
+                       onclick="clearALL();">
+            </div>
+
+            <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                <input type="button" id="btnSubmit" class="form-control ButtonColor" value="Submit"
+                       onclick="UpdateAWBDetails();" >
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center>
+                    <p class="text-muted" id="RightsReserved"></p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+
+</html>

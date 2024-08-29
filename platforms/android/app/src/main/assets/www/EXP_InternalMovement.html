@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+    <link href="css/index_signiturepad.css" rel="stylesheet" />
+    <style type="text/css">
+        .login__block__btn_margin {
+            margin-top: 3px !important;
+        }
+
+        a {
+            color: #fff !important;
+            background-color: transparent;
+        }
+
+        .table-bordered,
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #ccc;
+            padding: 3px;
+            text-transform: initial;
+        }
+         .table td, .table th {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body data-ma-theme="green">
+    <main class="main">
+        <div class="page-loader">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navigation-trigger hidden-xl-up">
+                <div class="navigation-trigger__inner">
+                    <!--<i class="navigation-trigger__line"></i>
+                <i class="navigation-trigger__line"></i>
+                <i class="navigation-trigger__line"></i>-->
+                    <a href="ExportOperations.html">
+                        <i style="font-size:2rem !important;"
+                           class="zmdi zmdi-chevron-left zmdi-hc-2x"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="header-title" id="lblIntMvmnt">Internal Movement</div>
+            <ul class="top-nav">
+                <!--<li class="hidden-xl-up"><a href="Dashboard.html" style="color:#fff;"><i class="zmdi zmdi-home zmdi-hc-2x"></i></a></li>-->
+                <!--<li class="hidden-xl-up"><a class="" data-toggle="modal" data-target="#modalhelp"><i class="zmdi zmdi-pin-help"></i></a></li>-->
+                <li class="hidden-xl-up"><a href="Login.html"><i class="zmdi zmdi zmdi-sign-in"></i></a></li>
+            </ul>
+        </header>
+        <aside class="sidebar">
+            <div class="scrollbar-inner">
+                <div class="user">
+                    <div class="user__info" data-toggle="dropdown">
+                        <div>
+                            <div class="user__name" id="loginUserName"></div>
+                            <div class="user__email" id="loginUserEmail"></div>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+                <ul class="navigation">
+                    <li class="navigation__active"><a href="Dashboard.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                </ul>
+            </div>
+        </aside>
+        <section class="content" style="margin-top:30px;">
+            <div class="contacts row contacts__itemfortext" style="margin-bottom: 0px;">
+                <div class="col-5">
+                    <div class="form-group vtMargin">
+                        <label class="lbl" id="lblMAWBNo">MAWB No</label>&nbsp;<font color="red">*</font>
+                    </div>
+                </div>
+                <!--<div class="col-2">
+                <div class="form-group">
+                    <input type="text" id="txtFlightPrefix" onkeypress="return blockSpecialChar(event)"
+                           onkeyup="MovetoNext(this, 'txtFlightNo');" autofocus maxlength="3"
+                           style="height: 30px;text-transform:uppercase;text-align:right;color:#2196F3;font-weight:bold;"
+                           class="textfieldClass" placeholder="">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>-->
+                <div class="col-7">
+                    <div class="form-group">
+                        <input type="text" id="txtMAWBNO" inputmode="text" enterkeyhint="Go" maxlength="30"
+                               autofocus onkeyup="ChkMaxLength(this, '30');"
+                               style="height: 30px;color:#2196F3;font-weight:bold;" class="textfieldClass"
+                               placeholder="">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <!--<div class="col-3">
+                <button type="button" onclick="GetRNoForAWB();" id="btnSearch"
+                    class="btn btn--icon login__block__btn login__block__btn_margin"><i
+                        class="zmdi zmdi-search"></i></button>
+                <button onclick="openScanner();"
+                    class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i
+                        class="zmdi zmdi-scanner"></i></button>
+            </div>-->
+
+                <div class="col-5">
+                    <div class="form-group vtMargin">
+                        <label class="lbl" id="lblbHWABNo">HAWB No.</label>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div class="form-group">
+                        <!--<input type="text" ID="txtHAWBNo" onkeypress="return blockSpecialChar(event)" style="height: 30px;" class="textfieldClass" placeholder="">-->
+                        <select class="textfieldClass" onchange="GetBinningAWBDetails($('#ddlHAWBList').val())" id="ddlHAWBList"></select>
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="form-group vtMargin">
+                        <label class="lbl" id="lblRNo">R No</label>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div class="form-group">
+                        <select class="textfieldClass" id="txtRNo">
+                            <option value="0">Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contacts row contacts__itemfortext" id="tblAirWayBillInfo">
+                <!-- <div class="col-5" style="text-align:left;">
+                <label class="lbl">Flight No. / Date</label>
+            </div>
+            <div class="col-7">
+                <select class="textfieldClass" id="flightNoDate">
+                    <option value="0">Select</option>
+                </select>
+            </div> -->
+                <div class="col-12" style="text-align:left;">
+                    <label class="lbl" id="lblFromLoc">From Loc. / Pieces &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;" id="locationShow"></span></label>
+
+                </div>
+                <!-- <div class="col-7">
+                <input type="text" id="fromLocPcs"
+                    style="height: 30px;text-align:right;color:#2196F3;font-weight:bold;" class="textfieldClass"
+                    placeholder="">
+            </div> -->
+
+                <div class="col-5" style="text-align:left;">
+                    <label class="lbl" id="lblNLoc">New Location</label>&nbsp;<font color="red">*</font>
+                </div>
+                <div class="col-7">
+                    <input type="text" id="txtNewLocation"
+                           style="height: 30px; text-transform:uppercase !important;" class="textfieldClass"
+                           placeholder="">
+                </div>
+                <div class="col-5">
+                    <label class="lbl" id="lblMpcs">Move Pieces</label>&nbsp;<font color="red">*</font>
+                    <i class="form-group__bar"></i>
+                </div>
+                <div class="col-7">
+                    <input type="number" id="textMovePkgs"
+                           style="height: 30px;text-align:right;" class="textfieldClass" onblur="calculateWeight() " onkeypress="return blockSpecialChar(event)"
+                           placeholder="">
+                </div>
+                <div class="col-5">
+                    <label class="lbl" id="lblMwght">Move Weight</label>&nbsp;<font color="red">*</font>
+                    <i class="form-group__bar"></i>
+                </div>
+                <div class="col-7">
+                    <input type="text" id="textMoveWght"
+                           style="height: 30px;text-align:right;" class="textfieldClass"
+                           placeholder="">
+                </div>
+                <div class="col-12">
+                    <label class="ibiSuccessMsg1"></label>
+                </div>
+            </div>
+
+            <div class="contacts row contacts__itemfortext" id="btndiv">
+                <div class="col-4">
+                    <div class="form-group">
+                        <button type="button" id="btnExit" onclick="exitFunction();" class="btnClass btn-primary">EXIT</button>
+                    </div>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnClear" onclick="fnClear();" class="btnClass btn-primary">CLEAR</button>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnSubmit" onclick="SaveInternalMovementDetails();"
+                            class="btnClass btn-primary">
+                        SUBMIT
+                    </button>
+                </div>
+            </div>
+            <div class="contacts row contacts__itemfortext">
+                <table class="table  table-bordered mb-0">
+                    <tbody id="tbTable">
+                        <tr>
+                            <td><span id="spnOriginDest">Origin / Destination</span></td>
+                            <td><span id="spnTxtOriginDest"></span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="" id="LocationDiv" style="">
+                <table class="table  table-bordered mb-0" style="table-layout: fixed;">
+                    <thead class="theadClass">
+                        <tr>
+                            <th id="tdLoc">Location</th>
+                            <th id="tdLoc1">Pieces</th>
+                            <th id="tdLoc2">Weight</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblLocation">
+                    </tbody>
+                </table>
+            </div>
+            <!--<footer>FOOTER</footer>-->
+        </section>
+
+        <div class="modal fade" id="remarkPriorityShow" tabindex="-1" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="border:solid thin #000;">
+                    <div class="modal-header">
+                        <h5 class="modal-title pull-left" id="lblPhoto">AWB Remarks</h5><button type="button" class="" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body contacts row">
+                        <div class="col-12" id="dvRemarkShow">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnBack1" data-dismiss="modal">Ok</button>
+                        <!--<button type="button" class="btn btn-primary" id="btnSave2" onclick="saveCameraPhoto();">Save</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div>
+        <footer class="footer">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+            </div>
+        </footer>
+    </div>-->
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/alert.mob.js"></script>
+    <script src="js/LoaderShow-Hide.js"></script>
+    <script src="js/LoadingModel.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="js/index_signiturepad.js"></script>
+    <script src="js/signature_pad.umd.js"></script>
+    <script src="js/app.js"></script>
+    <script src="script/General.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="script/Export/EXP_InternalMovement.js"></script>
+    <script language="javascript" type="text/javascript">
+        $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+    </script>
+</body>
+
+</html>

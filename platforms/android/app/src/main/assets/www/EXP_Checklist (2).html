@@ -1,0 +1,456 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+    <style type="text/css">
+
+        .table-bordered,
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #ccc;
+            padding: 3px;
+            text-transform: initial;
+        }
+
+        .vtMargin {
+            margin-bottom: 0rem !important;
+        }
+
+        .login__block__btn_margin {
+            margin-top: 3px !important;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+1) {
+            background-color: rgb(177,112,136);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+2) {
+            background-color: rgb(27,81,141);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+3) {
+            background-color: rgb(13,150,68);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+4) {
+            background-color: rgb(35,29,31);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+5) {
+            background-color: rgb(157,124,43);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+6) {
+            background-color: rgb(14,76,166);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+7) {
+            background-color: rgb(206,84,209);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+8) {
+            background-color: rgb(143,74,219);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+9) {
+            background-color: rgb(198,139,74);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            font-size: 12px;
+        }
+
+        #SHCCodeTbl {
+            margin-bottom: 0px !important;
+            margin-top: 5px;
+        }
+
+        .blink_me {
+            animation: blinker 1s linear infinite;
+            background-color: yellow;
+            padding: 15px;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bolder;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;">Checklist</a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <a href="#" id="navhdr" class="loggedinUser"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row form-group">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="display:none">
+                                    <input type="radio" name="radSize" id="rdoIntlMovement" value="IntlMovement" checked="checked" />
+                                    <label for="sizeLarge">Intl. Movement</label>
+                                    <input type="radio" name="radSize" id="rdoForwarding" value="Forwarding" />
+                                    <label for="sizeSmall">Forwarding/Backwarding</label>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" id="divChklist">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Scan AWB
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" id="txtScanAWBNo" autofocus onblur="GetExportCheckListSearch();" class="form-control" onkeyup="ChkMaxLength(this, '11');">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            MAWB No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" disabled id="txtMAWBAWBNo" class="form-control" onkeyup="ChkMaxLength(this, '12');">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblAWBNo" for="">NOG</label>
+                                        <!--<font color="red">*</font>-->
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtNOG" class="form-control" type="text" disabled>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    
+                                    <div class="col-xs-12 NoPadding">
+                                        <table class="table" id="TextBoxDiv">
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="ddlChecklist" class="control-label labelFont">
+                                            Declaration Type
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlChecklist"></select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--<div class="row form-group">
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-xs-offset-6 col-sm-offset-6  col-md-offset-6 NoPadding">
+                                    <input disabled type="button" id="btnMoveDetail" class="form-control ButtonColor" value="Move" onclick="GetMovementDetails()">
+                                </div>
+                            </div>-->
+
+                            <div class="row form-group">
+                                <span id="spnErrormsg"></span>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="divDocsDetail" style="background-color: #fbf7f7; border-radius: 10px; box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);padding:10px;">
+
+                <!--<table id="tblChecklistAfterScan" class="table table-striped table-bordered" style="display:none;">
+                <thead style="background-color:rgb(208, 225, 244);">
+                <tr>
+                <th>Declaration Type</th>
+                <th>User</th>
+                <th>Date & Time</th>
+                <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td style="background-color: rgb(224, 243, 215); text-align: center;" id="tdDeclarationType"></td>
+                <td style="background-color: rgb(224, 243, 215); text-align: center;" id="tdUSERNAME"><a></a></td>
+                <td style="background-color: rgb(224, 243, 215); text-align: center;" id="tdStatus"></td>
+                <td style="background-color: rgb(224, 243, 215); text-align: center;" id="tdDateTime"></td>
+                </tr>
+                </tbody>
+                </table>-->
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                    <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'EXP_Dashboard.html'">
+                </div>
+                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                    <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="clearALL()">
+                </div>
+                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                    <input type="button" id="btnNextBase" class="form-control ButtonColor" value="Start">
+                </div>
+            </div>
+
+            <div id="myModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content content">
+                        <!--<button type="button" class="close" data-dismiss="modal" style="padding:10px;">&times;</button>-->
+                        <!--<div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>-->
+                        <div class="modal-body row ">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                                <span id="spnErrormsgonPopup"></span>
+                            </div>
+                            <div style="padding:10px;" id="divCheckListDetail">
+                            </div>
+                        </div>
+                        <div class="modal-footer" >
+                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                            <div class="row">
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button"  class="form-control ButtonColor pre" value="PREVIOUS">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="unCheckAll()">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button" class="form-control ButtonColor next" value="NEXT">
+                                </div>
+                                <!--<div class="form-group col-xs-12 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>-->
+                            </div>
+
+                        </div>
+                        <!--<div class="form-group col-xs-12 col-sm-4 col-md-4" style="margin-top:15px">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>-->
+
+
+                    </div>
+                </div>
+            </div>
+
+           
+
+        </div>
+    </div>
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"></p></center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+</html>
+
+
+<!--<div class=" row">
+                             <label class="col-sm-4 control-label">Questions</label>
+                             <div class="col-sm-8">
+                                 <label class="radio-inline"> Yes </label>
+                                 <label class="radio-inline"> No </label>
+                                 <label class="radio-inline">  NA </label>
+                             </div>
+                             <div class="col-sm-8">
+                                 <label class="radio-inline"> <input type="radio" name="season" id="seasonSummer" value="summer" checked> </label>
+                                 <label class="radio-inline"> <input type="radio" name="season" id="seasonWinter" value="winter"> </label>
+                                 <label class="radio-inline"> <input type="radio" name="season" id="seasonSpringFall" value="spring-fall"></label>
+                             </div>
+                         </div>-->
+<!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+    <div class="col-xs-6 col-form-label">
+        <label id="lblQuestions" for="Questions" class="control-label labelFont">
+            Questions
+        </label>
+    </div>
+    <div class="col-xs-6 NoPadding">
+        <label class="radio-inline"> Yes </label>
+        <label class="radio-inline"> No </label>
+        <label class="radio-inline">  NA </label>
+    </div>
+</div>
+
+<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+    <div class="col-xs-8 col-form-label">
+        <label id="lblQuestions" for="Questions" class="control-label labelFont">
+            1. UN1845
+        </label>
+    </div>
+    <div class="col-xs-4 NoPadding" style="line-height:0;">
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSummer" value="summer" checked> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonWinter" value="winter"> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSpringFall" value="spring-fall"></label>
+    </div>
+</div>
+<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+    <div class="col-xs-8 col-form-label">
+        <label id="lblQuestions" for="Questions" class="control-label labelFont">
+            2. The Words "carbon dioxide, Solid" or "Dry ice"
+        </label>
+    </div>
+    <div class="col-xs-4 NoPadding" style="line-height:0;">
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSummer" value="summer" checked> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonWinter" value="winter"> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSpringFall" value="spring-fall"></label>
+    </div>
+</div>
+
+<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+    <div class="col-xs-8 col-form-label">
+        <label id="lblQuestions" for="Questions" class="control-label labelFont">
+            3. Number of packages  within the consignment
+        </label>
+    </div>
+    <div class="col-xs-4 NoPadding" style="line-height:0;">
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSummer" value="summer" checked> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonWinter" value="winter"> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSpringFall" value="spring-fall"></label>
+    </div>
+</div>
+
+<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+    <div class="col-xs-8 col-form-label">
+        <label id="lblQuestions" for="Questions" class="control-label labelFont">
+            4. The net weight of dry ice in kilograms
+        </label>
+    </div>
+    <div class="col-xs-4 NoPadding" style="line-height:0;">
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSummer" value="summer" checked> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonWinter" value="winter"> </label>
+        <label class="radio-inline"> <input type="radio" name="season" id="seasonSpringFall" value="spring-fall"></label>
+    </div>
+</div>-->
+<!--<div class="panel panel-widget forms-panel form-grids widget-shadow" style="margin-top:5%">
+    <div class="forms">
+        <div class="form-body">
+            <form>
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                        <div class="col-xs-6 col-form-label">
+                            <label for="txtFromLocation">Origin/Dest.</label>
+                        </div>
+                        <div class="col-xs-3 NoPadding">
+                            <input id="txtOrigin" class="form-control" type="text" maxlength="20" disabled>
+                        </div>
+                        <div class="col-xs-3 NoPadding">
+                            <input id="txtDestination" class="form-control" type="text" maxlength="20" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                        <div class="col-xs-6 col-form-label">
+                            <label for="ddlCommodity">Commodity</label>
+                        </div>
+                        <div class="col-xs-6 NoPadding">
+                            <input id="txtCommodity" class="form-control" type="text" maxlength="20" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                        <div class="col-xs-6 col-form-label">
+                            <label for="txtTotalPkg">Binned/Total Pkgs</label>
+                        </div>
+                        <div class="col-xs-6 NoPadding">
+                            <input id="txtTotalPkg" class="form-control" type="text" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div id="divAddLocation">
+
+                </div>
+                <div class="row form-group" style="margin-top:5px;">
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4 NoPadding">
+                        <input type="button" id="btnSubmit" class="form-control ButtonColor" value="Submit" onclick="SaveForwardDetails()">
+                    </div>
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                        <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="clearALL()">
+                    </div>
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                        <input type="button" id="btnExit" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+<!--<div id="divAddTestLocation">
+
+</div>-->

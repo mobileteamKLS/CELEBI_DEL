@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+</head>
+<body data-ma-theme="green">
+    <main class="main">
+        <div class="page-loader">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navigation-trigger hidden-xl-up">
+                <div class="navigation-trigger__inner">
+                    <!--<i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
+                    <!--<a class="btnHome" style="color:#fff;"><i class="zmdi zmdi-home"></i></a>-->
+                    <a href="EXP_ScanningLocationMain.html" class="btnHome" style="font-size:2rem !important;color:#fff !important;"><i style="" class="zmdi zmdi-chevron-left"></i></a>
+                </div>
+            </div>
+            <div id="txtScanLoc" class="header-title"></div>
+            <ul class="top-nav">
+                <!--<li class="hidden-xl-up"><a class="btnHome" style="color:#fff !important;"><i class="zmdi zmdi-home"></i></a></li>-->
+                <!--<li class="hidden-xl-up"><a class="" data-toggle="modal" data-target="#modalhelp"><i class="zmdi zmdi-pin-help"></i></a></li>-->
+                <li class="hidden-xl-up"><a href="Login.html"><i class="zmdi zmdi zmdi-sign-in"></i></a></li>
+
+            </ul>
+        </header>
+        <aside class="sidebar">
+            <div class="scrollbar-inner">
+                <div class="user">
+                    <div class="user__info" data-toggle="dropdown">
+                        <div>
+                            <div class="user__name" id="loginUserName"></div>
+                            <div class="user__email" id="loginUserEmail"></div>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+                <ul class="navigation">
+                    <li class="navigation__active"><a href="Dashboard.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                </ul>
+            </div>
+        </aside>
+        <section class="content" style="margin-top:30px;">
+
+            <div class="contacts row contacts__itemfortext">
+                <div class="col-4" style="text-align:left;">
+                    <label id="lblScanLoc" for="txtScanLoc" class="lbl">Scan Location</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtScanGate" autofocus style="height: 30px;text-transform:uppercase;text-align:left;" class="textfieldClass">
+                </div>
+
+                <div class="col-4" style="text-align:left;">
+                    <label id="lblTokenNo" for="txtTokenNo" class="lbl">VCT No.</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtTokenNo"  style="height: 30px;text-transform:uppercase;text-align:left;" class="textfieldClass">
+                </div>
+
+                <div class="checkbox col-8">
+                    <!--<input type="checkbox" id="chkIsSealed" onchange="PutGPno()">
+                    <label class="checkbox__label" id="chkIsSealed" for="chkIsSealed">Manual</label>-->
+                    <span id="spnStatusShow"></span>
+                </div>
+
+
+                <div class="col-12" style="margin-top:20px;"></div>
+
+                <div class="col-6" style="text-align:center;">
+                    <button type="button" id="btnViewAWB" onclick="DisplayAWBTable()" class="btnClass btn-primary btnHome">View Shipment</button>
+                </div>
+                <div class="col-6" style="text-align:center;">
+                    <button type="button" onclick="GetLocationScanDetails()" id="btnSearch" class="btnClass btn-primary">Search</button>
+                </div>
+
+            </div>
+            
+
+            <div class="contacts row contacts__itemfortext" style="margin-top:5%">
+                
+                <div class="col-4" style="text-align:left;">
+                    <label id="lblPieces" for="txtPieces" class="lbl">Pieces</label>
+                </div>
+                <div class="col-8">
+                    <input type="number" style="text-align:right;" id="txtPieces" onkeyup="ChkMaxLength(this, '7');" disabled class="textfieldClass">
+                </div>
+                
+                <div class="col-4" style="text-align:left;">
+                    <label id="lblWeight" for="txtWeight" class="lbl">Wt.(Kgs.)</label>
+                </div>
+                <div class="col-8">
+                    <input type="number" style="text-align:right;" id="txtWeight" disabled class="textfieldClass">
+                </div>
+                
+                <div class="col-4" style="text-align:left;">
+                    <label id="lblVehicleNo" for="txtVehicleNo" class="lbl">Vehicle No.</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtVehicleNo" disabled maxlength="20" class="textfieldClass">
+                </div>
+
+                <div class="col-4" style="text-align:left;">
+                    <label id="lblDriverName" for="txtDriverName" class="lbl">Driver Name</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtDriverName" disabled maxlength="20" class="textfieldClass">
+                </div>
+
+                <!--<div class="col-4" style="text-align:left;">
+                    <label id="lblZone" for="txtArea" class="lbl">Area</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtArea" disabled maxlength="20" class="textfieldClass">
+                </div>-->
+                <!--<div id="divGateNo" class="col-12">
+                    <div class="col-4" style="text-align:left;">
+                        <label id="lblGateNo" for="txtGateNo" class="lbl">Area</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="txtGateNo" disabled maxlength="20" class="textfieldClass">
+                    </div>
+                </div>-->
+
+
+                <!--<div class="col-4" style="text-align:left;">
+                    <label id="lblGateNo" for="txtGateNo" class="lbl">Gate No.</label>
+                </div>
+                <div class="col-8" id="divGateNo">
+                    <input type="text" id="txtGateNo" disabled maxlength="20" class="textfieldClass">
+                </div>-->
+              
+
+                <div class="col-12" style="margin-top:20px;"></div>
+
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnSave" onclick="SaveLocationScanDetails()" class="btnClass btn-primary btnHome">Submit</button>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" onclick="clearALL()" id="btnClear" class="btnClass btn-primary">Clear</button>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" onclick="window.location.href = 'ExportOperations.html'" id="btnExit"  class="btnClass btn-primary">Exit</button>
+                </div>
+
+            </div>
+           
+        </section>
+
+
+        <!--<div>
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/alert.mob.js"></script>
+    <script src="js/LoaderShow-Hide.js"></script>
+    <script src="js/LoadingModel.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="script/General.js"></script>
+    <script type="text/javascript" src="js/qrcode.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="script/Export/EXP_ScanningLocation.js"></script>
+
+    <script language="javascript" type="text/javascript">
+        $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+    </script>
+</body>
+</html>

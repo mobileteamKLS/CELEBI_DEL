@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .table-bordered,
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #ccc;
+            padding: 3px;
+            text-transform: initial;
+        }
+
+
+        .vtMargin {
+            margin-bottom: 0rem !important;
+        }
+
+        .login__block__btn_margin {
+            margin-top: 3px !important;
+        }
+    </style>
+</head>
+
+<body data-ma-theme="green">
+    <main class="main">
+        <div class="page-loader">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navigation-trigger hidden-xl-up">
+                <div class="navigation-trigger__inner">
+                    <!--<i class="navigation-trigger__line"></i>
+                <i class="navigation-trigger__line"></i>
+                <i class="navigation-trigger__line"></i>-->
+                    <!--<a class="btnHome" style="color:#fff;"><i class="zmdi zmdi-home"></i></a>-->
+                    <a href="Courier.html" class="btnHome" style="font-size:2rem !important;color:#fff !important;">
+                        <i style="" class="zmdi zmdi-chevron-left"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="header-title" id="lblPageNAme">Flight Check-In </div>
+            <ul class="top-nav">
+                <!--<li class="hidden-xl-up"><a class="btnHome" style="color:#fff !important;"><i class="zmdi zmdi-home"></i></a></li>-->
+                <!--<li class="hidden-xl-up"><a class="" data-toggle="modal" data-target="#modalhelp"><i class="zmdi zmdi-pin-help"></i></a></li>-->
+                <li class="hidden-xl-up"><a href="Login.html"><i class="zmdi zmdi zmdi-sign-in"></i></a></li>
+            </ul>
+        </header>
+        <aside class="sidebar">
+            <div class="scrollbar-inner">
+                <div class="user">
+                    <div class="user__info" data-toggle="dropdown">
+                        <div>
+                            <div class="user__name" id="loginUserName"></div>
+                            <div class="user__email" id="loginUserEmail"></div>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+                <ul class="navigation">
+                    <li class="navigation__active"><a href="Dashboard.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                </ul>
+            </div>
+        </aside>
+        <section class="content" style="margin-top:30px;">
+            <div class="contacts row contacts__itemfortext">
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblScanFlight">Scan Flight</label>
+                </div>
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <input type="text" id="txtScanMAWB" inputmode="numeric" enterkeyhint="Go" onkeypress="      return blockSpecialChar(event)"
+                               onkeyup="NumberOnly(event);" maxlength="30" autofocus style="height: 30px;color:#2196F3;font-weight:bold;text-align:right;"
+                               class="textfieldClass" placeholder="">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <!--<div class="col-3">
+                <button type="button" id="btnSearch"
+                        class="btn btn--icon login__block__btn login__block__btn_margin">
+                    <i class="zmdi zmdi-search"></i>
+                </button>
+                <button onclick="openScanner();"
+                        class="btn btn--icon login__block__btn login__block__btn_margin scannerBG">
+                    <i class="zmdi zmdi-scanner"></i>
+                </button>
+            </div>-->
+
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblFltDateNo">Flight No. / Dt</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" id="flightNo" maxlength="15" style="height: 30px;text-transform:uppercase;"
+                           class="textfieldClass" placeholder="">
+                    <i class="form-group__bar"></i>
+                </div>
+                <div class="col-4">
+                    <input type="text" id="flightDate" disabled maxlength="15" style="height: 30px;text-transform:uppercase;"
+                           class="textfieldClass" placeholder="">
+                    <i class="form-group__bar"></i>
+                </div>
+
+
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblAccept">Acceptance</label>
+                </div>
+                <div class="col-8">
+                    <div class="checkbox">
+                        <input type="checkbox" checked id="autoCheckBox">
+                        <label class="checkbox__label" id="lblSealed" for="autoCheckBox">Auto</label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label class="lbl">Group ID</label>
+                </div>
+
+                <div class="col-6">
+                    <input type="text" id="groupId" onblur="onFocus();" onkeypress="    return blockSpecialChar(event)" class="textfieldClass"
+                           placeholder="" style="width:100% !important;text-align:right;">
+
+
+                </div>
+                <div class="col-2">
+                    <button type="button" onclick="GetImportGetCourierAcceptedDetailsV2();" id="btnSearch"
+                            class="btn btn--icon login__block__btn login__block__btn_margin">
+                        <i class="zmdi zmdi-eye"></i>
+                    </button>
+                </div>
+                <div class="col-4" style="text-align:left;">
+                </div>
+                <div class="col-8">
+                    <button type="button" id="btnComplete" class="btnClass btn-primary">Complete</button>
+                </div>
+            </div>
+            <div class="contacts row contacts__itemfortext">
+                <!-- <div class="col-4" style="text-align:left;">
+                <label class="lbl">Scan</label>
+            </div>
+            <div class="col-8">
+                <input type="text" id="Scan" maxlength="15" style="height: 30px;text-transform:uppercase;"
+                    class="textfieldClass" placeholder="">
+                <i class="form-group__bar"></i>
+            </div> -->
+
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblScan">Scan</label>&nbsp;&nbsp;
+                    <button type="button" id="btntrash" class="btn btn--icon login__block__btn login__block__btn_margin">
+                        <i class="zmdi zmdi-format-clear-all"></i>
+                    </button>
+                </div>
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <input type="text" id="txtScan" onblur="searchRecord();" onkeypress="    return blockSpecialChar(event)"
+                               style="height: 30px;color:#2196F3;font-weight:bold;text-align:right;" class="textfieldClass" placeholder="">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <!--<div class="col-3">
+                <button type="button" id="btnSearchRecord" onclick="searchRecord()"
+                        class="btn btn--icon login__block__btn login__block__btn_margin">
+                    <i class="zmdi zmdi-search"></i>
+                </button>
+                <button onclick="scanBarCode();"
+                        class="btn btn--icon login__block__btn login__block__btn_margin scannerBG">
+                    <i class="zmdi zmdi-scanner"></i>
+                </button>
+            </div>-->
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblMAWBNo">MAWB No.</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="MAWB" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;"
+                           class="textfieldClass" placeholder="">
+                    <i class="form-group__bar"></i>
+                </div>
+
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblHAWBNo">HAWB No.</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="HAWB" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;"
+                           class="textfieldClass" placeholder="">
+                    <i class="form-group__bar"></i>
+                </div>
+
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblMPSNo">MPS No.</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="MPS" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;"
+                           class="textfieldClass" placeholder="">
+                    <i class="form-group__bar"></i>
+                </div>
+
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblPcs">Pieces</label>
+                </div>
+                <div class="col-2">
+                    <input type="text" id="Pieces" onkeyup="NumberOnly(event);" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;"
+                           class="textfieldClass" placeholder="">
+                    <i class="form-group__bar"></i>
+                </div>
+                <div class="col-2" style="text-align:left;">
+                    <label class="lbl">Weight</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" id="Weight" onkeyup="NumberOnly(event);" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;"
+                           class="textfieldClass" placeholder="">
+
+                </div>
+
+                <div class="col-4" style="text-align:left;">
+                    <label class="lbl" id="lblStatus">Status</label>
+                </div>
+                <div class="col-10">
+                    <label class="ibiSuccessMsg1"></label>
+                </div>
+            </div>
+            <div class="contacts row contacts__itemfortext" id="divbtnInfo">
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnExit" onclick="fnExit();" class="btnClass btn-primary btnHome">BACK</button>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" onclick="fnClear();" id="btnClear" class="btnClass btn-primary">CLEAR</button>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" onclick="GetImportSaveCourierDetailsV2();" id="btnSbmit"
+                            class="btnClass btn-primary">
+                        SUBMIT
+                    </button>
+                </div>
+            </div>
+            <!--<div class="col-2" style="float:right;">
+            <button href="index-2.html"  class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-format-clear-all"></i></button>
+        </div>-->
+            <!--<footer>FOOTER</footer>-->
+
+        </section>
+
+        <div class="modal fade" id="remarkPriorityShow" tabindex="-1" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="border:solid thin #000;">
+                    <div class="modal-header">
+                        <h5 class="modal-title pull-left" id="lblPhoto">AWB Remarks</h5><button type="button" class="" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body contacts row">
+                        <div class="col-12" id="dvRemarkShow">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnBack1" data-dismiss="modal">Ok</button>
+                        <!--<button type="button" class="btn btn-primary" id="btnSave2" onclick="saveCameraPhoto();">Save</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div>
+        <footer class="footer">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+            </div>
+        </footer>
+    </div>-->
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/alert.mob.js"></script>
+    <script src="js/LoaderShow-Hide.js"></script>
+    <script src="js/LoadingModel.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="script/General.js"></script>
+    <script type="text/javascript" src="js/qrcode.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="script/Courier/CourierFlightCheckIn.js"></script>
+    <script language="javascript" type="text/javascript">
+        $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+    </script>
+</body>
+
+</html>

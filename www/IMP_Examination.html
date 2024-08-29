@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <script src="scripts/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/Import/IMP_Examination.js"></script>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <a href="#" id="navhdr" class="loggedinUser"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row form-group">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="display:none">
+                                    <input type="radio" name="radSize" id="rdoIntlMovement" value="IntlMovement" checked="checked" />
+                                    <label for="sizeLarge">Intl. Movement</label>
+                                    <input type="radio" name="radSize" id="rdoForwarding" value="Forwarding" />
+                                    <label for="sizeSmall">Forwarding/Backwarding</label>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" id="divInternalMvmt">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblGroupId" for="">Group Id.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtGroupId"
+                                               autofocus class="form-control"
+                                               type="number"  onkeyup="ChkMaxLength(this, '14');    gateGroupID();" onblur="    GetHAWBDetailsForMAWB()">
+                                    </div>
+                                </div>
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="display:none;">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblAWBNo" for="">Remarks</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtRemark" class="form-control" type="text">
+                                    </div>
+
+                                </div>-->
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-xs-offset-6 col-sm-offset-6  col-md-offset-6 NoPadding">
+                                    <input type="button" id="btnMoveDetail" class="form-control ButtonColor" value="Search" onclick="GetHAWBDetailsForMAWBOnSearchButton()">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <span id="spnErrormsg"></span>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divVCTDetail">
+            </div>
+
+            <div id="divSplitField" class="panel panel-widget forms-panel form-grids widget-shadow" style="margin-top: 2%;">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <!-- <div class="row form-group">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="display:none">
+                                    <input type="radio" name="radSize" id="rdoIntlMovement" value="IntlMovement" checked="checked" />
+                                    <label for="sizeLarge">Intl. Movement</label>
+                                    <input type="radio" name="radSize" id="rdoForwarding" value="Forwarding" />
+                                    <label for="sizeSmall">Forwarding/Backwarding</label>
+                                </div>
+                            </div> -->
+
+                            <div class="row form-group" id="divInternalMvmt">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblNewGroupId" for="">New Group Id.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtNewGroupId" class="form-control" type="number" onkeyup="ChkMaxLength(this, '14'); gatePassChangeFocus();">
+                                    </div>
+                                    <div class="col-xs-6 col-form-label" style="padding-top: 2%;">
+                                        <label id="lblPieces" for="">Pieces</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding" style="padding-bottom: 2%;padding-top: 2%;">
+                                        <input id="txtPieces" onblur="piecesChangeFocus();" class="form-control" type="number" maxlength="15">
+                                    </div>
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblLocation" for="">Location</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtLocation" class="form-control"
+                                               type="text" maxlength="15">
+                                    </div>
+                                </div>
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="display:none;">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblAWBNo" for="">Remarks</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtRemark" class="form-control" type="text">
+                                    </div>
+
+                                </div>-->
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-xs-offset-6 col-sm-offset-6  col-md-offset-6 NoPadding">
+                                    <input type="button" id="btnSearchDetail" class="form-control ButtonColor" value="Move" onclick="SplitGroupId()">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <span id="spnErrormsg"></span>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
+                                    <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
+                                    <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="clearALL()">
+                                </div>
+                                <div id="divAddTestLocation">
+
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"></p></center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+</html>

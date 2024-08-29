@@ -1,0 +1,30 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-barcodescanner": {
+      "PACKAGE_NAME": "com.Galaxy_App"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.Galaxy_App"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.Galaxy_App"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.Galaxy_App"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.Galaxy_App"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "com.Galaxy_App"
+    }
+  },
+  "dependent_plugins": {}
+}

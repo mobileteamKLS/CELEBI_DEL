@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .table-bordered, .table-bordered td, .table-bordered th {
+            border: 1px solid #ccc;
+            padding: 3px;
+            text-transform: initial;
+        }
+
+        .vtMargin {
+            margin-bottom: 0rem !important;
+        }
+
+        .login__block__btn_margin {
+            margin-top: 3px !important;
+        }
+
+        .successAlertColor {
+            color: green !important;
+        }
+    </style>
+</head>
+<body data-ma-theme="green">
+    <main class="main">
+        <div class="page-loader">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navigation-trigger hidden-xl-up">
+                <div class="navigation-trigger__inner">
+                    <!--<i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
+                    <!--<a class="btnHome" style="color:#fff;"><i class="zmdi zmdi-home"></i></a>-->
+                    <a href="#" id="backPage" class="btnHome" style="font-size:2rem !important;color:#fff !important;"><i style="" class="zmdi zmdi-chevron-left"></i></a>
+                </div>
+            </div>
+            <div class="header-title" id="lblPageName">Cargo Acceptance </div>
+            <ul class="top-nav">
+                <!--<li class="hidden-xl-up"><a class="btnHome" style="color:#fff !important;"><i class="zmdi zmdi-home"></i></a></li>-->
+                <!--<li class="hidden-xl-up"><a class="" data-toggle="modal" data-target="#modalhelp"><i class="zmdi zmdi-pin-help"></i></a></li>-->
+                <li class="hidden-xl-up"><a href="Login.html"><i class="zmdi zmdi zmdi-sign-in"></i></a></li>
+            </ul>
+        </header>
+        <aside class="sidebar">
+            <div class="scrollbar-inner">
+                <div class="user">
+                    <div class="user__info" data-toggle="dropdown">
+                        <div>
+                            <div class="user__name" id="loginUserName"></div>
+                            <div class="user__email" id="loginUserEmail"></div>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+                <ul class="navigation">
+                    <li class="navigation__active"><a href="Dashboard.html"><i class="zmdi zmdi-home"></i> </a></li>
+                </ul>
+            </div>
+        </aside>
+        <section class="content" style="margin-top:30px;">
+            <div class="contacts row contacts__itemfortext">
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="VCTNo">Scan Barcode</label>
+                </div>
+                <div class="col-6">
+                    <div class="checkbox">
+                        <input type="checkbox" id="chkSecured">
+                        <label class="checkbox__label" id="lblSecured" for="chkSecured">Secured</label>
+                    </div>
+                </div>
+
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="scan">Scan AWB</label>
+                </div>
+                <div class="col-6">
+                    <input type="number" id="txtScanAWB" autofocus onkeyup="ChkMaxLength(this, '11');" style="height: 30px;text-transform:uppercase;" class="textfieldClass" placeholder="">
+                </div>
+                <!--<div class="col-12">
+                    <label id="successMsg"></label>
+                </div>-->
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblMAWBNo">MAWB No.</label>
+                </div>
+                <div class="col-6">
+                    <select class="textfieldClass" id="ddlMAWBNo"></select>
+                </div>
+                <!--<div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="scan">Scan HAWB</label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="txtScanHAWB" autofocus onkeyup="ChkMaxLength(this, '20');" style="height: 30px;text-transform:uppercase;" class="textfieldClass" placeholder="">
+                </div>-->
+
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblHAWBNo">HAWB No.</label>
+                </div>
+                <div class="col-6">
+                    <select class="textfieldClass" id="ddlHAWBNo"></select>
+                </div>
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblGrpId">Group Id</label>
+                </div>
+
+           
+
+                <div class="col-6">
+                    <input type="text" id="txtGroupId" onblur="onblurGroupID();" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
+                </div>
+
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblComCode">Com. Code</label>
+                </div>
+                <div class="col-6">
+
+                    <select class="textfieldClass" id="ddlComCode"></select>
+                </div>
+
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblNOG">NOG</label>
+                </div>
+                <div class="col-6">
+                    <input type="text"  id="txtNOG" class="textfieldClass" placeholder="" style="">
+                </div>
+
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblPcsSclWt">Pieces / Scale Wt.</label>
+                </div>
+                <div class="col-3">
+                    <input type="text" id="txPieces" onkeyup="NumberOnly(event);"  maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
+                </div>
+                <div class="col-3">
+                    <input type="text" id="txtScaleWt" onkeyup="NumberOnly(event);" onchange="checkWt();" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
+                </div>
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lblTrolly">Equ./Trolley</label>
+                </div>
+                <div class="col-6">
+                    <select class="textfieldClass" id="ddlEquTrolley"></select>
+                </div>
+                <div class="col-6" style="text-align:left;">
+                    <label class="lbl" id="lbltareWt">Tare Wt.</label>  <label class="lbl" id="TareWt"></label>
+                </div>
+                <div class="col-6">
+                    <label class="lbl">Net Wt.</label>  <label class="lbl" id="NetWt"></label>
+                </div>
+                <div class="col-12">
+                    <label class="ibiSuccessMsg1"></label>
+                </div>
+            </div>
+            <div class="contacts row contacts__itemfortext">
+                <table class="table  table-bordered mb-0">
+                    <thead class="theadClass">
+                        <tr>
+                            <th colspan="1" id="lblPcs">Pieces</th>
+                            <th colspan="1" id="lbVolume">Volume (LBH)</th>
+                            <th colspan="3">UOM <select id="ddlUnit"><option value="CM">CM</option><option value="IN">IN</option></select><button style="float:right" type="button" id='addButton' class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-plus"></i></button></th>
+                        </tr>
+                    </thead>
+                    <!--<tbody id="tbTable" style="display:none;">
+                        <tr>
+                            <td><input class="textpackges" id="textpackges1"  type="text" /></td>
+                            <td><input class="textpackges" id="textpackges2" type="text" /></td>
+                            <td><input class="textpackges" id="textpackges3" type="text" /></td>
+                            <td><input class="textpackges" id="textpackges4" type="text" /></td>
+                            <td><button type="button" id="btnAdd" style="background-color: red;" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-minus"></i></button></td>
+                        </tr>
+
+                    </tbody>-->
+                </table>
+
+                <table id="TextBoxesGroup" class="table  table-bordered mb-0">
+                    <tbody class="theadClass">
+                        <tr id="TextBoxDiv1m" style="display: none;">
+                            <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Pieces1" type="text" /></td>
+                            <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Length1" type="text" /></td>
+                            <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Width1" type="text" /></td>
+                            <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Height1" type="text" /></td>
+                            <td><button type="button" onclick="removeRow();" id="btnAdd" style="background-color: red;" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-minus"></i></button></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <!--<input type='button' value='Add Button' id='addButton'>-->
+                <!--<input type='button' value='Remove Button' id='removeButton'>-->
+                <!--<input type='button' value='Get TextBox Value' id='getButtonValue'>-->
+                <!--<div id='TextBoxesGroup'>
+                    <div id="TextBoxDiv1">
+                        <label>Textbox #1 : </label><input type='text' id='textbox1'>
+                    </div>
+                </div>-->
+                <!--<table class="table  table-bordered mb-0">
+                    <thead class="theadClass">
+                        <tr>
+                            <th colspan="1">Pieces</th>
+                            <th colspan="1">Volume (LBH)</th>
+                            <th colspan="3">UOM <select id="ddlUnit"><option value="CM">CM</option><option value="IN">IN</option></select> <button type="button" id="btnAdd" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-plus"></i></button></th>
+                        </tr>
+                    </thead>
+                    <tbody id='TextBoxesGroup'>
+                        <tr id="TextBoxDiv1">
+                            <td><input class="textpackges" id="textpackges1" type="text" /></td>
+                            <td><input class="textpackges" id="textpackges2" type="text" /></td>
+                            <td><input class="textpackges" id="textpackges3" type="text" /></td>
+                            <td><input class="textpackges" id="textpackges4" type="text" /></td>
+                            <td><button type="button" id="btnAdd" style="background-color: red;" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-minus"></i></button></td>
+                        </tr>
+
+                    </tbody>
+                </table>-->
+            </div>
+            <div class="contacts row contacts__itemfortext" id="divbtnInfo">
+
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnBack" class="btnClass">Back</button>
+                </div>
+                <br /><br />
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnUnScanned" onclick="clearFunction(); clearSuccessMsg();" class="btnClass">Clear</button>
+                </div>
+                <div class="col-4" style="text-align:center;">
+                    <button type="button" id="btnSubmit" onclick="saveCargoAcceptance();" class="btnClass">Submit</button>
+                </div>
+            </div>
+            <!--<div class="col-2" style="float:right;">
+                <button href="index-2.html"  class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-format-clear-all"></i></button>
+            </div>-->
+            <!--<footer>FOOTER</footer>-->
+
+        </section>
+
+
+        <!--<div>
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/alert.mob.js"></script>
+    <script src="js/LoaderShow-Hide.js"></script>
+    <script src="js/LoadingModel.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="script/General.js"></script>
+    <script type="text/javascript" src="js/qrcode.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="script/Export/EXP_VCTAcceptanceChild.js"></script>
+    <script language="javascript" type="text/javascript">
+        $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+    </script>
+</body>
+</html>
