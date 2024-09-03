@@ -148,7 +148,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
-                <img class="navbarImage" id="imgClear" src="images/Logo.png" onclick="ShowHomePage();">
+                <img class="navbarImage" id="imgClear" src="images/Logo.png" onclick="goToHome();">
                 <a href="#" id="navhdr" class="loggedinUser"></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -271,11 +271,11 @@
                                     <label id="lblDamagePkgs" for="txtDamagePkgs"
                                            class="control-label labelFont">Damage NoP</label>
                                 </div>
-                                <div class="col-xs-3 NoPadding">
+                                <!-- <div class="col-xs-3 NoPadding">
                                     <input type="text" style="text-align:right;" id="txtDamagePkgs"
                                            class="form-control" onblur="checkDamagePcs();" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
-                                </div>
-                                <div class="col-xs-3 NoPadding">
+                                </div> -->
+                                <div class="col-xs-6 NoPadding">
                                     <input type="text" style="text-align:right;" id="txtDamagePkgsView"
                                            class="form-control" onkeyup="ChkMaxLength(this, '4');" disabled>
                                 </div>
@@ -286,11 +286,11 @@
                                     <label id="lblDamagePkgs" for="txtDamagePkgs"
                                            class="control-label labelFont">Damage Weight</label>
                                 </div>
-                                <div class="col-xs-3 NoPadding">
+                                <!-- <div class="col-xs-3 NoPadding">
                                     <input type="number" onblur="checkDamageWt();" style="text-align:right;" id="txtDamageWt"
                                            class="form-control" onkeyup="ChkMaxLength(this, '10');">
-                                </div>
-                                <div class="col-xs-3 NoPadding">
+                                </div> -->
+                                <div class="col-xs-6 NoPadding">
                                     <input type="number" style="text-align:right;" id="txtDamageWtView"
                                            class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
                                 </div>
@@ -333,7 +333,7 @@
                         <div class="row" id="divbutton" style="margin-top:10px;">
                             <div class="form-group col-xs-4 col-sm-2 col-md-2">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Back"
-                                       onclick="window.location.href = 'IMP_Inventory_Management.html'">
+                                       onclick="goBack()">
                             </div>
 
                             <div class="form-group col-xs-4 col-sm-2 col-md-2">
@@ -353,13 +353,13 @@
 
                             <div class="form-group col-xs-6 col-sm-3 col-md-3">
                                 <input type="button" id="btnClear" class="form-control ButtonColor" value="Found Cargo"
-                                       onclick="window.location.href = 'IMP_Inventory_Found_Damage.html'">
+                                       onclick="goToDamage('F');">
                             </div>
 
 
                             <div class="form-group col-xs-6 col-sm-3 col-md-3">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Damage Cargo"
-                                       onclick="goToDamage();">
+                                       onclick="goToDamage('D');">
                             </div>
 
 

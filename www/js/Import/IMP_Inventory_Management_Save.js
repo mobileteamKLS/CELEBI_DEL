@@ -6,11 +6,19 @@ var UserName = window.localStorage.getItem("UserName");
 var CMSserviceURL = window.localStorage.getItem("CMSserviceURL");
 var Terminal = window.localStorage.getItem("Terminal");
 var Area = window.localStorage.getItem("Area");
+var LocType= window.localStorage.getItem("LocationType");
 var HAWBId;
 var IGMRowId;
 
 var availableLoc = [];
 $(function () {
+    if(LocType=="E"){
+        $('#divHAWB').hide();
+    }
+    else{
+        $('#divHAWB').show();
+    }
+
     getLocationCode(Terminal, Area);
     $("#txtScanLocation").autocomplete({
         source: function (request, response) {
@@ -24,7 +32,6 @@ $(function () {
 
     $('#ddlDamageType').change(function () {
         dmgType = $(this).val();
-
     });
 
 
@@ -40,8 +47,6 @@ $(function () {
         }
 
     });
-
-
 });
 
 function getLocationCode(Terminal, Area) {
@@ -173,7 +178,6 @@ function getHawbFromMawb() {
         });
         return false;
     }
-
 }
 
 function getIGMFromHAWB() {
@@ -314,6 +318,23 @@ function GetLocationDetails() {
                     $('#txtPcs').val($(this).find('locPcs').text());
                     HAWBId = parseInt($(this).find('HawbrowID').text());
                     IGMRowId = parseInt($(this).find('IGMrowID').text());
+                    var LocID=parseInt($(this).find('LocID').text());
+                    var Location=$(this).find('Location').text();
+                    window.localStorage.setItem("HawbrowID",HAWBId);
+                    window.localStorage.setItem("IGMrowID",IGMRowId);
+                    window.localStorage.setItem("InvLocId",LocID);
+                    window.localStorage.setItem("InvLocation",Location);
+                    window.localStorage.setItem("Groupid",groupId);
+                });
+
+                $(xmlDoc).find('Table2').each(function (index) {
+                    $('#txtDamagePkgsView').val($(this).find('DamagedNOP').text());
+                    $('#txtDamageWtView').val($(this).find('DamagedWt').text());
+                    var dNop=parseFloat($(this).find('DamagedNOP').text());
+                    var dWT=parseFloat($(this).find('DamagedWt').text());
+                    window.localStorage.setItem("DamagedNOP",dNop);
+                    window.localStorage.setItem("DamagedWt",dWT);
+                    
                 });
 
             },
@@ -407,9 +428,8 @@ function SaveLocationDetails() {
     }
 }
 
-
-function goToDamage() {
-    localStorage.setItem('comeFromDamage', 'D');
+function goToDamage(type) {
+    localStorage.setItem('comeFromDamage', type);
     window.location.href = 'IMP_Inventory_Found_Damage.html'
 }
 
@@ -424,16 +444,11 @@ function oneNumberCheck() {
 
 }
 
-function BacktoFlightCheck() {
-
-}
-
 function EnableFoundCargo() {
 
     clearALL();
     if (document.getElementById('rdoAWBNo').checked) {
         $('#divGroupID').hide();
-
         $('#txtGroupID').val('');
         $('#txtScanLocation').focus();
 
@@ -459,6 +474,7 @@ function checkDamagePcs() {
 
 
 }
+
 function checkDamageWt() {
     var foundPcs = parseFloat($('#txtFoundPkgsWt').val());
     var damagePcs = parseFloat($('#txtDamageWt').val());
@@ -467,9 +483,6 @@ function checkDamageWt() {
         $('#txtDamageWt').val('');
     }
 }
-
-
-
 
 function SelectElement(id, valueToSelect) {
     var element = document.getElementById(id);
@@ -492,11 +505,72 @@ function clearALL() {
     $('#txtRemark').val('');
 }
 
-
 function ClearError(ID) {
     $("#" + ID).css("background-color", "#e7ffb5");
 }
+
 function ClearFields() {
     $('.ClearFields input[type=text]').val("");
+}
+
+function updateStatusToPause(path){
+    var connectionStatus = navigator.onLine ? 'online' : 'offline'
+    var errmsg = "";
+    if (errmsg == "" && connectionStatus == "online") {
+        $.ajax({
+            type: "POST",
+            url: CMSserviceURL + "Inventory_Updatestatus",
+            data: JSON.stringify({
+                'pi_strLocationType': LocType,
+                'pi_strShed':Terminal,
+                'pi_strArea': Area,
+                'pi_strLocation': "",
+                'pi_strAction':'PS',
+                'pi_strUser': Userid,
+                'po_strStatus': "",
+                'po_strMessage':"",
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function doStuff() {
+                //$('.dialog-background').css('display', 'block');
+                $('body').mLoading({
+                    text: "Please Wait..",
+                });
+            },
+            success: function (response) {
+                $("body").mLoading('hide');
+                response = response.d;
+                var xmlDoc = $.parseXML(response);
+               
+                $(xmlDoc).find('Table').each(function (index) {
+                   var status=$(this).find('Status').text();
+                   var msg=$(this).find('Message').text()
+                   if(status=="S"){
+                    $(".ibiSuccessMsg1").text(msg).css({ "color": "Green", "font-weight": "bold" });
+                    setTimeout(function () {
+                        window.location.href = path;
+                    }, 2000);                
+                   }
+                   else{
+                    $(".ibiSuccessMsg1").text(msg).css({ "color": "Red", "font-weight": "bold" });
+                   }
+                });
+                
+            },
+            error: function (msg) {
+                $("body").mLoading('hide');
+                $.alert('Some error occurred while saving data');
+            }
+        });
+        return false;
+    }
+}
+
+function goBack(){
+    updateStatusToPause('IMP_Inventory_Management.html');
+}
+function goToHome(){
+    updateStatusToPause('GalaxyHome.html');
 }
 

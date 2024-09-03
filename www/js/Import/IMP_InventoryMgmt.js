@@ -277,6 +277,7 @@ function updateStatus(action){
                    if(status=="S"){
                     $(".ibiSuccessMsg1").text(msg).css({ "color": "Green", "font-weight": "bold" });
                     setTimeout(function () {
+                        window.localStorage.setItem("LocationType",$("#ddlLocationType").val());
                         window.location.href = 'IMP_Inventory_Management_Save.html';
                     }, 2000);
                     

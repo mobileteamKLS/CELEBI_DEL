@@ -9,7 +9,7 @@
 //var CMSserviceURL = 'https://uatwww.cargocel.in/CELEBIwebservice_hht/CMS_WS_PDA.asmx/';
 
 
-//UAT
+//UAT Client
 //var GHAserviceURL = 'http://52.172.181.171/Galaxy/Services/HHTImpServices.asmx/';
 //var GHAImportFlightserviceURL = 'http://52.172.181.171/Galaxy/services/HHTImpServices.asmx/';
 //var GHAExportFlightserviceURL = 'http://52.172.181.171/Galaxy/Services/HHTExpServices.asmx/';
