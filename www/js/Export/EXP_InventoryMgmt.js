@@ -66,7 +66,7 @@ function getLocationType(){
                     $("#ddlLocationType").append($("<option></option>").val($(this).find('LocaTypeCode').text()).html($(this).find('Column1').text()));
 
                 });
-                $("#ddlLocationType").val('I');
+                $("#ddlLocationType").val('E');
                 $("#ddlLocationType").trigger('change');
                 
             },
@@ -280,7 +280,7 @@ function updateStatus(action){
                     $(".ibiSuccessMsg1").text(msg).css({ "color": "Green", "font-weight": "bold" });
                     setTimeout(function () {
                         window.localStorage.setItem("LocationType",$("#ddlLocationType").val());
-                        window.location.href = 'IMP_Inventory_Management_Save.html';
+                        window.location.href = 'EXP_Inventory_Management_Save.html';
                     }, 2000);
                     
                    }

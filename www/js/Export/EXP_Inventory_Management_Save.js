@@ -1,4 +1,4 @@
-﻿
+
 var GHAImportFlightserviceURL = window.localStorage.getItem("GHAImportFlightserviceURL");
 var AirportCity = window.localStorage.getItem("SHED_AIRPORT_CITY");
 var UserID = window.localStorage.getItem("UserID");
@@ -12,12 +12,12 @@ var IGMRowId;
 
 var availableLoc = [];
 $(function () {
-    if(LocType=="E"){
-        $('#divHAWB').hide();
-    }
-    else{
-        $('#divHAWB').show();
-    }
+    // if(LocType=="E"){
+    //     $('#divHAWB').hide();
+    // }
+    // else{
+    //     $('#divHAWB').show();
+    // }
 
     getLocationCode(Terminal, Area);
     $("#txtScanLocation").autocomplete({
@@ -87,96 +87,100 @@ function getLocationCode(Terminal, Area) {
     }
 }
 
-function getHawbFromMawb() {
-    $(".ibiSuccessMsg1").text('');
-    $('#ddlHAWB').empty();
-    var newOption = $('<option></option>');
-    newOption.val(0).text('Select');
-    newOption.appendTo('#ddlHAWB');
-    var MAWBNo = $('#txtAWBNo').val();
-    if (MAWBNo == '') {
-        return;
-    }
-    if ($('#txtAWBNo').val() != '') {
-        if (MAWBNo.length != '11') {
-            if (MAWBNo.length != '13') {
-                errmsg = "Please enter valid AWB No.";
-                $.alert(errmsg);
-                $('#txtAWBNo').val('');
-                return;
-            }
-        }
-    }
-    var operation;
-    if ($('#txtAWBNo').val() != '') {
-        operation = 'A';
-        MAWBNo = $('#txtAWBNo').val();
-    } else {
-        operation = 'G';
-        MAWBNo = $('#txtGroupID').val();
-    }
 
 
+function GetEWRNo() {
+    clearBeforePopulate();
+    $('#ddlEWRNo').empty();
+    // var newOption = $('<option></option>');
+    // newOption.val(0).text('Select');
+    // newOption.appendTo('#ddlEWRNo');
     var connectionStatus = navigator.onLine ? 'online' : 'offline'
     var errmsg = "";
+    var outmsg="";
+    var AWBNo = $('#txtAWBNo').val();     
+
+    if (AWBNo == '') {        
+        return;
+    }
+
+    if (AWBNo != '' && AWBNo.length != '11') {
+        errmsg = "Please enter valid AWB No.";
+        $.alert(errmsg);
+        return;
+    }
+
     if (errmsg == "" && connectionStatus == "online") {
         $.ajax({
-            type: "POST",
-            url: CMSserviceURL + "GetHAWBNumbersForMAWBNumber_PDA",
-            data: JSON.stringify({
-                'pi_strMAWBNo': MAWBNo, 'pi_strHAWBNo': '',
-                'pi_strAirport': AirportCity, 'pi_strEvent': operation
-            }),
+            type: 'POST',
+            url: CMSserviceURL + "GetEWRnumberForAWB_PDA",
+            data: JSON.stringify({ 'pi_strAWBNo': AWBNo }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             beforeSend: function doStuff() {
                 //$('.dialog-background').css('display', 'block');
                 $('body').mLoading({
-                    text: "Please Wait..",
+                    text: "Loading..",
                 });
             },
             success: function (response) {
-                //debugger;                
                 $("body").mLoading('hide');
-                response = response.d;
-                var xmlDoc = $.parseXML(response);
+                var str = response.d;
 
-                $(xmlDoc).find('Table').each(function () {
+                strXmlStore = str;
 
-                    var outMsg = $(this).find('Status').text();
+                if (str != null && str != "") {
+                                    
+                    var xmlDoc = $.parseXML(str);
 
-                    if (outMsg == 'E') {
-                        $.alert($(this).find('StrMessage').text());
-                        return;
-                    }
-                    else {
-                        var HawbNo = $(this).find('HAWBNo').text();
-                        $('#txtAWBNo').val($(this).find('AirWaybillNo').text());
-                        if (HawbNo != '') {
+                    $(xmlDoc).find('Table').each(function (index) {
+                        outmsg=$(this).find('OutMsg').text();
+                        if (outmsg != '')
+                        {
+                            $.alert(outmsg);
+                            return;
+                        }
 
-                            var HAWBId;
-                            var HAWBNos;
+                        EWRval = $(this).find('EWRNo').text();
+                        EWRno = $(this).find('EWRNo').text();
 
-                            HAWBId = $(this).find('HAWBNo').text();
-                            HAWBNos = HawbNo;
-
-                            var newOption = $('<option></option>');
-                            newOption.val(HAWBId).text(HAWBNos);
-                            newOption.appendTo('#ddlHAWB');
+                        var newOption = $('<option></option>');
+                        newOption.val(EWRval).text(EWRno);
+                        newOption.appendTo('#ddlEWRNo');
+                   
+                        
+                    }); 
+                    if (outmsg == '') {
+                        if ($("#ddlEWRNo option:selected").val() != '' || $("#ddlEWRNo option:selected").val() != '0') {
+                            GetLocationDetails();
                         }
                     }
-                });
-                if ($("#ddlHAWB option:selected").val() == '' || $("#ddlHAWB option:selected").val() == '0') {
-                    GetLocationDetails();
+                                 
+
+                }
+                else {
+                    errmsg = 'Shipment does not exists';
+                    $.alert(errmsg);
                 }
 
             },
             error: function (msg) {
                 $("body").mLoading('hide');
-                $.alert('Some error occurred while saving data');
+                var r = jQuery.parseJSON(msg.responseText);
+                $.alert(r.Message);
             }
         });
-        return false;
+    }
+    else if (connectionStatus == "offline") {
+        $("body").mLoading('hide');
+        $.alert('No Internet Connection!');
+    }
+    else if (errmsg != "") {
+        $("body").mLoading('hide');
+        $.alert(errmsg);
+    }
+    else {
+        $("body").mLoading('hide');
     }
 }
 
@@ -256,12 +260,12 @@ function GetLocationDetails() {
         $.alert(errmsg);
         return;
     }
-    var HawnValue = "";
-    if ($("#ddlHAWB option:selected").val() == '' || $("#ddlHAWB option:selected").val() == '0') {
-        HawnValue = "";
+    var ERValue = "";
+    if ($("#ddlEWRNo option:selected").val() == '' || $("#ddlEWRNo option:selected").val() == '0') {
+        ERValue = "";
     }
     else {
-        HawnValue = $("#ddlHAWB option:selected").text();
+        ERValue = $("#ddlEWRNo option:selected").text();
     }
 
     var operation = "", groupId = "";
@@ -282,11 +286,11 @@ function GetLocationDetails() {
     if (errmsg == "" && connectionStatus == "online") {
         $.ajax({
             type: "POST",
-            url: CMSserviceURL + "Inventory_GetLocationDetails",
+            url: CMSserviceURL + "Inventory_EXP_GetLocationDetails",
             data: JSON.stringify({
                 'pi_strSelection': operation,
-                'pi_strMAWBNo': $("#txtAWBNo").val(),
-                'Pi_strHAWBNo': HawnValue,
+                'pi_strAWBNo': $("#txtAWBNo").val(),
+                'Pi_strEWRNo': ERValue,
                 'pi_GroupID': groupId,
                 'pi_strUser': UserID,
                 'po_strStatus': '',
@@ -458,7 +462,7 @@ function EnableFoundCargo() {
         $('#divGroupID').show();
         //$('#divHAWB').hide();
         //$('#divMAWB').hide();
-        $('#ddlHAWBNo').empty();
+        $('#ddlEWRNo').empty();
         $('#txtAWBNo').val('');
         $('#txtScanLocation').focus();
     }
@@ -493,7 +497,7 @@ function clearALL() {
     $('#txtScanLocation').val('');
     $('#txtGroupID').val('');
     $('#txtAWBNo').val('');
-    $('#ddlHAWB').empty();
+    $('#ddlEWRNo').empty();
     $('#txtLoc').val('');
     $('#txtPcs').val('');
     $('#txtInvPcs').val('');
@@ -565,6 +569,20 @@ function updateStatusToPause(path){
         });
         return false;
     }
+}
+
+function clearBeforePopulate(){
+    $(".ibiSuccessMsg1").text('');
+    $('#ddlEWRNo').empty();
+    $('#txtLoc').val('');
+    $('#txtPcs').val('');
+    $('#txtInvPcs').val('');
+    $('#txtDamagePkgs').val('');
+    $('#txtDamagePkgsView').val('');
+    $('#txtDamageWt').val('');
+    $('#txtDamageWtView').val('');
+    $('#ddlDamageType').empty();
+    $('#txtRemark').val('');
 }
 
 function goBack(){
