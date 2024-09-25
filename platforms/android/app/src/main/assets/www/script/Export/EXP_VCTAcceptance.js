@@ -16,7 +16,6 @@ var doorOptionforback = window.localStorage.getItem("doorOption");
 
 var flag = localStorage.getItem('flag');
 
-
 var IsSealed;
 var REM;
 var AcceptedPkg;
@@ -38,33 +37,24 @@ $(function () {
 
     if (flag == '1') {
         if (txtVCTNo != '') {
-            localStorage.setItem('isVCTNo', '1');
             inputxml = "<Root><VCTNo>" + txtVCTNo + "</VCTNo><ScannedNo></ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
             _GetVCTDetails(inputxml);
         } else if (txtScannedNo != '') {
-           
-            if (txtScannedNo.startsWith('T') || txtScannedNo.startsWith('S')) {
-                inputxml = "<Root><VCTNo>" + txtScannedNo + "</VCTNo><ScannedNo></ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
-                _GetVCTDetails(inputxml);
-            }
-            else {
-                localStorage.setItem('isVCTNo', '0');
-                inputxml = "<Root><VCTNo></VCTNo><ScannedNo>" + txtScannedNo + "</ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
-                _GetVCTDetails(inputxml);
-            }
+            inputxml = "<Root><VCTNo></VCTNo><ScannedNo>" + txtScannedNo + "</ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
+            _GetVCTDetails(inputxml);
         }
     }
+
    
-   
-   
-    $("#ddlDoorList").trigger('change');
 
     $("#ddlDoorList").change(function () {
         doorOption = $(this).find("option:selected").text();
-        
         localStorage.setItem('doorOption', doorOption);
 
     });
+
+
+
 
     $("#btnAdd").click(function () {
 
@@ -97,9 +87,9 @@ $(function () {
         event.stopPropagation();
     });
 
-    $("#btnUnScanned").click(function () {
-        getAllDetailOfHAWB();
-    });
+    //$("#btnUnScanned").click(function () {
+    //    getAllDetailOfHAWB();
+    //});
 
     var language = window.localStorage.getItem("Language");
 
@@ -170,21 +160,11 @@ function GetVCTDetails() {
     });
     if ($("#txtScannedNo").val() != '' || $("#txtVCTNo").val() != '') {
         if ($("#txtVCTNo").val() != '') {
-            localStorage.setItem('isVCTNo', '1');
             inputxml = "<Root><VCTNo>" + $("#txtVCTNo").val() + "</VCTNo><ScannedNo></ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
             _GetVCTDetails(inputxml);
         } else if ($("#txtScannedNo").val() != '') {
-            
-            if ($("#txtScannedNo").val().startsWith('T') || $("#txtScannedNo").val().startsWith('S')) {
-                inputxml = "<Root><VCTNo>" + $("#txtScannedNo").val() + "</VCTNo><ScannedNo></ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
-                _GetVCTDetails(inputxml);
-            }
-            else {
-                localStorage.setItem('isVCTNo', '0');
-                inputxml = "<Root><VCTNo></VCTNo><ScannedNo>" + $("#txtScannedNo").val() + "</ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
-                _GetVCTDetails(inputxml);
-            }
-
+            inputxml = "<Root><VCTNo></VCTNo><ScannedNo>" + $("#txtScannedNo").val() + "</ScannedNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
+            _GetVCTDetails(inputxml);
         }
 
     } else {
@@ -238,9 +218,6 @@ _GetVCTDetails = function (InputXML) {
                     IsDocInDone = $(this).find('IsDocInDone').text();
                     IsDocOutDone = $(this).find('IsDocOutDone').text();
                     ScannedNo = $(this).find('ScannedNo').text();
-                    // changes done here
-                    IsAccepted = $(this).find('flag').text();
-                    AcceptanceStatus = $(this).find('AcceptanceStatus').text();
                     var newOption = $('<option></option>');
                     // if (flag == '0') {
                     newOption.val(DOOR).text(DOOR);
@@ -276,16 +253,11 @@ _GetVCTDetails = function (InputXML) {
                     $("#spnRemainingPieces").text(REM).css('color', 'red');;
                     $("#spnAWBCount").text(AWBULDC);
                     $("#lblDockName").text(VCTStatus).css('color', 'red');
-                    //here
-                    if (AcceptanceStatus == 'Dock-In') {
+
+                    if (VCTStatus == 'Dock-In') {
 
                         if (flag == '0') {
-                            if ($("#txtScannedNo").val().startsWith('T') || $("#txtScannedNo").val().startsWith('S')){
-                                window.localStorage.setItem("txtScannedNo", '');
-                            }
-                            else{
-                                window.localStorage.setItem("txtScannedNo", $("#txtScannedNo").val());
-                            }
+                            window.localStorage.setItem("txtScannedNo", $("#txtScannedNo").val());
                             window.localStorage.setItem("txtVCTNo", $("#txtVCTNo").val());
                             window.localStorage.setItem("VCTNo", $("#txtVCTNo").val());
                             window.localStorage.setItem("VCTId", VCTId);
@@ -293,19 +265,12 @@ _GetVCTDetails = function (InputXML) {
                         }
                         $("#btnDockIn").prop("disabled", true).css('background-color', '#a7a7a7');
                         $("#btnNext").prop('disabled', false).css('background-color', '#3c7cd3');
-                        if(VCTStatus=='Dock-Out'){
-                            $("#btnDockOut").prop('disabled', true).css('background-color', '#a7a7a7');
-                        }
-                        else{
-                            $("#btnDockOut").prop('disabled', false).css('background-color', '#3c7cd3');   
-                        }
-                        
-                    } else if (AcceptanceStatus == 'Dock-Out') {
+                        $("#btnDockOut").prop('disabled', false).css('background-color', '#3c7cd3');
+                    } else if (VCTStatus == 'Dock-Out') {
                         $("#btnDockIn").prop("disabled", true).css('background-color', '#a7a7a7');
                         $("#btnNext").prop('disabled', true).css('background-color', '#a7a7a7');
                         $("#btnDockOut").prop('disabled', true).css('background-color', '#a7a7a7');
-                      //here
-                    } else if (AcceptanceStatus == 'Pending') {
+                    } else if (VCTStatus == 'Pending') {
                         $("#btnNext").prop('disabled', true).css('background-color', '#a7a7a7');
                         $("#btnDockOut").prop('disabled', true).css('background-color', '#a7a7a7');
                         $("#btnDockIn").prop("disabled", false).css('background-color', '#3c7cd3');
@@ -472,7 +437,6 @@ function clearFunction() {
     $(".ibiSuccessMsg1").text('');
     $("#ddlDoorList").empty();
     $(".ibiSuccessMsg1").text('');
-    flag=0;
 
 
 }

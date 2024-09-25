@@ -38,6 +38,13 @@
     width: 100px;
 }
 
+.loggedinUser {
+    text-align: right;
+    font-size: x-small;
+    font-family: Arial;
+    color: lightgreen;
+}
+
 .form-controlForButtons {
     padding-left: 5px;
     padding-right: 5px;
@@ -199,6 +206,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
     .img-wrap:hover .close {
         opacity: 1;
     }
+
 .rslides {
     position: relative;
     list-style: none;
@@ -242,7 +250,8 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   background: transparent url('http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif') center no-repeat;
 }*/
 label {
-    /*font-weight: 700;*/
+    font-weight: 700;
+    font-size: small;
 }
 
 
@@ -254,14 +263,18 @@ label {
 .col-form-label {
     padding-left: 5px;
     padding-right: 10px;
+    font-size: 15px;
 }
+
 .NoPadding {
     padding-left: 0px;
     padding-right: 0px;
 }
+
 .ImageSize {
-    width:100%;
+    width: 100%;
 }
+
 .VerticallyCenter {
     position: absolute;
     left: 50%;
@@ -271,48 +284,9 @@ label {
 }
 
 body {
-    background-color: #F8F8F8;
+    background-color: beige;
 }
 
-input{
-    text-transform:uppercase;
+input {
+    text-transform: uppercase;
 }
-
-
-.btn-img
-{
-    background-color: #F36F23;
-    border: 0 none;
-    color: #FFFFFF;
-    cursor: pointer;
-    height: 40px;
-    font-weight: bold;
-    padding: 0 3px 5px 1px;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-}
-a.orange-btn {
-    background-color: #F36F23;
-    display: block;
-    float: left;
-    height: 29px;
-    line-height: 23px;
-    padding-left: 4px;
-    text-decoration: none;
-    border-top-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-}
-
-input.btn {
-    background-color: #E2E2E2;
-    border: 1px solid #838585;
-    color: #626262;
-    cursor: pointer;
-    font-family: Arial;
-    font-size: 0.9em;
-    height: 20px;
-    padding: 0;
-    width: 20px;
-}
-
-

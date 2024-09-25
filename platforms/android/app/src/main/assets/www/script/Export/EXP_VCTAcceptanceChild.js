@@ -42,10 +42,7 @@ var _vlaueofTrolleytext;
 var IsBaggage;
 var MawbNo;
 var HawbNo;
-var isVCTNo = localStorage.getItem('isVCTNo');
-var _XmlForSHCCode;
-var joinAllValuesWithComma = '';
-var allSHCCodeSave = '';
+
 $(function () {
 
     if (txtScannedNo != '') {
@@ -53,11 +50,6 @@ $(function () {
 
     }
 
-    $("#btnOpenSHCModal").click(function () {
-        $("#spnValdatemsg").text('');
-        SHCCodePopupField();
-
-    });
 
 
     $('#txtScanAWB').keypress(function (event) {
@@ -66,7 +58,6 @@ $(function () {
             var inputxmlAWB = "<Root><VCTNo>" + VCTNo + "</VCTNo><AWBId>" + $("#txtScanAWB").val() + "</AWBId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
             GetVCTUnScannedAWBDetails(inputxmlAWB);
         }
-        event.stopPropagation();
     });
 
     //$('#txtGroupId').keypress(function (event) {
@@ -235,7 +226,7 @@ $(function () {
 
     inputxml = "<Root><VCTNo>" + VCTNo + "</VCTNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
     GetVCTUnScannedDetails(inputxml);
-    $("#VCTNo").text(VCTNo.toUpperCase()).css('color', 'red');
+    $("#VCTNo").text(VCTNo).css('color', 'red');
 
     // inputxml = "<Root><VCTNo>" + VCTNo + "</VCTNo><AWBId>"+AWBId+"</AWBId><AirportCity>" + AirportCity + "</AirportCity><Culture>" + language + "</Culture><UserId>" + UserId + "</UserId></Root>";
 
@@ -278,31 +269,6 @@ $(function () {
     });
 
     $("#ddlHAWBNo").change(function () {
-        allSHCCodeSave = '';
-        joinAllValuesWithComma = '';
-        $('#dvRemarkShow').empty();
-        $("#txtGroupId").val('');
-        $("#txPieces").val('');
-        $("#txtScaleWt").val('');
-        $("#ddlEquTrolley").val('0,-1');
-
-        $("#Pieces1").val('');
-        $("#Length1").val('');
-        $("#Width1").val('');
-        $("#Height1").val('');
-
-        $("#TareWt").text('');
-        $("#NetWt").text('');
-        $("#ddlComCode").val('0');
-        $("#txtNOG").val('');
-        $("#SHCCodeTbl").empty();
-        if ($("#ddlMAWBNo").val() == '0') {
-            return;
-        }
-        $("#dvForEditBtn").hide();
-
-        $("#txtGroupId").focus();
-
         _vlaueofRemPakgs = $('option:selected', this).val();
         selectTestHaWB = $('option:selected', this).text();
         ConsignmentRowID = $('option:selected', this).val();
@@ -317,13 +283,7 @@ $(function () {
                 NOG = $(this).find('NOG').text();
                 CommSrNo = $(this).find('CommSrNo').text();
                 IsBaggage = $(this).find('IsBaggage').text();
-                var Remark = '';
-                Remark = $(this).find('Remark').text();
-                if (Remark != '') {
-                    remarkPriority = $(this).find('remarkPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                    $('#remarkPriorityShow').modal('show');
-                }
+
                 $("#txPieces").val(RemainingPkg);
                 $("#txtScaleWt").val(RemainingWt);
                 $("#txtNOG").val(NOG);
@@ -339,21 +299,14 @@ $(function () {
 
                 //    fullHawb = $('#ddlHAWBNo option').length;
                 //}
-                SHCAll = $(this).find('SHCAll').text();
-
-                _XmlForSHCCode = SHCAll;
-                SHCSpanHtml(SHCAll);
             }
         });
         $("#txtGroupId").focus();
     });
 
     $("#ddlMAWBNo").change(function () {
-        allSHCCodeSave = '';
-        joinAllValuesWithComma = '';
-        $(".ibiSuccessMsg1").text('');
         $("#ddlHAWBNo").empty();
-        $("#dvForEditBtn").hide();
+
         var newOption = $('<option></option>');
         newOption.val('0').text('Select');
         newOption.appendTo('#ddlHAWBNo');
@@ -373,10 +326,6 @@ $(function () {
         $("#NetWt").text('');
         $("#ddlComCode").val('0');
         $("#txtNOG").val('');
-        $("#SHCCodeTbl").empty();
-        if ($("#ddlMAWBNo").val() == '0') {
-            return;
-        }
 
         setHAWBNo();
         $("#txtGroupId").focus();
@@ -575,29 +524,6 @@ $(function () {
 
 });
 
-function SHCCodePopupField() {
-    $('#dvSHCCode').empty();
-    html = '';
-    html += '<table id="tblSHCCode" class="table  table-bordered table-striped mb-0" style="border: 1px solid #eee;">';
-    html += '<thead class="theadClass">';
-    html += '<tr>';
-    html += '<th id="lblRemark">Sr No</th>';
-    html += '<th id="lbRemark">SHC Code</th>';
-
-    html += '</tr>';
-    html += '</thead>';
-    html += '<tbody class="">';
-    for (var i = 0; i < 9; i++) {
-        html += '<tr id="row1 ' + i + '">';
-        html += '<td>' + i + '</td>';
-        html += '<td><input type="text" id="txtSHC ' + i + '" class="textfieldClass" placeholder="" style=""></td>';
-        html += '</tr>';
-    }
-
-    html += "</tbody></table>";
-    $('#dvSHCCode').append(html);
-}
-
 function setTurkish() {
     //$('#lblPageName').text("Kargo Kabulü");
     $('#VCTNo').text("Barkod Tara");
@@ -659,9 +585,6 @@ function checkWt() {
     }
 
 }
-
-
-
 
 getAllValues = function () {
 
@@ -898,7 +821,6 @@ GetVCTUnScannedDetails = function (InputXML) {
 
 
                     DocumentNo = $(this).find('DocumentNo').text();
-                    SelectedCommSrNo = $(this).find('CommSrNo').text();
                     HAWBNo = $(this).find('HAWBNo').text();
                     //RemainingPkg = $(this).find('RemainingPkg').text();
                     //RemainingWt = $(this).find('RemainingWt').text();
@@ -914,20 +836,7 @@ GetVCTUnScannedDetails = function (InputXML) {
                     var newOption = $('<option></option>');
                     newOption.val(DocumentNo).text(DocumentNo);
                     newOption.appendTo('#ddlMAWBNo');
-                    if (isVCTNo == '0') {
-                        var result;
-                        $("#ddlMAWBNo option").each(function () {
-                            result = $('#txtScanAWB').val();
-                            if (result.length != 11) {
-                                let text = $('#txtScanAWB').val();
-                                result = text.slice(0, 11);
-                            }
-                            if ($(this).val() === result) {
-                                $(this).prop("selected", true);
-                                setHAWBNo();
-                            }
-                        });
-                    }
+
 
                     var a = new Array();
                     $("#ddlMAWBNo").children("option").each(function (x) {
@@ -979,15 +888,6 @@ GetVCTUnScannedDetails = function (InputXML) {
                     var newOption = $('<option></option>');
                     newOption.val(SR_NO).text(COMMODITY_TYPE);
                     newOption.appendTo('#ddlComCode');
-                    if (isVCTNo == '0') {
-                        $("#ddlComCode option").each(function () {
-                            if ($(this).val() === SelectedCommSrNo) {
-                                $(this).prop("selected", true);
-
-                            }
-                        });
-                    }
-
 
                 });
 
@@ -1049,7 +949,7 @@ GetVCTUnScannedDetails = function (InputXML) {
                                 $("#txtNOG").val(NOG);
                                 // $("#ddlComCode").val(CommSrNo);
                                 $("#ddlHAWBNo").val(ConsignmentRowID);
-                                $('#ddlHAWBNo').trigger('change');
+
                                 // var newOption = $('<option></option>');
                                 // newOption.val(ConsignmentRowID).text(HAWBNo);
                                 // newOption.appendTo('#ddlHAWBNo');
@@ -1093,7 +993,7 @@ function onblurGroupID() {
 
 var fullHawb;
 function setHAWBNo(i) {
-    $('#dvRemarkShow').empty();
+
     $(_xmlDocTable).find('Table1').each(function (index) {
         if ($("#ddlMAWBNo").find(":selected").text() == $(this).find('DocumentNo').text()) {
 
@@ -1115,11 +1015,6 @@ function setHAWBNo(i) {
                 $("#txtScaleWt").val(RemainingWt);
                 $("#txtNOG").val(NOG);
                 $("#ddlComCode").val(CommSrNo);
-
-                SHCAll = $(this).find('SHCAll').text();
-
-                _XmlForSHCCode = SHCAll;
-                SHCSpanHtml(SHCAll);
             }
             else {
 
@@ -1129,23 +1024,10 @@ function setHAWBNo(i) {
 
                 fullHawb = $('#ddlHAWBNo option').length;
 
-                $("#SHCCodeTbl").empty();
-
-            }
-        }
 
 
-    });
 
-    var Remark = '';
-    $(_xmlDocTable).find('Table3').each(function (index) {
-        if ($("#ddlMAWBNo").find(":selected").text() == $(this).find('DocumentNo').text()){
-            Remark = $(this).find('Remark').text();
-            if (Remark != '') {
-                // RemarkDate = $(this).find('RemarkDate').text();
-                remarkPriority = $(this).find('remarkPriority').text();
-                $('#dvRemarkShow').append(Remark);
-                $('#remarkPriorityShow').modal('show');
+
             }
         }
     });
@@ -1207,7 +1089,6 @@ function saveCargoAcceptance() {
         $(".alert_btn_ok").click(function () {
             $("#txPieces").focus();
         });
-
         return;
     } else if ($("#txtScaleWt").val() == '') {
         // $("#txPieces").focus();
@@ -1219,17 +1100,17 @@ function saveCargoAcceptance() {
         });
         return;
     }
-    // else if ($("#txtGroupId").val() == '') {
-    //     //  $("#txPieces").focus();
-    //     $("body").mLoading('hide');
-    //     errmsg = "Please Enter Unique Group ID</br>";
-    //     $.alert(errmsg);
-    //     $(".alert_btn_ok").click(function () {
-    //         $("#txtGroupId").focus();
-    //     });
-    //     return;
+    else if ($("#txtGroupId").val() == '') {
+        //  $("#txPieces").focus();
+        $("body").mLoading('hide');
+        errmsg = "Please Enter Unique Group ID</br>";
+        $.alert(errmsg);
+        $(".alert_btn_ok").click(function () {
+            $("#txtGroupId").focus();
+        });
+        return;
 
-    // }
+    }
     else if (IsBaggage != 'Y' && (parseInt($("#txPieces").val()) > parseInt(RemainingPkg))) {
         $("body").mLoading('hide');
         errmsg = "Entered Package(s) " + $("#txPieces").val() + " must be less than or equal to remaining Package(s)" + RemainingPkg + "</br>";
@@ -1261,7 +1142,6 @@ function saveCargoAcceptance() {
     //    return;
     //}
     else {
-
         //var empty = 0;
 
         //$('#TextBoxesGroup input[type=text]').each(function () {
@@ -1280,26 +1160,26 @@ function saveCargoAcceptance() {
         //SaveVCTCargoDetails(inputxml);
         //    alert('k');
         //}
-        var $input;
-        var formElements = new Array();
-        $('#TextBoxesGroup').find('input').each(function (i, input) {
-            $input = $(input);
-            $input.css('background-color', $input.val() ? 'white' : '#FFCCCB');
-            formElements.push($input.val());
-        });
+        // var $input;
+        // var formElements = new Array();
+        // $('#TextBoxesGroup').find('input').each(function (i, input) {
+        //     $input = $(input);
+        //     $input.css('background-color', $input.val() ? 'white' : '#FFCCCB');
+        //     formElements.push($input.val());
+        // });
         // if ($input.val() == '') {
         //     $input.css('background-color', $input.val() ? 'white' : '#FFCCCB');
         //     $(".ibiSuccessMsg1").text('Please enter dimensions.').css({ 'color': 'red' });
         //     $("#Length1").focus();
-        // } else {
-            $(".ibiSuccessMsg1").text('');
-            getAllValues();
-            inputxml = "<Root><VCTNo>" + txtVCTNo + "</VCTNo><VCTID>" + VCTId + "</VCTID><ISULD>False</ISULD><ConsignmentRowID>" + ConsignmentRowID + "</ConsignmentRowID><HouseRowId>" + ConsignmentRowID + "</HouseRowId><AWBULDNo>" + $("#ddlMAWBNo").val() + "</AWBULDNo><HAWB>" + $("#ddlHAWBNo option:selected").text() + "</HAWB><Package>" + $("#txPieces").val() + "</Package><GrossWt>" + $("#txtScaleWt").val() + "</GrossWt><WtUOM>KG</WtUOM><TrolleyCode>" + IDENTIFIER + "</TrolleyCode><TrolleyWt>" + REFERENCE + "</TrolleyWt><IsSecured>" + IsSecuredTF + "</IsSecured><GroupId>" + $("#txtGroupId").val() + "</GroupId><DimUOM>" + $("#ddlUnit").val() + "</DimUOM><DimDetails>" + inputRows + "</DimDetails><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId><NOG>" + $("#txtNOG").val() + "</NOG><CommSrNo>" + $("#ddlComCode").val() + "</CommSrNo>" + allSHCCodeSave + "</Root>"
-            console.log(inputxml);
-            SaveVCTCargoDetails(inputxml);
-        //}
+        // } 
+        //else {
+        $(".ibiSuccessMsg1").text('');
+        getAllValues();
+        inputxml = "<Root><VCTNo>" + txtVCTNo + "</VCTNo><VCTID>" + VCTId + "</VCTID><ISULD>False</ISULD><ConsignmentRowID>" + ConsignmentRowID + "</ConsignmentRowID><HouseRowId>" + ConsignmentRowID + "</HouseRowId><AWBULDNo>" + DocumentNo + "</AWBULDNo><HAWB>" + selectTestHaWB + "</HAWB><Package>" + $("#txPieces").val() + "</Package><GrossWt>" + $("#txtScaleWt").val() + "</GrossWt><WtUOM>KG</WtUOM><TrolleyCode>" + IDENTIFIER + "</TrolleyCode><TrolleyWt>" + REFERENCE + "</TrolleyWt><IsSecured>" + IsSecuredTF + "</IsSecured><GroupId>" + $("#txtGroupId").val() + "</GroupId><DimUOM>" + $("#ddlUnit").val() + "</DimUOM><DimDetails>" + inputRows + "</DimDetails><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId><NOG>" + $("#txtNOG").val() + "</NOG><CommSrNo>" + $("#ddlComCode").val() + "</CommSrNo></Root>"
+        console.log(inputxml);
+        SaveVCTCargoDetails(inputxml);
         // }
-
+        // }
     }
 }
 
@@ -1353,12 +1233,9 @@ SaveVCTCargoDetails = function (InputXML) {
 
                         //$(".alert_btn_ok").click(function () {
                         //    window.location.reload();
-                        inputxml = "<Root><VCTNo>" + VCTNo + "</VCTNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
-                        setTimeout(() => {
-                            GetVCTUnScannedDetails(inputxml);
-                        }, 2500);
-                        allSHCCodeSave = '';
-                        joinAllValuesWithComma = '';
+                        // inputxml = "<Root><VCTNo>" + VCTNo + "</VCTNo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserId>" + Userid + "</UserId></Root>";
+                        //GetVCTUnScannedDetails(inputxml);
+
                         //});
                         clearFunction();
 
@@ -1386,13 +1263,13 @@ SaveVCTCargoDetails = function (InputXML) {
 
 function clearFunction() {
     $("#txtScanAWB").val('');
-    $("#ddlMAWBNo").val('0');
-    $("#ddlHAWBNo").val('0');
+    // $("#ddlMAWBNo").text('');
+    //  $("#ddlHAWBNo").text('');
     $("#txtGroupId").val('');
     $("#txPieces").val('');
     $("#txtScaleWt").val('');
     $("#ddlEquTrolley").text('');
-    $("#dvForEditBtn").hide();
+
     //$("#TextBoxesGroup").empty();
     $("#TextBoxesGroup tr:gt(0)").remove();
     $('#Pieces1').val('');
@@ -1404,7 +1281,6 @@ function clearFunction() {
         $input.css('background-color', '');
     });
     $("#TextBoxDiv1").empty();
-    $("#SHCCodeTbl").empty();
     //$("#TextBoxesGroup").hide();
 
     $("#ddlComCode").val('0');
@@ -1499,9 +1375,9 @@ GetVCTUnScannedAWBDetails = function (InputXMLAWB) {
 
                     //$("#ddlMAWBNo option:contains(" + MawbNo + ")").attr('selected', 'selected');                    
                     $('#ddlMAWBNo').val(MawbNo);
-                    var newOption = $('<option></option>');
-                    newOption.val(HawbNo).text(HawbNo);
-                    newOption.appendTo('#ddlHAWBNo');
+                    // var newOption = $('<option></option>');
+                    // newOption.val(HawbNo).text(HawbNo);
+                    // newOption.appendTo('#ddlHAWBNo');
                     setHAWBNo();
                     RemainingPkg = $(this).find('RemainingPkg').text();
                     RemainingWt = $(this).find('RemainingWt').text();
@@ -1536,197 +1412,4 @@ GetVCTUnScannedAWBDetails = function (InputXMLAWB) {
             alert('Server not responding...');
         }
     });
-}
-
-
-
-function SHCCodePopupField() {
-    $('#dvSHCCode').empty();
-    //var allSHCCodeSave = '';
-    //var joinAllValuesWithComma = '';
-
-    html = '';
-    html += '<table id="tblSHCCode"  class="table  table-bordered table-striped mb-0" style="border: 1px solid #eee;">';
-    html += '<thead class="theadClass">';
-    html += '<tr>';
-    html += '<th id="lblRemark">Sr No</th>';
-    html += '<th id="lbRemark">SHC Code</th>';
-
-    html += '</tr>';
-    html += '</thead>';
-    html += '<tbody class="">';
-
-    if (joinAllValuesWithComma != '') {
-        var newSpanSHC = joinAllValuesWithComma.split(',');
-        for (var n = 0; n < 9; n++) {
-
-            html += '<tr id="row1 ' + n + '">';
-            html += '<td style="text-align:center;">' + (n + 1) + '</td>';
-            html += '<td><input onkeypress="return blockSpecialChar(event)" maxlength="3" value="' + newSpanSHC[n] + '" type="text" id="txtSHC ' + n + '" class="textfieldClass" placeholder="" style="text-transform: uppercase;"></td>';
-            html += '</tr>';
-        }
-    } else {
-        var newSpanSHC = _XmlForSHCCode.split(',');
-        var filtered = newSpanSHC.filter(function (el) {
-            return el != "";
-        });
-
-        for (var n = 0; n < filtered.length; n++) {
-            var blink = filtered[n].split('~');
-            html += '<tr id="row1 ' + n + '">';
-            html += '<td style="text-align:center;">' + (n + 1) + '</td>';
-            html += '<td><input onkeypress="return blockSpecialChar(event)" maxlength="3" value="' + blink[0] + '" type="text" id="txtSHC ' + n + '" class="textfieldClass" placeholder="" style="text-transform: uppercase;"></td>';
-            html += '</tr>';
-        }
-    }
-
-
-
-    html += "</tbody></table>";
-    $('#dvSHCCode').append(html);
-    $('#SHCCode').modal('show');
-}
-
-function getAllSHCCodefromPopup() {
-    var inputName = "";
-    var values = "";
-    var htmlVal = '';
-    var jionOfComma = '';
-    $('#dvSHCCode tr').each(function (i, el) {
-
-        $(this).find("input").each(function () {
-            inputName = $(this).attr("Value");
-            values = $(this).val();
-            if (i == 1) {
-                htmlVal += '<SHC1>' + values.toUpperCase() + '</SHC1>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 2) {
-                htmlVal += '<SHC2>' + values.toUpperCase() + '</SHC2>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 3) {
-                htmlVal += '<SHC3>' + values.toUpperCase() + '</SHC3>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 4) {
-                htmlVal += '<SHC4>' + values.toUpperCase() + '</SHC4>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 5) {
-                htmlVal += '<SHC5>' + values.toUpperCase() + '</SHC5>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 6) {
-                htmlVal += '<SHC6>' + values.toUpperCase() + '</SHC6>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 7) {
-                htmlVal += '<SHC7>' + values.toUpperCase() + '</SHC7>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 8) {
-                htmlVal += '<SHC8>' + values.toUpperCase() + '</SHC8>';
-                jionOfComma += values.toUpperCase() + ','
-            }
-            if (i == 9) {
-                htmlVal += '<SHC9>' + values.toUpperCase() + '</SHC9>';
-                jionOfComma += values.toUpperCase()
-            }
-        });
-
-    });
-
-    allSHCCodeSave = htmlVal;
-    joinAllValuesWithComma = jionOfComma;
-    console.log("Values====", joinAllValuesWithComma)
-    ValidateSHCCodes();
-}
-
-function SHCSpanHtml(newSHC) {
-    $("#SHCCodeTbl").empty();
-    var spanStr = "<tr class=''>";
-    var newSpanSHC = newSHC.split(',');
-    var filtered = newSpanSHC.filter(function (el) {
-        return el != "";
-    });
-
-    for (var n = 0; n < filtered.length; n++) {
-        var blink = filtered[n].split('~');
-
-        if (filtered[n].indexOf('~') > -1) {
-            if (blink[1] == 'Y' && filtered[n] != '~Y') {
-                spanStr += "<td class='blink_me'>" + blink[0] + "</td>";
-                console.log(filtered[n])
-            }
-        }
-
-        if (filtered[n].indexOf('~') > -1) {
-            if (blink[1] == 'N' && filtered[n] != '~N') {
-                spanStr += "<td class='foo'>" + blink[0] + "</td>";
-                console.log(filtered[n])
-            }
-        }
-    }
-    spanStr += "</tr>";
-
-    $("#SHCCodeTbl").html(spanStr);
-    $("#dvForEditBtn").show();
-
-    return spanStr;
-
-}
-
-
-function ValidateSHCCodes() {
-
-    var InputXML = '<Root><AirportCity>' + SHED_AIRPORT_CITY + '</AirportCity>' + allSHCCodeSave + '</Root >';
-    $('body').mLoading({
-        text: "Please Wait..",
-    });
-    $.ajax({
-        type: 'POST',
-        url: ExpURL + "/ValidateSHCCodes",
-        data: JSON.stringify({ 'InputXML': InputXML }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response, xhr, textStatus) {
-            HideLoader();
-            var str = response.d;
-            if (str != null && str != "" && str != "<NewDataSet />") {
-                // $("#btnDiv").show('slow');
-                // $("#tbTable").show('slow');
-                var xmlDoc = $.parseXML(str);
-                $(xmlDoc).find('Table').each(function (index) {
-
-                    Status = $(this).find('Status').text();
-                    StrMessage = $(this).find('StrMessage').text();
-                    if (Status == 'E') {
-                        $("#spnValdatemsg").text(StrMessage).css({ "color": "Red", "font-weight": "bold" });
-                        allSHCCodeSave = '';
-                        joinAllValuesWithComma = '';
-                    } else if (Status == 'S') {
-                        $("#spnValdatemsg").text('');
-                        $('#SHCCode').modal('hide');
-                    }
-
-                });
-
-
-            } else {
-                $("body").mLoading('hide');
-                return;
-            }
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            $("body").mLoading('hide');
-            alert('Server not responding...');
-        }
-    });
-
-
-}
-
-function cleatInvalidSHCCode() {
-    allSHCCodeSave = '';
 }

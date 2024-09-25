@@ -1,0 +1,619 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bootstrap-3.3.7-dist/css/slick.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/slick.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+
+    <script src="js/Import/IMP_RecordDamage_Options.js"></script>
+
+    <style>
+        .first:not(:first-child) {
+            display: none;
+        }
+
+        .first {
+            /* box-sizing: border-box;*/
+            /* width: 200px;
+            padding: 50px;*/
+            /* border: 1px solid red;
+            text-align: center;*/
+        }
+
+            .first:not(:first-child) {
+                display: none;
+            }
+
+        .controls {
+            width: 200px;
+        }
+
+        .pre {
+            float: left;
+        }
+
+        .next {
+            float: right;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        .checkbox-inline {
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 25px;
+            position: relative;
+        }
+
+            .checkbox-inline input {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+                .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox] {
+                    margin-left: 0px
+                }
+
+        #divDetalofDamageObserved > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            padding: 2px !important;
+        }
+
+        #divContainers > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            padding: 2px !important;
+        }
+
+        /*  input[type="radio"] {
+            appearance: none;
+            border: 0.5px solid #065da1;
+            width: 15px;
+            height: 15px;
+            content: none;
+            outline: none;
+            margin: 0;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+            input[type="radio"]:checked {
+                appearance: none;
+                outline: none;
+                padding: 0;
+                content: none;
+                border: none;
+            }
+
+                input[type="radio"]:checked::before {
+                    position: absolute;
+                    color: #065da1 !important;
+                    content: "\00A0\2713\00A0" !important;
+                    border: 1px solid #d3d3d3;
+                    font-weight: bolder;
+                    font-size: 10px;
+                }*/
+
+        input[type="checkbox"] {
+            appearance: none;
+            border: 1px solid #065da1;
+            width: 15px;
+            height: 15px;
+            content: none;
+            outline: none;
+            margin: 0;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+            input[type="checkbox"]:checked {
+                appearance: none;
+                outline: none;
+                padding: 0;
+                content: none;
+                border: none;
+            }
+
+                input[type="checkbox"]:checked::before {
+                    position: absolute;
+                    color: #065da1 !important;
+                    content: "\00A0\2713\00A0" !important;
+                    border: 1px solid #d3d3d3;
+                    font-weight: bolder;
+                    font-size: 10px;
+                }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;">Record Damage</a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <a href="#" id="navhdr" class="loggedinUser"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="content ">
+
+                        <div class="first visible">
+
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="col-xs-6 col-form-label" style="padding-left: 0px;">
+                                    <label class="control-label labelFont" style="font-weight: 900;">A. AWB Details</label>
+                                </div>
+                                <div class="col-xs-6 col-form-label">
+                                    <label class="control-label labelFont" id="lblAWBNoForShow"></label>
+                                </div>
+                            </div>
+                            <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtOrigin">1. Origin</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txtOrigin" disabled class="form-control" type="text">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtDestination">2. Destination</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txtDestination" disabled class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtFlightNo">3. Flight No./Date</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txFlightNo" disabled class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtPointofLoading">4. Point of Loading</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txPointofLoading" disabled class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtPointofUnloading">5. Point of Unloading</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txPointofUnloading" disabled class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtContentasperAWB">6. Content as per AWB</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txtContentasperAWB" disabled class="form-control" type="text">
+                                </div>
+                            </div>-->
+                            <div class="col-xs-12 col-sm-6 col-md-6 ">
+                                <table class="" border='1' style='font-size: small; width: 100%; word-break: break-word; border-color: white; margin-top: 2%;'>
+                                    <tr>
+                                        <td>1. Origin</td>
+                                        <td><span id="txtOrigin"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. Destination</td>
+                                        <td><span id="txtDestination"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Flight No./Date</td>
+                                        <td><span id="txFlightNo"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Point of Loading</td>
+                                        <td><span id="txPointofLoading"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5. Point of Unloading</td>
+                                        <td><span id="txPointofUnloading"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>6. Content as per AWB</td>
+                                        <td><span id="txtContentasperAWB"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="form-group col-xs-12 col-form-label" style="padding-left: 0px;">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">B. Type of Discrepancy</label>
+                                </div>
+                                <div class=" col-xs-12 col-sm-6 col-md-6 NoPadding" id="divTypeofdiscrepancy">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">7. Shipment Weight Details</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtShipmentWaitDetails">a. Total Pcs./ Wt.</label>
+                                </div>
+                                <div class="col-xs-3 col-form-label">
+                                    <label size="2" id="lblNPX"></label>
+                                </div>
+                                <div class="col-xs-3 col-form-label">
+                                    <label size="2" id="lblWtExp"></label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6" id="divDmgWt">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtPckgsEXP">b. Damage Pcs./Wt.<font color="red">*</font></label>
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input id="txtPckgsEXP" onkeyup="NumberOnly(event); ChkMaxLength(this, '10'); calculateDiff();" class="form-control" type="number">
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input id="txtPckgsRCV" oninput="validateDecimalNumber(this);" onkeyup="NumberOnly(event); ChkMaxLength(this, '10'); calculateDiffWt();" class="form-control" type="text">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-7 col-form-label">
+
+                                    <label for="txtShipmentWaitDetails">c. Difference Pcs./ Wt.</label>
+                                </div>
+                                <div class="col-xs-2 col-form-label">
+                                    <label size="2" id="lblNPR"></label>
+                                </div>
+                                <div class="col-xs-2 col-form-label">
+                                    <label size="2" id="lblWtRec"></label>
+                                </div>
+                            </div>
+                            <div class=" col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">8. Individual Wt. of each Damage Pkg./ Pcs.</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-8 col-form-label">
+                                    <label for="txtPckgsFoundWt">a. As per document</label>
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input id="txtIndividualWt" oninput="validateDecimalNumber(this);" onkeyup="NumberOnly(event); ChkMaxLength(this, '10'); calculateDiffWt();" class="form-control" type="text">
+                                </div>
+                                <div class="col-xs-1 NoPadding">
+                                    <label>&nbsp;kg</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-8 col-form-label">
+                                    <label for="txtPckgsFoundWt">b. As per actual Wt. check</label>
+                                </div>
+                                <div class="col-xs-3 NoPadding">
+                                    <input id="txtIndividualActualWt" oninput="validateDecimalNumber(this);" onkeyup="NumberOnly(event); ChkMaxLength(this, '10'); calculateDiffWtActual();" class="form-control" type="text">
+                                </div>
+                                <div class="col-xs-1 NoPadding">
+                                    <label>&nbsp;kg</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtPckgsFoundWt">c. Difference</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <label for="lblDiff" id="diffrent"></label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <span id="emMsg"></span>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 " id="Divmaterial">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">C. Packaging Details</label>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">9. Container</label>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <label for="txtShipmentWaitDetails">a) Material</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divChkMaterial">
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <label for="txtShipmentWaitDetails">b) Type</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divType">
+                                </div>
+                                <div class="form-group col-xs-12 col-form-label">
+
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">10. Mark & Label</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divMarkanLabel">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 " id="Divmaterial">
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">11. Outer Packing</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divOuterPacking">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">12. Inner Packing</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divInnerPacking">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 " id="isPackRadio" style=" margin-top: 10px;">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">13. Is Packing Sufficient</label>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <input type="radio" id="Y" name="ispack" value="Yes" />
+                                    <label style="padding: 5px;" for="Yes">Yes</label>
+                                    <input type="radio" id="N" name="ispack" value="No" />
+                                    <label style="padding: 5px;" for="No">No</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">D) Details of Damage Observed</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <!--14.a Content <br />-->
+                                    <label style="font-weight: 800;">14.a Content <br /></label>
+                                    <table class="table" id="divDetalofDamageObserved">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label" style="padding-left: 0px;">
+                                    <label style="font-weight: 900;">14.b Containers <br /></label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 NoPadding" id="">
+                                    <table class="table" id="divContainers">
+                                    </table>
+                                </div>
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">15. Damage Discovered</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divDamageDiscovered">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 " id="divrbtSpacemissing" style=" margin-top: 10px;">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">16. a) Any Space for Missing Items</label>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <input type="radio" id="Y" name="missingitems" value="Yes" />
+                                    <label style="padding: 5px;" for="Y">Yes</label>
+                                    <input type="radio" id="N" name="missingitems" value="No" />
+                                    <label style="padding: 5px;" for="N">No</label>
+                                    <input type="radio" id="A" name="missingitems" value="NA" />
+                                    <label style="padding: 5px;" for="A">NA</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 " id="divrbtInvioce">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="">b) Is Shortage Verified by Invoice</label>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <input type="radio" id="Y" name="IsShortage" value="Yes" />
+                                    <label style="padding: 5px;" for="Y">Yes</label>
+                                    <input style="padding: 5px;" type="radio" id="N" name="IsShortage" value="No" />
+                                    <label for="N">No</label>
+                                    <input type="radio" id="A" name="IsShortage" value="NA" />
+                                    <label style="padding: 5px;" for="A">NA</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="">17. Weather Condition</label>
+                                </div>
+                                <div class="form-group col-xs-12 col-form-label" id="divWeatherCondition">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">18. The Damage Apparently Caused by</label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 NoPadding" id="divTheDamageApparentlycausedby">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">19. Any Damage Remarked In: a) The AWB b) The Manifest </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-6 col-form-label">
+                                    <label>Exact Wording:  </label>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 NoPadding">
+                                    <input id="txtExactWording" autofocus class="form-control" type="text" onkeyup="ChkMaxLength(this, '30');">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 " id="divrbtEvidance">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;" for="txtShipmentWaitDetails">20. Any Evidence of Pilferage </label>
+                                </div>
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <input type="radio" id="Y" name="anyevidence" value="Yes" />
+                                    <label style="padding: 5px;" for="Y">Yes</label>
+                                    <input type="radio" id="N" name="anyevidence" value="No" />
+                                    <label style="padding: 5px;" for="N">No</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;">21.  Remark (In Case of Irregularity of Live Animal Type of Injury and Reason as Diagnosed by Veterinarian)<font color="red">*</font></label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 NoPadding" id="">
+                                    <textarea style="text-transform:uppercase;" class="form-control" id="txtAreaRemarkincase"></textarea>
+                                    <span id="emMsgRem"></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;">
+                                        E) Action Taken
+                                    </label>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;">
+                                        21. Salvage Action
+                                    </label>
+                                </div>
+                                <div class="col-xs-12 col-form-label" id="divSalvageAction">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="first">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="form-group col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;">
+                                        22. Disposition
+                                    </label>
+                                </div>
+                                <div class="col-xs-12 col-form-label" id="divDisposition">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <div class="col-xs-12 col-form-label">
+                                    <label style="font-weight: 900;">
+                                        23. Representative
+                                    </label>
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <label>
+                                        GHA Representative
+                                    </label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 ">
+                                    <input oninput="lettersOnlyGHA(this)" id="txtGHARepresentative" class="form-control" type="text" maxlength="25" style="text-transform: capitalize;">
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <label>
+                                        Airline Representative
+                                    </label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 ">
+                                    <input oninput="lettersOnlyAirLine(this)" id="txtAirlineRepresentative" class="form-control" type="text" maxlength="25" style="text-transform: capitalize;">
+                                </div>
+                                <div class="col-xs-12 col-form-label">
+                                    <label>
+                                        Security Representative
+                                    </label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 ">
+                                    <input oninput="lettersOnlySecurity(this)" id="txtSecurityRepresentative" class="form-control" type="text" maxlength="25" style="text-transform: capitalize;">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 " id="divImages">
+                                <!--<img id="myImage" height="100" width="100" style="display:none;" />-->
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 ">
+                                <label> Only 10 Images </label>
+                                <!--( Count :  <label id="onlyimageCount"></label> )-->
+                            </div>
+                            <div class="form-group col-xs-6 col-sm-4 col-md-4" style="margin-top:15px">
+                                <input type="button" id="cameraTakePicture" class="form-control ButtonColor" value="Upload Photo">
+                            </div>
+                            <div class="form-group col-xs-6 col-sm-3 col-md-3" style="margin-top:15px">
+                                <input id="btnRecordDamage" type="button" class="form-control ButtonColor" value="Record Damage">
+                            </div>
+                            <!--<div class="form-group col-xs-6 col-sm-3 col-md-3" style="margin-top:15px">
+                                <input type="button" id="btnExit" onclick="window.location.href = 'IMP_Dashboard.html'" class="form-control ButtonColor" value="Exit">
+                            </div>-->
+                            <!--<div class="form-group col-xs-6 col-sm-3 col-md-3" style="margin-top:15px">
+                                <input type="button" id="btnBack" onclick="backPrevPage();" class="form-control ButtonColor" value="Back" style="display:none;">
+                            </div>-->
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button" class="form-control ButtonColor pre" value="Back">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button" id="btnExit" onclick="window.location.href = 'IMP_Dashboard.html'" class="form-control ButtonColor" value="Exit">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button" class="form-control ButtonColor next" value="Next">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"></p></center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+</html>

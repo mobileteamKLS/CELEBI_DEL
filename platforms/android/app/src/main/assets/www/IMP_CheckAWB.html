@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="scripts/jquery-ui.js"></script>
+
+    <!--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+
+    <script src="js/select2.min.js"></script>
+    <link href="css/select2.min.css" rel="stylesheet" />
+
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+    <script src="js/Import/IMP_CheckAWB.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
+                        data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <!--<a href="#" id="navhdr" class="loggedinUser"></a>-->
+
+                <select id="ddlLocation" style="padding-left: 15px;width:20%;background-color: #065da1;color: #fff; border: solid thin #fff;"></select>
+
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <!--<table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>Flight No.</td>
+                                            <td>Flight Date</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="txtFltNo"></td>
+                                            <td id="txtFltDate"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>-->
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label>Flight No. Date </label><br />
+                                        <!--<label>Flight Date</label>-->
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <label id="txtFltNo"></label>&nbsp;&nbsp;<label id="txtFltDate"></label>
+                                        <!--<input id="txtFltNo" class="form-control" type="text" style="text-align:right;"
+                                               disabled>-->
+                                    </div>
+
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="" for="txtFlightManpower" class="control-label labelFont">
+                                            Flight Manpower
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <!--<input value="0" id="txtFlightManpower" class="form-control" type="text" style="text-align:right;">-->
+                                        <label id="txtFlightManpower"></label>
+                                    </div>
+
+                                </div>
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtFlightManpower" class="control-label labelFont">
+                                            Flight Manpower
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input value="0" id="txtFlightManpower" class="form-control" type="text" style="text-align:right;">
+                                    </div>
+                                </div>-->
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label for="txtFltDate">Flight Date</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtFltDate" class="form-control" type="text"
+                                               style="text-align:right;" disabled>
+                                    </div>
+                                </div>-->
+                            </div>
+
+                            <div class="row" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Scan ULD
+                                        </label>
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="text" id="txtScanULD" autocomplete="off" class="form-control" maxlength="20" autofocus oninput="this.value = this.value.toUpperCase()">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            ULD
+                                            No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlULDNo"
+                                                onchange="GetAWBDetailsForULD($('#ddlULDNo').val())"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding" style="margin-top:5px;">
+                                        <input type="button" id="btnModify"
+                                               class="form-control ButtonColor" value="BULK/ULD Complete" onclick="UpdateImportULDClose()">
+                                    </div>
+                                </div>
+                                <label id="successMsg"></label>
+                                <!--<div class="col-xs-12 NoPadding">
+                                    <label id="successMsg"></label>
+                                </div>-->
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="margin-top:5px;">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblUldManpower" for="txtUldManpower" class="control-label labelFont">
+                                            Uld Manpower
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-4 NoPadding">
+                                        <input id="txtUldManpower" onblur="goToAWBNoTextBox();" class="form-control" type="text" style="text-align:right;">
+                                    </div>
+                                    <div class="col-xs-2 NoPadding">
+                                        <input type="button" id="btnULDManPower" class="form-control ButtonColor" value="Save" onclick="SaveULDManpowerDetails();">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="divNormalCargo" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Scan MAWB No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" id="txtScanAWBNo" class="form-control" onkeyup="ChkMaxLength(this, '12');">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblAwbNo" for="txtAwbNo" class="control-label labelFont">
+                                            MAWB
+                                            No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlAWBNo"
+                                                onchange="GetHAWBDetails($('#ddlAWBNo').val())">
+                                            <!--<option value="0">Select</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row" id="divNormalCargoHawb" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Scan HAWB No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <!--<input type="text" id="txtScanHAWBNo" class="form-control" maxlength="11">-->
+                                        <input type="text" autocomplete="off" id="hawbLists" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblHAWBNo" for="ddlHAWBNo" class="control-label labelFont">
+                                            HAWB
+                                            No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlHAWBNo"
+                                                onchange="GetHAWBLevelPiecesDetails($('#ddlHAWBNo').val())">
+                                            <option value="0">Select</option>
+                                        </select>
+                                        <!--<input class="form-control" id="hawbLists" style="display: none;">-->
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="txtRemark">
+                                    <!--<div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblRemark" for="txtRemark" class="control-label labelFont">
+                                            Remark
+                                        </label>
+                                    </div>-->
+                                    <!--<div class="col-xs-6 NoPadding" >-->
+                                    <!--<textarea disabled class="form-control" id="txtRemark">
+
+                                    </textarea>-->
+                                    <!--<span id="txtRemark"  class="control-label labelFont">
+
+                                    </span>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+
+
+
+                            <div class="row" id="divFoundCargo" style="display:none;box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblAwbNo" for="txtAwbNo" class="control-label labelFont">
+                                            MAWB
+                                            No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="text" id="txtFoundMAWB" class="form-control" maxlength="11">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblHAWBNo" for="txtFoundHAWB" class="control-label labelFont">
+                                            HAWB
+                                            No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="text" id="txtFoundHAWB" class="form-control" maxlength="11">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblMnifestedPkg" for="txtMnifestedPkg"
+                                               class="control-label labelFont">Manifested NoP</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtMnifestedPkg"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '4');" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblReceivedRemainingPkgs" for="txtReceivedRemainingPkgs"
+                                               class="control-label labelFont">Rcvd./Rem. NoP</label>
+                                    </div>
+                                    <div class="col-xs-3 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtReceivedPkgs"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '4');" disabled>
+                                    </div>
+                                    <div class="col-xs-3 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtRemainingPkgs"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="divArrivedPkgs">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Group Id.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" id="txtScanGroupId" class="form-control" onkeyup="ChkMaxLength(this, '14'); onFocusGroupId()" onblur="checkLocation(); onFocusGroupId();">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblArrivedPkgs" for="txtArrivedPkgs"
+                                               class="control-label labelFont">Arrived NoP</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtArrivedPkgs"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="divFoundCgoDetails" style="display:none">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Group Id.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" id="txtScanGroupIdFoundCargo" onkeyup="ChkMaxLength(this, '14'); foundCargo();" class="form-control" maxlength="20" onblur="    checkLocation();">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblArrivedPkgs" for="txtFoundPkgs"
+                                               class="control-label labelFont">Found NoP</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtFoundPkgs"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblArrivedPkgs" for="txtFoundPkgsWt"
+                                               class="control-label labelFont">Found NoP Wt</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtFoundPkgsWt"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '10');">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamagePkgs" for="txtDamagePkgs"
+                                               class="control-label labelFont">Damage NoP</label>
+                                    </div>
+                                    <div class="col-xs-3 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtDamagePkgs"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                                    </div>
+                                    <div class="col-xs-3 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtDamagePkgsView"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '4');" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamagePkgs" for="txtDamagePkgs"
+                                               class="control-label labelFont">Damage Weight</label>
+                                    </div>
+                                    <div class="col-xs-3 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtDamageWt"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '10');">
+                                    </div>
+                                    <div class="col-xs-3 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtDamageWtView"
+                                               class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamageType" for="ddlDamageType"
+                                               class="control-label labelFont">Damage Type</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlDamageType">
+                                            <!--<option>Select</option>'-->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-5 col-form-label">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" id="chkFoundCgo"
+                                                   onclick="EnableFoundCargo()">Found Cargo
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-3 col-form-label">
+                                        <label class="checkbox-inline" style="display:none;">
+                                            <input type="checkbox" id="chkModify"
+                                                   onclick="">Modify
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-4 col-form-label">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" id="chkShowAll"
+                                                   onclick="ShowALLRefresh()">Show All
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="foundCargoHint" style="display:none">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <font color="red" size="1">* MLM for master label missing</font>
+                                    </div>
+                                    <div class="col-xs-12 col-form-label">
+                                        <font color="red" size="1">* MLH for house label missing</font>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group" style="margin-top:10px;">
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                    <input type="button" id="btnModify" class="form-control ButtonColor" value="Submit"
+                                           onclick="UpdateAWBDetails();">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                    <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear"
+                                           onclick="clearALL();">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                    <input type="button" id="btnModify" class="form-control ButtonColor" value="Back"
+                                           onclick="BacktoFlightCheck()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center>
+                    <p class="text-muted" id="RightsReserved"></p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+
+</html>

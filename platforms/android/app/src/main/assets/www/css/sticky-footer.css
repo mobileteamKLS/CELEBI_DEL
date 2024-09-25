@@ -1,22 +1,22 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
-
 body {
-    /* Margin bottom by footer height */
-    /*margin-bottom: 60px;*/
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }
-
 .footer {
-    position: fixed;
-    bottom: 0;
-    font-size: 15px !important;
-    width: 100%;
-    background-color: #a3cc48;
-    font-weight:bold;
+  /*position: absolute;*/ /*Commented By Nikhil*/
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  /*height: 60px;*//*Commented By Nikhil*/
+  /*height: 40px;*/
+  background-color: #f5f5f5;
 }
 
 
@@ -25,14 +25,12 @@ body {
 /* Not required for template or sticky footer method. */
 
 .container {
-    width: auto;
-    max-width: 680px;
-    padding: 0 15px;
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
 }
-
-    .container .text-muted {
-        /*margin: 20px 0;*/ /*Commented By Nikhil*/
-        /*margin: 10px 0;*/
-        margin: 5px 0;
-        font-size: 13px;
-    }
+.container .text-muted {
+  /*margin: 20px 0;*/    /*Commented By Nikhil*/
+  /*margin: 10px 0;*/
+  margin: 5px 0;
+}

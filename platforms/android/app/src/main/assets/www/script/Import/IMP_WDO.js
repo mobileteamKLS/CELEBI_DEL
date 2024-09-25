@@ -52,7 +52,7 @@ $(function () {
             $.alert(errmsg);
             return;
         } else {
-            inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture></Root>";
+            inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserID>" + Userid + "</UserID></Root>";
             GetWDODetails(inputxml);
         }
 
@@ -78,7 +78,7 @@ $(function () {
                 $.alert(errmsg);
                 return;
             } else {
-                inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture></Root>";
+                inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserID>" + Userid + "</UserID></Root>";
                 GetWDODetails(inputxml);
             }
         }
@@ -196,7 +196,7 @@ function openScanner() {
     //    inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture></Root>";
     //    GetWDODetails(inputxml);
     //}
-    inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture></Root>";
+    inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture><UserID>" + Userid + "</UserID></Root>";
     GetWDODetails(inputxml);
 }
 
@@ -272,24 +272,6 @@ function fnClear() {
     $("#txtMPSNo").val('');
     $("#tbTable").hide('slow');
     $("#lblPkgsWgt").html('');
-    $("#lblMawbNo").html('');
-    $("#lblHawbNo").html('');
-    $("#lblStatus").html('');
-    $("#txtScanMAWB").focus();
-    $("#txtWDONo").focus();
-    // $(".ibiSuccessMsg1").text('');
-    $("#locationShow").text('');
-
-
-}
-
-function fnClearonClear() {
-    $("#txtWDONo").val('');
-    $("#txtMPSNo").val('');
-    $("#tbTable").hide('slow');
-    $("#lblPkgsWgt").html('');
-    $("#lblMawbNo").html('');
-    $("#lblHawbNo").html('');
     $("#lblStatus").html('');
     $("#txtScanMAWB").focus();
     $("#txtWDONo").focus();
@@ -389,7 +371,7 @@ GetWDOMPSDetailsBL = function (InputXML) {
 
 GetWDODetails = function (InputXML) {
 
-    $('.ibiSuccessMsg1').text('');
+
 
     //    inputxml = "<Root><WDONo>" + $("#txtWDONo").val() + "</WDONo><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><Culture>" + language + "</Culture></Root>";
 
@@ -415,8 +397,6 @@ GetWDODetails = function (InputXML) {
                         $("#btnDiv").hide();
                         $("#txtWDONo").val('');
                         $("#lblPkgsWgt").html('');
-                        $("#lblMawbNo").html('');
-                        $("#lblHawbNo").html('');
                         $("#lblStatus").html('');
                         $("#spnSelect").text('');
                         $("#spnLocationCode").text('');
@@ -444,10 +424,6 @@ GetWDODetails = function (InputXML) {
                     _WEIGHT = $(this).find('WEIGHT').text();
                     _IsSeized = $(this).find('IsSeized').text();
                     arrayofStockId.push(stockIdList);
-                    _MAWBNo = $(this).find('AWBno').text();
-                    _HAWBNo = $(this).find('HAWBno').text();
-                    $("#lblMawbNo").text(_MAWBNo);
-                    $("#lblHawbNo").text(_HAWBNo);
 
                     //$("#spnLocationCode").text(_LOCCODE);
                     //$("#spnPieces").text(_NOP);
@@ -471,18 +447,6 @@ GetWDODetails = function (InputXML) {
                     }
                     $("#lblStatus").text(_WDOStatus);
                     $("#lblPkgsWgt").text(_totPkgs + ' / ' + _totWgt);
-
-                });
-                $('#dvRemarkShow').empty();
-                var Remark = '';
-                $(xmlDoc).find('Table3').each(function (index) {
-
-                    Remark = $(this).find('Remark').text();
-                    // Date = $(this).find('Date').text();
-                    IsHighPriority = $(this).find('IsHighPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                    $('#remarkPriorityShow').modal('show');
-
 
                 });
 
@@ -636,9 +600,9 @@ SaveWDODetails = function (InputXML) {
 
 
 
-                if (Status0 == 'S' || Status1 == 'S' || Status2 == 'S') {
+                if (Status0 == 'S' && Status1 == 'S' && Status2 == 'S') {
                     // if (StrMessage == 'Location updated successfully.') {
-                    $(".ibiSuccessMsg1").text(StrMessage).css({ 'color': 'green', "font-weight": "bold" });
+                    $(".ibiSuccessMsg1").text('Goods delivered successfully.').css({ 'color': 'green', "font-weight": "bold" });
                     // }
                     fnClear();
 

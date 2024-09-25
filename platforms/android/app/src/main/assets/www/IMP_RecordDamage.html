@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bootstrap-3.3.7-dist/css/slick.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/slick.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+
+    <script src="js/Import/IMP_RecordDamage.js"></script>
+
+    <style>
+        .first:not(:first-child) {
+            display: none;
+        }
+
+        .first {
+            /* box-sizing: border-box;*/
+            /* width: 200px;
+            padding: 50px;*/
+            /* border: 1px solid red;
+            text-align: center;*/
+        }
+
+            .first:not(:first-child) {
+                display: none;
+            }
+
+        .controls {
+            width: 200px;
+        }
+
+        .pre {
+            float: left;
+        }
+
+        .next {
+            float: right;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        .checkbox-inline {
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 25px;
+            position: relative;
+        }
+
+            .checkbox-inline input {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+                .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox] {
+                    margin-left: 0px
+                }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <a href="#" id="navhdr" class="loggedinUser"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+
+                            <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div class="col-xs-6 col-form-label">
+                                    <label for="txtAWBNo">AWB No.</label>
+                                    <font color="red">*</font>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <input id="txtAWBNo" autofocus onblur="GetImportHouseNoByAWBNo();" class="form-control" type="number" onkeyup="ChkMaxLength(this, '11');">
+                                </div>
+                            </div>-->
+                            <div class="row" id="divNormalCargo" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Scan AWB No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input autofocus type="number" onblur="GetImportDamageFlightDetails();" id="txtScanAWBNo" class="form-control" onkeyup="ChkMaxLength(this, '11');">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblAwbNo" for="txtAwbNo" class="control-label labelFont">
+                                            MAWB
+                                            No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" id="txtAWBNo" class="form-control" onkeyup="ChkMaxLength(this, '11');">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="divNormalCargoHawb" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">
+                                            Scan HAWB No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <!--<input type="text" id="txtScanHAWBNo" class="form-control" maxlength="11">-->
+                                        <input type="text" id="hawbLists" class="form-control" maxlength="11">
+                                        <span id="successMsg"></span>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblHAWBNo" for="ddlHAWBNo" class="control-label labelFont">
+                                            HAWB
+                                            No.
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlHAWBNo" onchange="GetImportFlightDetailsByAWBId($('#ddlHAWBNo').val())"><option value="0">Select</option></select>
+                                        <!--<input class="form-control" id="hawbLists" style="display: none;">-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div class="col-xs-6 col-form-label">
+                                    <label id="lblHAWB" for="ddlHAWB" class="control-label labelFont">HAWB No.</label>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <select onchange="GetImportFlightDetailsByAWBId($('#ddlHAWB').val())" class="form-control" id="ddlHAWB">
+
+                                    </select>
+                                </div>
+                            </div>-->
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblFlightNo" for="ddlFlightNo" class="control-label labelFont">Flight No./Date</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlFlightNo">
+                                            <!--<option value="0">Select</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblFlightNo" for="ddlRemark" class="control-label labelFont">Remarks</label>
+                                    </div>
+                                    <div class="form-group col-xs-6 NoPadding">
+                                        <textarea disabled="disabled" class="form-control" id="txtAreaRemark"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <span id="spnErrormsg"></span>
+                            </div>
+
+
+                            <div class="row form-group" style="margin-top:10px;">
+
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4 ">
+                                    <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+                                </div>
+
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4 ">
+                                    <input type="button" id="btnClearMaster" class="form-control ButtonColor" value="Clear" onclick="clearALL();">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4   ">
+                                    <input type="button" id="btnNextBase" class="form-control ButtonColor" value="Start" onclick="clickOnNextButton();">
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"></p></center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+</html>

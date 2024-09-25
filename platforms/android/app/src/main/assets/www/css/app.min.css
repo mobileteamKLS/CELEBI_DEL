@@ -17107,10 +17107,3 @@ select {
 body{
     background-color: beige;
 }
-#remarkPriorityShow {
-    top: 250px;
-}
-
-#dvRemarkShow {
-    font-family: Arial, Helvetica, sans-serif;
-}

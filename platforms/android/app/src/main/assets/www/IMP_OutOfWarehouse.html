@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="js/Import/IMP_OutOfWarehouse.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/aes.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
+                        data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <a href="#" id="navhdr" class="loggedinUser"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row form-group">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblGPNo" for="" class="control-label labelFont">
+                                            Gate Pass Scan
+                                        </label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input style=" text-transform: uppercase;" id="txtGatePass" class="form-control" type="text"
+                                               autofocus maxlength="14" onblur="GetGroupIdBaseOnGatepass();">
+                                    </div>
+                                </div>
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                            <div class="col-xs-6 col-form-label">
+                                <label id="lblGroupId" for="" class="control-label labelFont">
+                                    Group Id Scan
+                                </label>
+
+                            </div>
+                            <div class="col-xs-6 NoPadding">
+                                <input id="txtGroupId" disabled class="form-control" type="text"
+                                       onkeyup="ChkMaxLength(this, '14');">
+                            </div>
+                        </div>-->
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblPieces" for="" class="control-label labelFont">
+                                            Pieces
+                                        </label>
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtPieces" disabled class="form-control" type="text"
+                                               onkeyup="ChkMaxLength(this, '14');">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblWeight" for="" class="control-label labelFont">
+                                            Weight
+                                        </label>
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtWeight" disabled class="form-control" type="text"
+                                               onkeyup="ChkMaxLength(this, '14');">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblLocation" for="" class="control-label labelFont">
+                                            Location
+                                        </label>
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <textarea id="txtLocation" disabled class="form-control" type="text"
+                                                  onkeyup="ChkMaxLength(this, '30');"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblEmployeeID" for="" class="control-label labelFont">
+                                            Employee ID
+                                        </label>
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txEmployeeID" class="form-control" type="text"
+                                               onkeyup="ChkMaxLength(this, '14');" disabled>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblEmployeeID" for="" class="control-label labelFont">
+                                            Remark
+                                        </label>
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <textarea disabled id="txRemark" class="form-control" type="text"
+                                                  onkeyup="ChkMaxLength(this, '50');"></textarea>
+                                    </div>
+                                </div>-->
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <span id="lblMessage">
+
+                                    </span>
+                                    <span id="lblMessageSuccess">
+
+                                    </span>
+                                </div>
+
+
+
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                                    <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="clearAWBDetails()">
+                                </div>
+                                <!--<div class="form-group col-xs-4 col-sm-4 col-md-4" style="margin-top:15px">
+                            <input type="button" id="btnSubmit" class="form-control ButtonColor" value="Submit" onclick="SaveOutforWarehouse();">
+                        </div>-->
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4 NoPadding" style="margin-top:15px">
+                                    <input type="button" disabled id="btnGatePassHandover" class="form-control ButtonColor" value="GP Handover" onclick="HandoverGatepass_HHT();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divVCTDetail">
+
+                <!--<table id="tblNewsForGatePass" border="1" style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+        <thead>
+        <tr>
+        <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px" align="center" font-weight:'bold'="">Group Id</th>
+        <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px" align="center" font-weight:'bold'="">Peices</th>
+        <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px" align="center" font-weight:'bold'="">Cancel</th>
+        </tr>
+        </thead>
+        <tbody>
+                                <tr>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:right;padding-right: 4px;">2022103010001</td>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:right;padding-right: 4px;">5</td>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:center;color:red;"><span class='glyphicon glyphicon-remove'></span></td>
+                                </tr>
+                                <tr>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:right;padding-right: 4px;">2022103010002</td>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:right;padding-right: 4px;">8</td>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:center;color:red;"><span class='glyphicon glyphicon-remove'></span></td>
+                                </tr>
+                                <tr>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:right;padding-right: 4px;">2022103010003</td>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:right;padding-right: 4px;">10</td>
+                                    <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;text-align:center;color:red;"><span class='glyphicon glyphicon-remove'></span></td>
+                                </tr>
+
+                            </tbody>
+        </table>-->
+
+
+
+            </div>
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <div class="row form-group">
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div class="col-xs-4 col-form-label">
+                                    <label id="lblEmployeeID" for="" class="control-label labelFont">
+                                        Remark
+                                    </label>
+
+                                </div>
+                                <div class="col-xs-8 NoPadding">
+                                    <textarea id="txRemark" disabled class="form-control" type="text"
+                                              onkeyup="ChkMaxLength(this, '50');"></textarea>
+                                </div>
+                            </div>
+    
+
+                            <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
+                            </div>
+
+
+                            <!--<div class="form-group col-xs-8 col-sm-8 col-md-8" style="margin-top:15px">
+        <input disabled type="button" id="btnGatePassHandover" class="form-control ButtonColor" value="Gate Pass Handover" onclick="HandoverGatepass_HHT();">
+    </div>-->
+                            <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
+                                <input type="button" disabled id="btnSubmit" class="form-control ButtonColor" value="Submit" onclick="HandoverGatepass_HHT_OnSubmitRemark();">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+                        <!--<div class="panel panel-widget forms-panel form-grids widget-shadow" style="margin-top:5%">
+                              <div class="forms">
+                                  <div class="form-body">
+                                      <form>
+                                          <div class="row form-group">
+                                              <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                                  <div class="col-xs-6 col-form-label">
+                                                      <label id="lblAWBNo" for="txtDelieveredTo" class="control-label">
+                                                          Delivered
+                                                          To
+                                                      </label>
+                                                      <font color="red">*</font>
+                                                  </div>
+                                                  <div class="col-xs-6 NoPadding">
+                                                      <input type="text" id="txtDelieveredTo" maxlength="50"
+                                                             class="form-control" onkeyup="ChkMaxLength(this, '11');">
+                                                  </div>
+                                              </div>
+                                              <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                                  <div class="col-xs-6 col-form-label">
+                                                      <label id="lblHAWBNo" for="txtHAWBNo"
+                                                             class="control-label">Identification</label>
+                                                      <font color="red">*</font>
+                                                  </div>
+                                                  <div class="col-xs-6 NoPadding">
+                                                      <select id="ddlIdentification" class="form-control">
+                                                          <option value="0">Select</option>
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                                  <div class="col-xs-6 col-form-label">
+                                                      <label id="lblAWBNo" for="txtPieces" class="control-label">ID No.</label>
+                                                      <font color="red">*</font>
+                                                  </div>
+                                                  <div class="col-xs-6 NoPadding">
+                                                      <input type="password" id="txtIdentificationNo"
+                                                             maxlength="50" class="form-control">
+                                                      <span class=" form-control-feedback glyphicon glyphicon-eye-open" style=" cursor: pointer; text-decoration: none; overflow: hidden;
+                position: absolute; pointer-events: auto; right: 0px;  z-index: 100;line-height: 1.9;" onclick="viewPassword();">
+                                                      </span>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                                  <div class="col-xs-6 col-form-label">
+                                                      <label id="lblHAWBNo" for="txtWeight" class="control-label">Del. Pieces</label>
+                                                  </div>
+                                                  <div class="col-xs-6 NoPadding">
+                                                      <input type="number" style="text-align:right;" id="txtDeliveryPieces"
+                                                             class="form-control" max="9999999" disabled>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                                  <div class="col-xs-6 col-form-label">
+                                                      <label id="lblAWBNo" for="txtDeliveryTo" class="control-label">
+                                                          Del. Gr.
+                                                          Wt.
+                                                      </label>
+                                                  </div>
+                                                  <div class="col-xs-6 NoPadding">
+                                                      <input type="text" id="txtDeliveryGrWt" class="form-control" maxlength="20"
+                                                             style="text-align:right;" disabled>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                                  <div class="col-xs-6 col-form-label">
+                                                      <label id="lblHAWBNo" for="txtDeliveryStatus" class="control-label">
+                                                          Del. Ch.
+                                                          Wt.
+                                                      </label>
+                                                  </div>
+                                                  <div class="col-xs-6 NoPadding">
+                                                      <input type="text" id="txtDeliveryChWt" class="form-control" maxlength="20"
+                                                             style="text-align:right;" disabled>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                                  <div class="col-xs-6 col-form-label">
+                                                      <label id="lblHAWBNo" for="txtDeliveryStatus"
+                                                             class="control-label">Status</label>
+                                                  </div>
+                                                  <div class="col-xs-6 NoPadding">
+                                                      <input type="text" id="txtDeliveryStatus" class="form-control" maxlength="20"
+                                                             disabled>
+                                                  </div>
+                                              </div>
+                                          </div>
+
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>-->
+                    </div>
+                </div>
+                <div>
+                    <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+                        <div class="container">
+                            <center><p class="text-muted" id="RightsReserved"></p></center>
+                        </div>
+                    </footer>
+                </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+
+</html>
+
+
+
+
+
+

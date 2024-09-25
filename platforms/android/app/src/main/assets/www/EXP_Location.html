@@ -48,12 +48,10 @@
             <div class="navigation-trigger hidden-xl-up">
                 <div class="navigation-trigger__inner">
                     <!--<i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>-->
-                    <a href="ExportOperations.html">
-                        <i style="font-size:2rem !important;"
-                           class="zmdi zmdi-chevron-left zmdi-hc-2x"></i>
-                    </a>
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
+                    <a href="ExportOperations.html"><i style="font-size:2rem !important;"
+                            class="zmdi zmdi-chevron-left zmdi-hc-2x"></i></a>
 
                 </div>
             </div>
@@ -92,38 +90,26 @@
                     </div>
                 </div>
                 <!-- <div class="col-2">
-                <div class="form-group">
-                    <input type="text" id="txtFlightPrefix" onkeypress="return blockSpecialChar(event)" autofocus
-                        maxlength="3"
-                        style="height: 30px;text-transform:uppercase;text-align:right;color:#2196F3;font-weight:bold;"
-                        class="textfieldClass" placeholder="">
-                    <i class="form-group__bar"></i>
-                </div>
-            </div> -->
+                    <div class="form-group">
+                        <input type="text" id="txtFlightPrefix" onkeypress="return blockSpecialChar(event)" autofocus
+                            maxlength="3"
+                            style="height: 30px;text-transform:uppercase;text-align:right;color:#2196F3;font-weight:bold;"
+                            class="textfieldClass" placeholder="">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div> -->
                 <div class="col-7">
                     <div class="form-group">
-                        <input type="text" inputmode="text" enterkeyhint="Go" maxlength="30" id="txtMAWBNo" autofocus onkeyup="ChkMaxLength(this, '30');"
-                               style="height: 30px;color:#2196F3;font-weight:bold;text-align:left;" class="textfieldClass"
-                               placeholder="">
+                        <input type="text" inputmode="text" enterkeyhint="Go" maxlength="30"  id="txtMAWBNo" autofocus onkeyup="ChkMaxLength(this, '11');"
+                            style="height: 30px;color:#2196F3;font-weight:bold;text-align:right;" class="textfieldClass"
+                            placeholder="" >
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
                 <!--<div class="col-3">
-                <button type="button" onclick="searchAWBNumberAndHAWBNo();" id="btnSearch" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-search"></i></button>
-                <button onclick="openScanner();" class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i class="zmdi zmdi-scanner"></i></button>
-            </div>-->
-
-                <div class="col-5">
-                    <div class="form-group vtMargin">
-                        <label class="lbl" id="lblbHWABNo">HAWB No.</label>
-                    </div>
-                </div>
-                <div class="col-7">
-                    <div class="form-group">
-                        <!--<input type="text" ID="txtHAWBNo" onkeypress="return blockSpecialChar(event)" style="height: 30px;" class="textfieldClass" placeholder="">-->
-                        <select class="textfieldClass" onchange="GetBinningAWBDetails($('#ddlHAWBList').val())" id="ddlHAWBList"></select>
-                    </div>
-                </div>
+                    <button type="button" onclick="searchAWBNumberAndHAWBNo();" id="btnSearch" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-search"></i></button>
+                    <button onclick="openScanner();" class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i class="zmdi zmdi-scanner"></i></button>
+                </div>-->
 
                 <div class="col-5">
                     <div class="form-group vtMargin">
@@ -132,7 +118,7 @@
                 </div>
                 <div class="col-7">
                     <div class="form-group">
-                        <select class="textfieldClass" id="txtRNo">
+                        <select class="textfieldClass" id="ddlHAWBList">
                             <option value="0">Select</option>
                         </select>
                     </div>
@@ -145,7 +131,7 @@
                 <div class="col-7">
                     <div class="form-group">
                         <input type="text" ID="txtLocation" onkeypress="return blockSpecialChar(event)"
-                               style="height: 30px; text-transform:uppercase !important;" class="textfieldClass" placeholder="">
+                            style="height: 30px;" class="textfieldClass" placeholder="">
                     </div>
                 </div>
                 <div class="col-5">
@@ -155,32 +141,21 @@
                 </div>
                 <div class="col-7">
                     <div class="form-group">
-                        <input type="number" ID="txtBinnPkgs" onkeypress="return blockSpecialChar(event)"  onblur="calculateWeight()"
-                               style="height: 30px;text-align:right;" class="textfieldClass" placeholder="">
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="form-group vtMargin">
-                        <label class="lbl" id="lblWght">Binning Weight</label>&nbsp;<font color="red">*</font>
-                    </div>
-                </div>
-                <div class="col-7">
-                    <div class="form-group">
-                        <input type="text" ID="txtWght" onkeypress="return blockSpecialChar(event)"
-                               style="height: 30px;text-align:right;" class="textfieldClass" placeholder="">
+                        <input type="text" ID="txtBinnPkgs" onkeypress="return blockSpecialChar(event)"
+                            style="height: 30px;text-align:right;" class="textfieldClass" placeholder="">
                     </div>
                 </div>
                 <div class="col-5"></div>
-                <div class="col-7">
-                    <button type="button" id="btnSbmit" class="btnClass btn-success btnHome"
-                            onclick="SaveLocationDetails()">
-                        Submit
-                    </button>
+                    <div class="col-7">
+                        <button type="button" id="btnSbmit" class="btnClass btn-success btnHome"
+                                onclick="SaveLocationDetails()">
+                            Submit
+                        </button>
+                    </div>
+                    <div class="col-12">
+                        <label class="ibiSuccessMsg1"></label>
+                    </div>
                 </div>
-                <div class="col-12">
-                    <label class="ibiSuccessMsg1"></label>
-                </div>
-            </div>
             <br />
             <div class="contacts row contacts__itemfortext">
                 <table class="table  table-bordered mb-0">
@@ -197,21 +172,17 @@
                             <td><span id="spnBinnPkgs">Binning / Total Pieces</span></td>
                             <td class="text-right"><span id="spnTxtbinnPkgs"></span></td>
                         </tr>
-                        <tr>
-                            <td><span id="spnWght">Located / Total Weight</span></td>
-                            <td class="text-right"><span id="spnTxtWeight"></span></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="contacts row contacts__itemfortext" id="divbtnInfo">
-
+                
                 <!--<div class="col-4" style="text-align:center;">
-                <button type="button" id="btnExit" class="btnClass btn-primary btnHome"
-                        onclick="fnBackpage()">
-                    Back
-                </button>
-            </div>-->
+                    <button type="button" id="btnExit" class="btnClass btn-primary btnHome"
+                            onclick="fnBackpage()">
+                        Back
+                    </button>
+                </div>-->
                 <div class="col-6" style="text-align:center;">
                     <button type="button" id="btnExit" class="btnClass btn-primary btnHome"
                             onclick="fnClear()">
@@ -228,32 +199,14 @@
             </div>
             <!--<footer>FOOTER</footer>-->
         </section>
-        <div class="modal fade" id="remarkPriorityShow" tabindex="-1" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content" style="border:solid thin #000;">
-                    <div class="modal-header">
-                        <h5 class="modal-title pull-left" id="lblPhoto">AWB Remarks</h5><button type="button" class="" data-dismiss="modal">X</button>
-                    </div>
-                    <div class="modal-body contacts row">
-                        <div class="col-12" id="dvRemarkShow">
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnBack1" data-dismiss="modal">Ok</button>
-                        <!--<button type="button" class="btn btn-primary" id="btnSave2" onclick="saveCameraPhoto();">Save</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-
+       
         <!--<div>
-        <footer class="footer">
-            <div class="container">
-                <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
-            </div>
-        </footer>
-    </div>-->
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
     </main>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

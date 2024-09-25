@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-ui.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/jquery-ui.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/aes.js"></script>
+    <script src="js/Import/IMP_ULDAcceptance.js"></script>
+    <style>
+        td, th {
+            padding: 0;
+            /* background-color: rgb(208, 225, 244); */
+            border-color: white;
+            background: rgb(224, 243, 215);
+        }
+
+        hr {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            border: 0;
+            border-top: 1px solid #555;
+        }
+
+        h6 {
+            overflow: hidden;
+            text-align: center;
+            padding: 0px;
+        }
+
+            h6:before,
+            h6:after {
+                background-color: #555;
+                content: "";
+                display: inline-block;
+                height: 1px;
+                position: relative;
+                vertical-align: middle;
+                width: 50%;
+            }
+
+            h6:before {
+                right: 0.5em;
+                margin-left: -50%;
+            }
+
+            h6:after {
+                left: 0.5em;
+                margin-right: -50%;
+            }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
+                        data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <a href="#" id="navhdr" class="loggedinUser"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row form-group">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-4 col-form-label">
+                                        <label id="lblGPNo" for="txtGPNo" class="control-label labelFont">
+                                            Location
+                                        </label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-8 NoPadding">
+                                        <input id="txtLocation" class="form-control" type="text"
+                                               maxlength="11" autofocus onblur="checkLocation();">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <hr />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-4 col-form-label">
+                                        <label id="lblGPNo" for="txtGPNo" class="control-label labelFont">
+                                            ULD No.
+                                        </label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-8 NoPadding">
+                                        <input id="txtSacnULD" class="form-control" type="text"
+                                               maxlength="11" onblur="GetImportULDList();">
+                                    </div>
+                                    <!--<div class="col-xs-2 NoPadding">
+                                        <button onclick="openScanner();" class="glyphicon glyphicon-qrcode form-control ButtonColor"></button>
+
+                                    </div>-->
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <input type="button" id="btnScanAccpt" class="form-control ButtonColor" value="Accept"
+                                               onclick="ImportULDAcceptance();" disabled>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="button" id="btnExit" class="form-control ButtonColor" value="Search"
+                                               onclick="GetImportULDList();">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <span id="spnMsg"></span>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <h6>OR</h6>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-4 col-form-label">
+                                        <label id="lblGPNo" for="txtScanFlight" class="control-label labelFont">
+                                            Scan Flight
+                                        </label>
+                                        <!--<font color="red">*</font>-->
+                                    </div>
+                                    <div class="col-xs-8 NoPadding">
+                                        <input id="txtScanFlight" class="form-control" type="number"
+                                               onkeyup="ChkMaxLength(this, '9');" onblur="ScanFlightDetail();" style="text-align:right;">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+
+                                </div>
+
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-4 col-form-label">
+                                        <label id="lblFlightNo" for="txtFlightNo" class="control-label">Flight No.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-4 NoPadding ClearFields">
+                                        <input type="text" id="txtFlightPrefix" class="form-control" maxlength="3">
+                                    </div>
+                                    <div class="col-xs-4 NoPadding ClearFields">
+                                        <input type="text" id="txtFlightNo" class="form-control" style="text-align:right;" onkeyup="ChkMaxLength(this, '5');">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-4 col-form-label">
+                                        <label id="lblFlightNo" for="txtFlightDate" class="control-label">Flight Date</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <!--<div class="col-xs-6 NoPadding">
+                                        <input type="text" id="txtFlightDate"
+                                               style="text-transform: none;" class="form-control" title="Date">
+
+                                    </div>-->
+                                    <!--<div class="col-xs-2 NoPadding">
+                                        <select class="form-control" id="day"></select>
+
+                                    </div>
+                                    <div class="col-xs-3 NoPadding">
+                                        <select class="form-control" id="month"></select>
+                                    </div>
+
+                                    <div class="col-xs-3 NoPadding">
+                                        <select class="form-control" id="year"></select>
+                                    </div>-->
+
+                                    <div class="col-xs-8 NoPadding">
+                                        <input type="text" id="txtFlightDate"
+                                               style="text-transform: none;"
+                                               class="form-control" title="Date">
+                                        <!--<input type="text" onblur="checkdate();" id="date" name="date" placeholder="dd/mm/yyyy" class="form-control" />-->
+                                    </div>
+
+
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="margin-top:10px;">
+                                        <div class="col-xs-6 col-form-label">
+
+                                        </div>
+                                        <div class="col-xs-6 NoPadding">
+                                            <input type="button" id="btnGetFDetail" class="form-control ButtonColor" value="Get"
+                                                   onclick="GetImportULDListWithFlightDetails();">
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divULDNumberDetails" style="display:none;overflow-y:scroll;">
+
+                <!--<table id="tblULDNumberDetails" border="1" style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+                <thead>
+                <tr>
+                <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px" align="center" font-weight:'bold'="">ULD Number</th>
+                <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px" align="center" font-weight:'bold'="">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;" id="tdGatepass">PAG1234AF</td>
+                <td style="background: rgb(224, 243, 215);padding-left: 20%;font-size:14px;padding: 5px;padding-left: 20%;"><button  class="btn ButtonColor">Accept</button></td>
+                </tr>
+                <tr>
+                <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;" id="tdGatepass">PAG1234AF</td>
+                <td style="background: rgb(224, 243, 215);padding-left: 20%;font-size:14px;padding: 5px;padding-left: 20%;"><button  class="btn ButtonColor">Accept</button></td>
+                </tr>
+                <tr>
+                <td style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px;" id="tdGatepass">PAG1234AF</td>
+                <td style="background: rgb(224, 243, 215);padding-left: 20%;font-size:14px;padding: 5px;padding-left: 20%;"><button  class="btn ButtonColor">Accept</button></td>
+                </tr>
+                </tbody>
+                </table>-->
+
+            </div>
+            <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
+                <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+            </div>
+            <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
+                <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="clearAWBDetails()">
+            </div>
+            <!--<div class="panel panel-widget forms-panel form-grids widget-shadow" style="margin-top:5%">
+                          <div class="forms">
+                              <div class="form-body">
+                                  <form>
+                                      <div class="row form-group">
+                                          <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                              <div class="col-xs-6 col-form-label">
+                                                  <label id="lblAWBNo" for="txtDelieveredTo" class="control-label">
+                                                      Delivered
+                                                      To
+                                                  </label>
+                                                  <font color="red">*</font>
+                                              </div>
+                                              <div class="col-xs-6 NoPadding">
+                                                  <input type="text" id="txtDelieveredTo" maxlength="50"
+                                                         class="form-control" onkeyup="ChkMaxLength(this, '11');">
+                                              </div>
+                                          </div>
+                                          <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                              <div class="col-xs-6 col-form-label">
+                                                  <label id="lblHAWBNo" for="txtHAWBNo"
+                                                         class="control-label">Identification</label>
+                                                  <font color="red">*</font>
+                                              </div>
+                                              <div class="col-xs-6 NoPadding">
+                                                  <select id="ddlIdentification" class="form-control">
+                                                      <option value="0">Select</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                          <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                              <div class="col-xs-6 col-form-label">
+                                                  <label id="lblAWBNo" for="txtPieces" class="control-label">ID No.</label>
+                                                  <font color="red">*</font>
+                                              </div>
+                                              <div class="col-xs-6 NoPadding">
+                                                  <input type="password" id="txtIdentificationNo"
+                                                         maxlength="50" class="form-control">
+                                                  <span class=" form-control-feedback glyphicon glyphicon-eye-open" style=" cursor: pointer; text-decoration: none; overflow: hidden;
+            position: absolute; pointer-events: auto; right: 0px;  z-index: 100;line-height: 1.9;" onclick="viewPassword();">
+                                                  </span>
+                                              </div>
+                                          </div>
+                                          <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                              <div class="col-xs-6 col-form-label">
+                                                  <label id="lblHAWBNo" for="txtWeight" class="control-label">Del. Pieces</label>
+                                              </div>
+                                              <div class="col-xs-6 NoPadding">
+                                                  <input type="number" style="text-align:right;" id="txtDeliveryPieces"
+                                                         class="form-control" max="9999999" disabled>
+                                              </div>
+                                          </div>
+                                          <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                              <div class="col-xs-6 col-form-label">
+                                                  <label id="lblAWBNo" for="txtDeliveryTo" class="control-label">
+                                                      Del. Gr.
+                                                      Wt.
+                                                  </label>
+                                              </div>
+                                              <div class="col-xs-6 NoPadding">
+                                                  <input type="text" id="txtDeliveryGrWt" class="form-control" maxlength="20"
+                                                         style="text-align:right;" disabled>
+                                              </div>
+                                          </div>
+                                          <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                              <div class="col-xs-6 col-form-label">
+                                                  <label id="lblHAWBNo" for="txtDeliveryStatus" class="control-label">
+                                                      Del. Ch.
+                                                      Wt.
+                                                  </label>
+                                              </div>
+                                              <div class="col-xs-6 NoPadding">
+                                                  <input type="text" id="txtDeliveryChWt" class="form-control" maxlength="20"
+                                                         style="text-align:right;" disabled>
+                                              </div>
+                                          </div>
+                                          <div class="form-group col-xs-12 col-sm-5 col-md-6 NoPadding">
+                                              <div class="col-xs-6 col-form-label">
+                                                  <label id="lblHAWBNo" for="txtDeliveryStatus"
+                                                         class="control-label">Status</label>
+                                              </div>
+                                              <div class="col-xs-6 NoPadding">
+                                                  <input type="text" id="txtDeliveryStatus" class="form-control" maxlength="20"
+                                                         disabled>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </form>
+                              </div>
+                          </div>
+                      </div>-->
+        </div>
+    </div>
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"></p></center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+    $(document).ready(function () {
+        //var formattedDate = new Date();
+        //var d = formattedDate.getDate();
+        //if (d.toString().length < Number(2))
+        //    d = '0' + d;
+        //var m = formattedDate.getMonth();
+        //m += 1;  // JavaScript months are 0-11
+        //if (m.toString().length < Number(2))
+        //    m = '0' + m;
+        //var y = formattedDate.getFullYear();
+        //var t = formattedDate.getTime();
+        //var date = m.toString() + '/' + d.toString() + '/' + y.toString();
+
+        //newDate = y.toString() + '-' + m.toString() + '-' + d.toString();
+        //$('#txtFlightDate').val(newDate);
+
+        //var h = date.getHours();
+        //var m = date.getMinutes();
+        //var s = date.getSeconds();
+
+        //$("#txtFlightDate").datepicker().datepicker("setDate", new Date());
+
+
+        let date = new Date();
+        const day = date.toLocaleString('default', { day: '2-digit' });
+        const month = date.toLocaleString('default', { month: 'short' });
+        const year = date.toLocaleString('default', { year: 'numeric' });
+        var today = day + '-' + month + '-' + year;
+        $('#txtFlightDate').val(today);
+
+        $("#txtFlightDate").datepicker({
+            shortYearCutoff: 1,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-M-yy'
+        });
+    });
+
+
+
+    //      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    //"Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+    //      ];
+    //      let qntYears = 4;
+    //      let selectYear = $("#year");
+    //      let selectMonth = $("#month");
+    //      let selectDay = $("#day");
+    //      let currentYear = new Date().getFullYear();
+
+    //      for (var y = 0; y < qntYears; y++) {
+    //          let date = new Date(currentYear);
+    //          let yearElem = document.createElement("option");
+    //          yearElem.value = currentYear
+    //          yearElem.textContent = currentYear;
+    //          selectYear.append(yearElem);
+    //          currentYear--;
+    //      }
+
+    //      for (var m = 0; m < monthNames.length; m++) {
+    //          let month = monthNames[m];
+    //          let monthElem = document.createElement("option");
+    //          monthElem.value = m + 1;
+    //          monthElem.textContent = month ;
+    //          selectMonth.append(monthElem );
+    //      }
+
+    //      var d = new Date();
+    //      var month = d.getMonth();
+    //      var year = d.getFullYear();
+    //      var day = d.getDate();
+
+    //      selectYear.val(year);
+    //      selectYear.on("change", AdjustDays);
+    //      selectMonth.val(month+1);
+    //      selectMonth.on("change", AdjustDays);
+
+    //      AdjustDays();
+    //      selectDay.val(day)
+
+    //      function AdjustDays() {
+    //          var year = selectYear.val();
+    //          var month = parseInt(selectMonth.val()) + 1;
+    //          selectDay.empty();
+
+    //          //get the last day, so the number of days in that month
+    //          var days = new Date(year, month, 0).getDate();
+
+    //          //lets create the days of that month
+    //          for (var d = 1; d <= days; d++) {
+    //              var dayElem = document.createElement("option");
+    //              dayElem.value = d;
+    //              dayElem.textContent = d;
+    //              selectDay.append(dayElem);
+    //          }
+    //      }
+
+
+    //$('#txtFlightDate').keyup(function () {
+    //    var foo = $(this).val().split("-").join(""); // remove hyphens
+    //    if (foo.length > 0) {
+    //        foo = foo.match(new RegExp('.{1,2}', 'g')).join("-");
+    //    }
+    //    $(this).val(foo);
+    //});
+
+
+    //    var myObj = $.parseJSON('{"date_created":"1273185387"}'),
+    //myDate = new Date(1000 * myObj.date_created);
+
+    //    console.log(myDate.toString());
+    //    console.log(myDate.toLocaleString());
+    //    console.log(myDate.toUTCString());
+    //});
+
+
+
+    //function checkdate() {
+
+    //    if ($('#txtFlightDate').val().length != 8) {
+    //        $("#spnMsg").text('Invalid date format. Please enter ddmmyyyy').css({ 'color': 'red' });
+    //        return;
+    //    }
+    //    var d = $('#txtFlightDate').val().slice(0, 2);
+    //    var m = $('#txtFlightDate').val().slice(2, 4);
+    //    var y = $('#txtFlightDate').val().slice(4, 8);
+
+    //    day = Number(d);
+    //    month = Number(m) - 1; //bloody 0-indexed month
+    //    year = Number(y);
+
+    //    var nd = new Date(year, month, day);
+    //    if (nd.getFullYear() == year && nd.getMonth() == month && nd.getDate() == day) {
+    //        $("#spnMsg").text('');
+    //        return;
+    //    } else {
+    //        $("#spnMsg").text('Invalid date format. Please enter ddmmyyyy').css({ 'color': 'red' });
+    //        $('#txtFlightDate').val('');
+    //        return;
+    //    }
+    //var input = $('#txtFlightDate').val();
+    //if (input == '') {
+    //    return;
+    //}
+
+    //var reg = /(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])(19|20)\d\d/;
+    //if (input.match(reg)) {
+    //    //alert("Input matched");
+    //    $("#spnMsg").text('');
+    //}
+    //else {
+    //    // alert("Invalid date format. Please enter dd-mm-yyyy");
+    //    $("#spnMsg").text('Invalid date format. Please enter ddmmyyyy').css({ 'color': 'red' });
+    //    $('#txtFlightDate').val('');
+    //    return;
+    //}
+    // }
+</script>
+
+</html>

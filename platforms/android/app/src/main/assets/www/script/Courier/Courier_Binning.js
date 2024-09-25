@@ -80,7 +80,7 @@ $(function () {
             });
             if ($("#txtScanMAWB").val() == '') {
                 $("body").mLoading('hide');
-                errmsg = "Please Scan No.</br>";
+                errmsg = "Please Scan</br>";
                 $.alert(errmsg);
                 return;
             } else {
@@ -257,10 +257,10 @@ searchDetails = function (InputXML) {
                     StrMessage = $(this).find('StrMessage').text();
                     if (Status == 'E') {
                         $(".ibiSuccessMsg1").text(StrMessage).css({ "color": "Red", "font-weight": "bold" });
-                        //clearRecords();
+                        clearRecords();
                     } else if (Status == 'S') {
                         $(".ibiSuccessMsg1").text(StrMessage).css({ 'color': 'green', "font-weight": "bold" });
-                        
+
                     } else {
                         $(".ibiSuccessMsg1").text('');
                     }
@@ -269,7 +269,7 @@ searchDetails = function (InputXML) {
                     var MAWB, HAWB, Remarks, NOP;
                     $("#txtLocation1").val($(this).find('LocCode').text());
                     $("#nog").val($(this).find('NOG').text());
-                    $("#suggestions").text($(this).find('Suggestion').text());
+                    $("#suggestions").val($(this).find('Suggestion').text());
 
                     MAWB = $(this).find('MAWB').text();
                     HAWB = $(this).find('HAWB').text();
@@ -283,18 +283,8 @@ searchDetails = function (InputXML) {
                 $('#tableRecords').append(html);
                 $('#tableRecords').show();
 
-                $('#txtLocation2').focus();
-                $('#dvRemarkShow').empty();
-                var Remark = '';
-                $(xmlDoc).find('Table3').each(function (index) {
+                $('#txtLocation2').focus();                
 
-                    Remark = $(this).find('Remark').text();
-                    // Date = $(this).find('Date').text();
-                    IsHighPriority = $(this).find('IsHighPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                    $('#remarkPriorityShow').modal('show');
-
-                });
             } else {
                 $("body").mLoading('hide');
                 errmsg = "Record not found</br>";
@@ -324,9 +314,7 @@ function createDynamicTable(MAWB, HAWB, Remarks, NOP) {
 }
 
 moveLocDetails = function () {
-    if ($("#txtScanMAWB").val() == "") {
-        $.alert("Please enter Barcode No.");
-    } else {
+    if ($("#txtScanMAWB").val() == "") { $.alert("Please enter Barcode No."); } else {
         var inputMoveXml = "<Root><GroupID>" + $("#txtScanMAWB").val() + "</GroupID><LocCode>" + $("#txtLocation2").val().toUpperCase() + "</LocCode><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><UserId>" + Userid + "</UserId></Root>";
         moveLocation(inputMoveXml);
     }

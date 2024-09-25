@@ -412,7 +412,7 @@ GetImportSaveCourierDetailsV2 = function () {
 
 searchRecord = function () {
     if ($("#txtScanMAWB").val() == "") {
-       // $.alert("Please Enter Scan Flight No.");
+        $.alert("Please Enter Scan Flight No.");
         return;
     }
 
@@ -444,18 +444,6 @@ searchRecord = function () {
                             $(".ibiSuccessMsg1").text('');
                         }
                     });
-                    $('#dvRemarkShow').empty();
-                    var Remark = '';
-                    $(xmlDoc).find('Table2').each(function (index) {
-
-                        Remark = $(this).find('Remark').text();
-                        // Date = $(this).find('Date').text();
-                        IsHighPriority = $(this).find('IsHighPriority').text();
-                        $('#dvRemarkShow').append(Remark);
-                        $('#remarkPriorityShow').modal('show');
-
-
-                    });
 
                     $(xmlDoc).find('Table1').each(function (index) {
                         $("#txtScan").val('');
@@ -485,7 +473,7 @@ searchRecord = function () {
             }
         });
     } else {
-       // $.alert("Please Enter MPS No.");
+        $.alert("Please Enter MPS No.");
     }
 }
 

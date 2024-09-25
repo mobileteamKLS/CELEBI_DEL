@@ -28,93 +28,6 @@
         .successAlertColor {
             color: green !important;
         }
-
-        #SHCCodeTbl td.foo:nth-child(7n+1) {
-            background-color: rgb(177,112,136);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+2) {
-            background-color: rgb(27,81,141);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+3) {
-            background-color: rgb(13,150,68);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+4) {
-            background-color: rgb(35,29,31);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+5) {
-            background-color: rgb(157,124,43);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+6) {
-            background-color: rgb(14,76,166);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+7) {
-            background-color: rgb(206,84,209);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+8) {
-            background-color: rgb(143,74,219);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl td.foo:nth-child(7n+9) {
-            background-color: rgb(198,139,74);
-            color: white;
-            padding: 3px;
-            text-align: center;
-        }
-
-        #SHCCodeTbl > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-            font-size: 12px;
-        }
-
-        #SHCCodeTbl {
-            margin-bottom: 0px !important;
-            margin-top: 5px;
-        }
-
-        .blink_me {
-            animation: blinker 1s linear infinite;
-            background-color: yellow;
-            padding: 15px;
-            text-align: center;
-            line-height: 50px;
-            font-weight: bolder;
-        }
-
-        @keyframes blinker {
-            50% {
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body data-ma-theme="green">
@@ -179,9 +92,7 @@
                     <label class="lbl" id="scan">Scan AWB</label>
                 </div>
                 <div class="col-6">
-                 <!-- <input type="number" id="txtScanAWB" autofocus maxlength="15" style="height: 30px;text-transform:uppercase;" class="textfieldClass" placeholder=""> -->
-                 <input type="text" enterkeyhint="go" id="txtScanAWB" 
-                 onkeyup="ChkMaxLength(this, '15');" autofocus style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
+                    <input type="number" id="txtScanAWB" autofocus maxlength="15" style="height: 30px;text-transform:uppercase;" class="textfieldClass" placeholder="">
                 </div>
                 <!--<div class="col-12">
                     <label id="successMsg"></label>
@@ -209,7 +120,7 @@
                     <label class="lbl" id="lblGrpId">Group Id</label>
                 </div>
 
-
+           
 
                 <div class="col-6">
                     <input type="text" id="txtGroupId" onblur="onblurGroupID();" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
@@ -227,25 +138,14 @@
                     <label class="lbl" id="lblNOG">NOG</label>
                 </div>
                 <div class="col-6">
-                    <input type="text" id="txtNOG" class="textfieldClass" placeholder="" style="">
-                </div>
-                <div class="col-5" style="text-align:left;">
-                    <label class="lbl" id="lblshc">SHC</label>
-                </div>
-                <div id="dvForEditBtn" class="col-7" style="text-align:right;display:none;">
-                    <!--<button id="btnOpenSHCModal" type="button" class="btn btn--icon login__block__btn login__block__btn_margin edit"><i class="zmdi zmdi-edit"></i></button>-->
-                    <img id="btnOpenSHCModal" src="img/49.jpg" />
-                </div>
-                <div class="col-12">
-                    <!--<input type="text" id="txtSHC" disabled class="textfieldClass" placeholder="" style="">-->
-                    <table class="table" id="SHCCodeTbl"></table>
+                    <input type="text"  id="txtNOG" class="textfieldClass" placeholder="" style="">
                 </div>
 
                 <div class="col-6" style="text-align:left;">
                     <label class="lbl" id="lblPcsSclWt">Pieces / Scale Wt.</label>
                 </div>
                 <div class="col-3">
-                    <input type="text" id="txPieces" onkeyup="NumberOnly(event);" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
+                    <input type="text" id="txPieces" onkeyup="NumberOnly(event);"  maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
                 </div>
                 <div class="col-3">
                     <input type="text" id="txtScaleWt" onkeyup="NumberOnly(event);" onchange="checkWt();" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
@@ -293,7 +193,7 @@
                             <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Pieces1" onkeypress="MoveToLen(this);" type="text" /></td>
                             <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Length1" onkeypress="MoveToWid(this);" type="text" /></td>
                             <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Width1" onkeypress="MoveToHei(this);" type="text" /></td>
-                            <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Height1" type="text" /></td>
+                            <td><input onkeyup="NumberOnly(event);" class="textpackges text-right" id="Height1"  type="text" /></td>
                             <td><button type="button" onclick="removeRow();" id="btnAdd" style="background-color: red;" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-minus"></i></button></td>
                         </tr>
                     </tbody>
@@ -347,46 +247,6 @@
 
         </section>
 
-        <div class="modal fade" id="remarkPriorityShow" tabindex="-1" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content" style="border:solid thin #000;">
-                    <div class="modal-header">
-                        <h5 class="modal-title pull-left" id="lblPhoto">AWB Remarks</h5><button type="button" class="" data-dismiss="modal">X</button>
-                    </div>
-                    <div class="modal-body contacts row">
-                        <div class="col-12" id="dvRemarkShow">
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnBack1" data-dismiss="modal">Ok</button>
-                        <!--<button type="button" class="btn btn-primary" id="btnSave2" onclick="saveCameraPhoto();">Save</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" id="SHCCode" tabindex="-1" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content" style="border:solid thin #000;">
-                    <div class="modal-header">
-                        <h5 class="modal-title pull-left" id="lblPhoto">Add SHC</h5><button type="button" class="" data-dismiss="modal">X</button>
-                    </div>
-                    <div class="modal-body contacts row">
-                        <div class="col-12" id="dvSHCCode">
-
-                        </div>
-                        <span id="spnValdatemsg"></span>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnOk" onclick="getAllSHCCodefromPopup();">Ok</button>
-                        <button type="button" class="btn btn-primary" id="btnCancelSHCCode" data-dismiss="modal" onclick="cleatInvalidSHCCode();">Cancel</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!--<div>
             <footer class="footer">

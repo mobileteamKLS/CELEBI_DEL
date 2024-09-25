@@ -21,26 +21,16 @@ var LocCode;
 var MAWBId;
 var HAWBNo;
 var _vlaueofHawb;
-var _textofHawb="";
+var _textofHawb;
 var currentLocID;
-var NPR;
-var ShipmentWeight;
-var isDataAvail = false;
 $(function () {
 
     // $("#ddlHAWBList").trigger('change'); _textofHawb
 
     $("#ddlHAWBList").change(function () {
         _vlaueofHawb = $('option:selected', this).val();
-        if($('option:selected', this).text()=="Select" || $('option:selected', this).text()==null){
-            _textofHawb="";
-        }
-        else{
-            _textofHawb = $('option:selected', this).text();
-        }
-        $("#txtMovePkgs").val('');
-        $("#textMoveWght").val('');
-        $("#txtLocation").val('');
+        _textofHawb = $('option:selected', this).text();
+
         // ASI(_vlaueofHawb);
         $("#txtBinnPkgs").val(_vlaueofHawb);
         //$("#txtReceived").val(Received);
@@ -102,7 +92,7 @@ $(function () {
 
 
 function setTurkish() {
-    $('#lblIntlMove').text("İç hareket");
+   $('#lblIntlMove').text("İç hareket");
     $('#lblMAwbNo').text("Ana Konsimento");
     $('#lblbHWABNo').text("Ara Konsimento No");
     $('#lblFltChk').text("Ucus Detayları");
@@ -133,19 +123,8 @@ function setHungarian() {
     $('#lblLoc1').text("Darabszám");
     $('#lblPcs').text("Lokáció");
     $('#lblOrgDest').text("Cikis/Varis");
-}
 
-function calculateWeight() {
-    if (!isDataAvail) {
-        return;
-    }
-    if ($("#txtMovePkgs").val() == '') {
-        $("#textMoveWght").val(" "); 
-        return;
-    }
-    locNOP = $("#txtMovePkgs").val()
-    locWeight = (parseFloat(locNOP) * parseFloat(ShipmentWeight)) / parseFloat(NPR);
-    $("#textMoveWght").val(locWeight.toFixed(3))
+
 }
 
 function SaveBinning() {
@@ -165,32 +144,27 @@ function SaveBinning() {
         errmsg = "Please Enter Location</br>";
         $.alert(errmsg);
         return;
-    } else if ($("#txtMovePkgs").val() == '') {
+    } else if ($("#txtBinnPkgs").val() == '') {
         HideLoader();
-        errmsg = "Please Enter move Pkgs</br>";
-        $.alert(errmsg);
-        return;
-    } else if ($("#textMoveWght").val() == '') {
-        HideLoader();
-        errmsg = "Please Enter move Weight</br>";
+        errmsg = "Please Enter Binn Pkgs</br>";
         $.alert(errmsg);
         return;
     } else {
         if ($("#ddlHAWBList").val() == '0') {
-            if (HAWBNo != " ") {
+            if (HAWBNo != '') {
                 HideLoader();
                 errmsg = "Please select HAWB No.</br>";
                 $.alert(errmsg);
                 return;
             } else {
-                if (HAWBNo == ' ') {
+                if (HAWBNo == '') {
                     if ($("#locationShow").html() == '') {
                         HideLoader();
                         errmsg = "From location and pckgs not selected</br>";
                         $.alert(errmsg);
                         return;
                     } else {
-                        inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo></HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><Weight>" + $('#textMoveWght').val() + "</Weight><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
+                        inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo></HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
                         _SaveBinning(inputxml);
                     }
 
@@ -201,7 +175,7 @@ function SaveBinning() {
                         $.alert(errmsg);
                         return;
                     } else {
-                        inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo>" + _textofHawb + "</HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><Weight>" + $('#textMoveWght').val() + "</Weight><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
+                        inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo>" + _textofHawb + "</HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
 
                         _SaveBinning(inputxml);
                     }
@@ -215,7 +189,7 @@ function SaveBinning() {
                     $.alert(errmsg);
                     return;
                 } else {
-                    inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo></HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><Weight>" + $('#textMoveWght').val() + "</Weight><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
+                    inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo></HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
                     _SaveBinning(inputxml);
                 }
             } else {
@@ -225,7 +199,7 @@ function SaveBinning() {
                     $.alert(errmsg);
                     return;
                 } else {
-                    inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo>" + _textofHawb + "</HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><Weight>" + $('#textMoveWght').val() + "</Weight><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
+                    inputxml = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo>" + _textofHawb + "</HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><LocCode>" + $("#txtLocation").val() + "</LocCode><LocId>" + currentLocID + "</LocId><NOP>" + $("#txtMovePkgs").val() + "</NOP><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>";
                     _SaveBinning(inputxml);
                 }
             }
@@ -247,7 +221,7 @@ function getDetailsbyFilghtChangeEvent(IGMVal) {
         dataType: "json",
         success: function (response, xhr, textStatus) {
             HideLoader();
-            console.log(response.d)
+            //console.log(response.d)
             var str = response.d;
             if (str != null && str != "" && str != "<NewDataSet />") {
                 $("#btnDiv").show('slow');
@@ -277,10 +251,7 @@ function getDetailsbyFilghtChangeEvent(IGMVal) {
                     LocCode = $(this).find('LocCode').text();
                     LocationStatus = $(this).find('LocationStatus').text();
                     TotalPieces = $(this).find('TotalPieces').text();
-                    ShipmentWeight = $(this).find('shipmentWeightExp').text();
-                    LocWeight=$(this).find('LocWeight').text();
-                    NPR = $(this).find('NPR').text();
-                    isDataAvail = true;
+
                     //$("#txtBinnPkgs").val(PendingPieces);
                     //$("#txtLocation").text(LocPieces);
                     $("#spnOriginDist").text(Origin + ' / ' + Destination);
@@ -291,7 +262,7 @@ function getDetailsbyFilghtChangeEvent(IGMVal) {
                         $("#LocationDiv").show();
                         //
 
-                        $('<tr></tr>').html('<td class="text-left">' + LocCode + '</td><td style="text-align:right;">' + LocPieces + '</td><td style="text-align:right;">' + LocWeight + '</td>').appendTo('#tblLocation');
+                        $('<tr></tr>').html('<td class="text-left">' + LocCode + '</td><td style="text-align:right;">' + LocPieces + '</td>').appendTo('#tblLocation');
 
                         //$("#spnlocationName").text(LocCode);
                         //$("#spnlocationPackgs").text(LocPieces);
@@ -450,12 +421,12 @@ getHWABNoList = function (InputXML) {
                         //   $("#btnSubmit").removeAttr('disabled');
                         $(".ibiSuccessMsg1").text(StrMessage).css({ 'color': 'green', "font-weight": "bold" });
                         $("#btnSubmit").removeAttr('disabled').css('background-color', '#3c7cd3');
-                        // $("#ddlHAWBList").trigger('change');
+                        $("#ddlHAWBList").trigger('change');
 
                     } else {
                         $(".ibiSuccessMsg1").text('');
                         $("#btnSubmit").removeAttr('disabled').css('background-color', '#3c7cd3');
-                        // $("#ddlHAWBList").trigger('change');
+                        $("#ddlHAWBList").trigger('change');
                     }
                     var Process = $(this).find('Process').text();
                     var IGMNo = $(this).find('IGMNo').text();
@@ -464,42 +435,27 @@ getHWABNoList = function (InputXML) {
 
                     MAWBId = $(this).find('MAWBId').text();
                     HAWBNo = $(this).find('HAWBNo').text();
-                   
 
                     //var newOption = $('<option></option>');
                     //newOption.val(MAWBId).text(HAWBNo);
                     //newOption.appendTo('#ddlHAWBList');
 
-                    if (index == 0) {
-                        var newOption = $('<option></option>');
-                        newOption.val(0).text('Select');
-                        newOption.appendTo('#ddlHAWBList');
-                    }
+                    //if (index == 0) {
+                    //    var newOption = $('<option></option>');
+                    //    newOption.val(0).text('Select');
+                    //    newOption.appendTo('#ddlHAWBList');
+                    //}
 
                     var newOption = $('<option></option>');
                     newOption.val(PendingPieces).text(HAWBNo);
                     newOption.appendTo('#ddlHAWBList');
-                     $("#ddlHAWBList").trigger('change');
+                    //  $("#ddlHAWBList").trigger('change');
                     $("#txtLocation").focus();
                 });
-                
-                var Remark = '';
-                $(xmlDoc).find('Table1').each(function (index) {
 
-                    Remark = $(this).find('Remark').text();
-                    if(Remark!=''){
-                    $('#dvRemarkShow').empty();
-                    IsHighPriority = $(this).find('IsHighPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                    $('#remarkPriorityShow').modal('show');
-                    }
-                    // Date = $(this).find('Date').text();
-                    
-                });
-                
-                    _InputXML = "<Root><MAWBNO>" + $("#txtScanMAWB").val() + "</MAWBNO><HAWBNO>" + _textofHawb + "</HAWBNO><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><EventType>I</EventType></Root>"
-                    getIGMNoList(_InputXML);
-                  
+                _InputXML = "<Root><MAWBNO>" + $("#txtScanMAWB").val() + "</MAWBNO><HAWBNO>" + _textofHawb + "</HAWBNO><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity><EventType>I</EventType></Root>"
+                getIGMNoList(_InputXML);
+
             } else {
                 $("body").mLoading('hide');
                 //errmsg = "WDO No. not found</br>";
@@ -514,16 +470,7 @@ getHWABNoList = function (InputXML) {
     });
 }
 
-function dialogAlert(Remark) {
-    var message = Remark;
-    var title = "AWB Remarks";
-    var buttonName = "Ok";
-    navigator.notification.alert(message, alertCallback, title, buttonName);
 
-    function alertCallback() {
-        console.log("Alert is Dismissed!");
-    }
-}
 getIGMNoList = function (InputXML) {
     $("#ddlFlightNoandDate").text('');
     $.ajax({
@@ -555,37 +502,13 @@ getIGMNoList = function (InputXML) {
 
 
                 });
-
-               
-                var Remark = '';
-                $(xmlDoc).find('Table1').each(function (index) {
-                   
-                    Remark = $(this).find('Remark').text();
-                    if(Remark!=''){
-                        $('#dvRemarkShow').empty();
-                        IsHighPriority = $(this).find('IsHighPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                    }
-                    // Date = $(this).find('Date').text();
-                    
-
-
-                });
-                if (Remark != '') {
-                    $('#remarkPriorityShow').modal('show');
-                }
-                if(HAWBNo==""){
-                    _InputXML = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo></HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>"
-                _GetBinningLocPkgDetails(_InputXML);
-                }
-                else{
                 _InputXML = "<Root><AWBNo>" + $("#txtScanMAWB").val() + "</AWBNo><HouseNo>" + _textofHawb + "</HouseNo><IGMNo>" + $('#ddlFlightNoandDate').val() + "</IGMNo><UserId>" + Userid + "</UserId><AirportCity>" + SHED_AIRPORT_CITY + "</AirportCity></Root>"
                 _GetBinningLocPkgDetails(_InputXML);
-                }
+
             } else {
                 $("body").mLoading('hide');
-                //errmsg = "WDO No. not found</br>";
-                //$.alert(errmsg);
+                errmsg = "WDO No. not found</br>";
+                $.alert(errmsg);
                 return;
             }
         },
@@ -639,10 +562,7 @@ _GetBinningLocPkgDetails = function (InputXML) {
                     LocCode = $(this).find('LocCode').text();
                     LocationStatus = $(this).find('LocationStatus').text();
                     TotalPieces = $(this).find('TotalPieces').text();
-                    ShipmentWeight = $(this).find('shipmentWeightExp').text();
-                    LocWeight=$(this).find('LocWeight').text();
-                    NPR = $(this).find('NPR').text();
-                    isDataAvail = true;
+
                     $("#txtBinnPkgs").val(PendingPieces);
                     //$("#txtLocation").text(LocPieces);
                     $("#spnOriginDist").text(Origin + ' / ' + Destination);
@@ -652,7 +572,7 @@ _GetBinningLocPkgDetails = function (InputXML) {
                     if (LocCode != '') {
                         $("#LocationDiv").show();
 
-                        $('<tr class="valp"></tr>').html('<td class="text-left .tdVal"  >' + LocCode + '</td><td style="text-align:right;">' + LocPieces + '</td><td style="display:none;">' + LocId + '</td><td style="text-align:right;">' + LocWeight + '</td>').appendTo('#tblLocation');
+                        $('<tr class="valp"></tr>').html('<td class="text-left .tdVal"  >' + LocCode + '</td><td style="text-align:right;">' + LocPieces + '</td><td style="display:none;">' + LocId + '</td>').appendTo('#tblLocation');
                         //$('<tr></tr>').html('<td class="text-left tdVal">' + LocCode + '</td><td>' + LocPieces + '</td>').appendTo('#tblLocation');
 
                         //$("#spnlocationName").text(LocCode);
@@ -734,7 +654,6 @@ _SaveBinning = function (InputXML) {
                         //clearFunction();
                         $("#txtLocation").val('');
                         $("#txtMovePkgs").val('');
-                        $("#textMoveWght").val('');
                         $('#locationShow').text('');
                     }
                 });
@@ -762,8 +681,7 @@ function clearFunction() {
     $("#ddlHAWBList").text('');
     $("#ddlFlightNoandDate").val('');
     $("#txtLocation").val('');
-    $("#txtMovePkgs").val('');
-    $("#textMoveWght").val('');
+    $("#txtBinnPkgs").val('');
     $("#spnOriginDist").text('');
     $("#spnCommodity").text('');
     $("#spnBinnTotPkgs").text('');
@@ -773,7 +691,6 @@ function clearFunction() {
     $("#LocationDiv").hide();
     $("#tblLocation").empty();
     $(".ibiSuccessMsg1").text('');
-    _textofHawb="";
 }
 
 

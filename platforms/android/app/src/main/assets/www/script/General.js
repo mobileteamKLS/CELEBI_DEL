@@ -13,17 +13,6 @@ var language;
 function ShowHomePage() {
     window.location.href = "GalaxyHome.html";
 }
-
-// function preventSpecialCharacters(inputField) {
-//     var inputValue = inputField.value;
-//     var regex = /^[$&+,:;=?[\]@#|{}'<>.^*()%!-/`~]+$/;
-    
-//     if (regex.test(inputValue)) {
-//         inputField.value = inputValue.replace(/[$&+,:;=?[\]@#|{}'<>.^*()%!-/~`]/,"");
-       
-//     }
-// }
-
 function LoadNavBar() {
     $('#myNavbar').load("NavBar.html");
     if (window.location.pathname.split("/").pop() == "EXP_Dashboard.html") {

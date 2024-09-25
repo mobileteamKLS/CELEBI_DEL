@@ -21,6 +21,7 @@
             padding: 2px 8px !important;
         }
 
+        
 
         .vtMargin {
             margin-bottom: 0rem !important;
@@ -44,8 +45,8 @@
             <div class="navigation-trigger hidden-xl-up">
                 <div class="navigation-trigger__inner">
                     <!--<i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>-->
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
                     <!--<a class="btnHome" style="color:#fff;"><i class="zmdi zmdi-home"></i></a>-->
                     <a href="ImportOperations.html" class="btnHome" style="font-size:2rem !important;color:#fff !important;"><i style="" class="zmdi zmdi-chevron-left"></i></a>
                 </div>
@@ -86,8 +87,9 @@
                     <label class="lbl" id="lblWDONo">WDO No.</label>
                 </div>
                 <div class="col-6">
-                    <input type="text" inputmode="text" enterkeyhint="Go" maxlength="20"
-                           autofocus="autofocus" id="txtWDONo" onkeyup="ChkMaxLength(this, '20');"
+                    <input type="text" inputmode="text" enterkeyhint="Go" maxlength="20" 
+                            autofocus="autofocus" id="txtWDONo" onkeyup="ChkMaxLength(this, '20');" 
+                           
                            style="height: 30px;text-transform:uppercase;" class="textfieldClass" placeholder="">
                 </div>
 
@@ -95,27 +97,20 @@
                     <label class="lbl" id="lblPcsWt"> MPS No.</label>
                 </div>
                 <div class="col-8 dis" style="display:none; ">
-                    <input type="number" autofocus="autofocus" id="txtMPSNo" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
+                    <input type="number"  autofocus="autofocus" id="txtMPSNo" maxlength="15" style="height: 30px;text-transform:uppercase;text-align:right;" class="textfieldClass" placeholder="">
                 </div>
                 <!--<div class="col-3">
-                <button type="button" id="btnSearch" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-search"></i></button>
-                <button onclick="openScanner();" class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i class="zmdi zmdi-scanner"></i></button>
-            </div>-->
+                    <button type="button" id="btnSearch" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-search"></i></button>
+                    <button onclick="openScanner();" class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i class="zmdi zmdi-scanner"></i></button>
+                </div>-->
 
             </div>
             <div class="contacts row contacts__itemfortext">
                 <div class="col-md-12">
                     <label class="lbl" style="color:red" id="lblStatus"></label>
                 </div>
-                
                 <div class="col-md-12">
-                    <label class="lbl" id="lblMawbHead" style="margin-right: 22px !important;">MAWB No.</label><label class="lbl" id="lblMawbNo" style="font-weight: bold;"></label>
-                </div>
-                <div class="col-md-12">
-                    <label class="lbl" id="lblHawbHead" style="margin-right: 24px !important;">HAWB No.</label><label class="lbl" id="lblHawbNo" style="font-weight: bold;"></label>
-                </div>
-                <div class="col-md-12">
-                    <label class="lbl" id="lblPcsWtshow" style="margin-right: 14px !important;">Pieces / Wt.</label><label class="lbl" id="lblPkgsWgt" style="font-weight: bold;"></label>
+                    <label class="lbl" id="lblPcsWtshow">Pieces / Wt.</label><label class="lbl" id="lblPkgsWgt"></label>
                 </div>
                 <table class="table  table-bordered mb-0" id="tblTotalPcs">
                     <thead class="theadClass">
@@ -144,44 +139,27 @@
                     <button type="button" id="btnClose" onclick="fnExit()" class="btnClass btn-primary btnHome">EXIT</button>
                 </div>
                 <div class="col-4" style="text-align:center;">
-                    <button type="button" onclick="fnClearonClear();" id="btnClear" class="btnClass btn-primary">CLEAR</button>
+                    <button type="button" onclick="fnClear();" id="btnClear" class="btnClass btn-primary">CLEAR</button>
                 </div>
                 <div class="col-4" style="text-align:center;">
-                    <button type="button" id="btnSubmit" onclick="saveWDO();" class="btnClass btn-primary">SUBMIT</button>
+                    <button type="button" id="btnSubmit"  onclick="saveWDO();" class="btnClass btn-primary">SUBMIT</button>
                 </div>
             </div>
             <!--<div class="col-2" style="float:right;">
-            <button href="index-2.html"  class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-format-clear-all"></i></button>
-        </div>-->
+                <button href="index-2.html"  class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-format-clear-all"></i></button>
+            </div>-->
             <!--<footer>FOOTER</footer>-->
 
         </section>
-        <div class="modal fade" id="remarkPriorityShow" tabindex="-1" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content" style="border:solid thin #000;">
-                    <div class="modal-header">
-                        <h5 class="modal-title pull-left" id="lblPhoto">AWB Remarks</h5><button type="button" class="" data-dismiss="modal">X</button>
-                    </div>
-                    <div class="modal-body contacts row">
-                        <div class="col-12" id="dvRemarkShow">
 
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnBack1" data-dismiss="modal">Ok</button>
-                        <!--<button type="button" class="btn btn-primary" id="btnSave2" onclick="saveCameraPhoto();">Save</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!--<div>
-        <footer class="footer">
-            <div class="container">
-                <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
-            </div>
-        </footer>
-    </div>-->
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
     </main>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

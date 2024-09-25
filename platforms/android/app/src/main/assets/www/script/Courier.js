@@ -104,8 +104,4 @@ function DisplayScreen(Mode) {
         window.location.href = "BinningMPSLevel.html";
         localStorage.setItem('Mode', 'BinningMPSLevel');
     }
-    else if (Mode == "AWBRemarks") {
-        localStorage.setItem('Is_I_E', 'C');
-        window.location.href = "IMP_AWBRemarks.html";
-    }
 }

@@ -164,14 +164,6 @@ $(function () {
         _vlaueofHawbText = $('option:selected', this).text();
 
         ASI(_vlaueofHawb);
-        if(_vlaueofHawbText=="Select"){
-            $("#txtNOG").val('');
-            $("#ddlComCode").val(0);
-            $("#txtManifested").val('');
-            $("#txtReceived").val('');
-            $("#txtRemaining").val('');
-            return; 
-        }
         //$("#txtManifested").val(Manifested);
         //$("#txtReceived").val(Received);
         //$("#txtRemaining").val(Remaining);
@@ -393,32 +385,27 @@ function searchAWBNo() {
 function ASIforFlight(_vlaueofHawbforflight, _vlaueofHawbforflightText) {
     FltDetails = _vlaueofHawbforflightText;
     var array = _vlaueofHawbforflight.split(",");
-
-    var hawbSelected=$('#ddlHAWBList option:selected');
-    if(hawbSelected.text()!="Select"){
-        for (i = 0; i < array.length; i++) {
-            if (i == 0) {
-                $("#txtManifested").val(array[i]);
-            }
-            else if (i == 1) {
-                $("#txtReceived").val(array[i]);
-            }
-            else if (i == 2) {
-                $("#txtRemaining").val(array[i]);
-            }
-            else if (i == 3) {
-                saveFltSeqNo = array[i];
-            } else if (i == 4) {
-                saveIMPSHIPROWID = array[i];
-            }
-            else if (i == 5) {
-                IMPSHIPROWID = array[i];
-                // HWABIDSEND = array[i]
-            }
+    //$("#txArrivedPakg").focus();
+    for (i = 0; i < array.length; i++) {
+        if (i == 0) {
+            $("#txtManifested").val(array[i]);
+        }
+        else if (i == 1) {
+            $("#txtReceived").val(array[i]);
+        }
+        else if (i == 2) {
+            $("#txtRemaining").val(array[i]);
+        }
+        else if (i == 3) {
+            saveFltSeqNo = array[i];
+        } else if (i == 4) {
+            saveIMPSHIPROWID = array[i];
+        }
+        else if (i == 5) {
+            IMPSHIPROWID = array[i];
+            // HWABIDSEND = array[i]
         }
     }
-    //$("#txArrivedPakg").focus();
-   
 }
 
 function ASI(_vlaueofHawb) {
@@ -474,26 +461,19 @@ function saveFlightCheckInDetals() {
         });
         return
     }
-    else if ($('#ddlHAWBList').children('option').length > '0' && $('#ddlHAWBList').val() == '0') {
-        $("body").mLoading('hide');
-        errmsg = "Please select HAWB No.</br>";
-        $.alert(errmsg);
-        return
-
-    }
-    else if ($("#ddlComCode").val() == '0' || $("#ddlComCode").val() == null) {
+    else if ($("#ddlComCode").val() == '0') {
         $("body").mLoading('hide');
         errmsg = "Please select Com. Code</br>";
         $.alert(errmsg);
         return
     }
 
-    //else if ($("#txtNOG").val() == '') {
-    //    $("body").mLoading('hide');
-    //    errmsg = "Please enter NOG</br>";
-    //    $.alert(errmsg);
-    //    return
-    //}
+        //else if ($("#txtNOG").val() == '') {
+        //    $("body").mLoading('hide');
+        //    errmsg = "Please enter NOG</br>";
+        //    $.alert(errmsg);
+        //    return
+        //}
 
 
 
@@ -600,7 +580,7 @@ GetImportCargoCheckInDetailsOnChange = function (InputXML) {
         success: function (response, xhr, textStatus) {
             // console.log(response.d)
             HideLoader();
-            $("#ddlflightNoAndDate").prop("disabled", false);
+
             $("#ddlflightNoAndDate").empty();
             var str = response.d;
             if (str != null && str != "" && str != "<NewDataSet />") {
@@ -697,19 +677,6 @@ GetImportCargoCheckInDetailsOnChange = function (InputXML) {
                     } else if (Status == 'S') {
                         $(".ibiSuccessMsg").text(StrMessage).css({ 'color': 'green', "font-weight": "bold" });
                     }
-                });
-
-
-                $('#dvRemarkShow').empty();
-                var Remark = '';
-                $(xmlDoc).find('Table3').each(function (index) {
-
-                    Remark = $(this).find('Remark').text();
-                    // Date = $(this).find('Date').text();
-                    IsHighPriority = $(this).find('IsHighPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                    $('#remarkPriorityShow').modal('show');
-
                 });
 
             } else {
@@ -952,16 +919,11 @@ GetImportCargoCheckInDetails = function (InputXML) {
                     dmgIMPAWBROWID = $(this).find('IMPAWBROWID').text();
                     dmgIMPSHIPROWID = $(this).find('IMPSHIPROWID').text();
                     commsrno = $(this).find('commsrno').text();
-                    if (commsrno != '-1' && commsrno != '0' && commsrno != null && commsrno != undefined) {
-                        // $("#ddlComCode").val(commsrno);
-                    }
-                    if(HouseNo==''){
-                        console.log("is empty");
+                    if(commsrno != '-1' && commsrno != '0' && commsrno != null && commsrno != undefined){
                         $("#ddlComCode").val(commsrno);
-                        $("#txtNOG").val($(this).find('nog').text());
                     }
-
-                    // $("#txtNOG").val($(this).find('nog').text());
+                   
+                    $("#txtNOG").val($(this).find('nog').text());
 
                     $("#txtAWBNo").val(AWBNo);
 
@@ -991,10 +953,9 @@ GetImportCargoCheckInDetails = function (InputXML) {
                     $('#ddlflightNoAndDate').trigger('change');
 
                     if ($(this).find("HouseNo").is(':empty')) {
-                        $("#ddlflightNoAndDate").prop("disabled", false);
+
                     }
                     else {
-                        $('#ddlflightNoAndDate').prop("disabled", true);
 
                         if (index == 0) {
                             var newOption = $('<option></option>');
@@ -1057,20 +1018,6 @@ GetImportCargoCheckInDetails = function (InputXML) {
                 });
 
 
-
-
-                $('#dvRemarkShow').empty();
-                var Remark = '';
-                $(xmlDoc).find('Table3').each(function (index) {
-
-                    Remark = $(this).find('Remark').text();
-                    // Date = $(this).find('Date').text();
-                    IsHighPriority = $(this).find('IsHighPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                    $('#remarkPriorityShow').modal('show');
-
-                });
-
                 // $(xmlDoc).find('Table2').each(function (index) {
                 // Status = $(this).find('Status').text();
                 // StrMessage = $(this).find('StrMessage').text();
@@ -1091,7 +1038,7 @@ GetImportCargoCheckInDetails = function (InputXML) {
                 // // $(".ibiSuccessMsg").text(StrMessage).css({ 'color': 'green', "font-weight": "bold" });
                 // }
                 // });
-                $(xmlDoc).find('Table2').each(function (index) {
+                $(xmlDoc).find('Table1').each(function (index) {
                     Status = $(this).find('Status').text();
                     StrMessage = $(this).find('StrMessage').text();
                     if (Status == 'E') {
@@ -1119,16 +1066,7 @@ GetImportCargoCheckInDetails = function (InputXML) {
     });
 }
 
-function dialogAlert(Remark) {
-    var message = Remark;
-    var title = "AWB Remarks";
-    var buttonName = "Ok";
-    navigator.notification.alert(message, alertCallback, title, buttonName);
 
-    function alertCallback() {
-        console.log("Alert is Dismissed!");
-    }
-}
 
 SaveImportMaifestDetailsV2 = function (InputXML) {
     //console.log(InputXML)
@@ -1146,14 +1084,6 @@ SaveImportMaifestDetailsV2 = function (InputXML) {
                 $("#btnDiv").show('slow');
                 var xmlDoc = $.parseXML(str);
                 clearFunction();
-                $(xmlDoc).find('Table').each(function (index) {
-                    Status = $(this).find('Status').text();
-                    StrMessage = $(this).find('StrMessage').text();
-                    if (Status == 'E') {
-                        $(".ibiSuccessMsg").text(StrMessage).css({ "color": "Red", "font-weight": "bold" });
-
-                    }
-                });
                 $(xmlDoc).find('Table1').each(function (index) {
                     Status = $(this).find('Status').text();
                     StrMessage = $(this).find('StrMessage').text();

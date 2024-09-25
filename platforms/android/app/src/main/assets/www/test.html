@@ -12,7 +12,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            sendMessageToConsumerAfterApproval();
+
             var counter = 2;
 
             $("#addButton").click(function () {
@@ -23,11 +23,11 @@
                 }
 
                 var newTextBoxDiv = $(document.createElement('div'))
-                    .attr("id", 'TextBoxDiv' + counter);
+                     .attr("id", 'TextBoxDiv' + counter);
 
                 newTextBoxDiv.after().html('<label>Textbox #' + counter + ' : </label>' +
-                    '<input type="text" name="textbox' + counter +
-                    '" id="textbox' + counter + '" value="" >');
+                      '<input type="text" name="textbox' + counter +
+                      '" id="textbox' + counter + '" value="" >');
 
                 newTextBoxDiv.appendTo("#TextBoxesGroup");
 
@@ -56,22 +56,6 @@
                 alert(msg);
             });
         });
-
-        sendMessageToConsumerAfterApproval = function () {
-            $.ajax({
-                url: "http://jisl.co.in/test/sms/index.php",
-                type: "POST",
-                crossDomain: true,
-                data: { "num": '9960588510', 'mtr': 'Dear user, %0a' + 'your connection No.:' + currentConnectionID + 'is %0a' + 'approved and successfully converted %0a' + 'to 24x7 drinking water supply %0a' + 'scheme. %0a' + 'Thank you' },
-                dataType: "json",
-                success: function (response) {
-                    var resp = JSON.parse(response)
-                },
-                error: function (xhr, status) {
-                    //alert("error");
-                }
-            });
-        }
     </script>
 </head>
 <body>

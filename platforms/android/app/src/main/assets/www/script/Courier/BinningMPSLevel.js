@@ -271,21 +271,6 @@ searchDetails = function (InputXML) {
                     console.log(tblArray);
                     i++;
                 });
-
-                $('#dvRemarkShow').empty();
-                var Remark = '';
-                $(xmlDoc).find('Table3').each(function (index) {
-
-                    Remark = $(this).find('Remark').text();
-                    // Date = $(this).find('Date').text();
-                    IsHighPriority = $(this).find('IsHighPriority').text();
-                    $('#dvRemarkShow').append(Remark);
-                   
-
-                });
-                if (Remark != '') {
-                    $('#remarkPriorityShow').modal('show');
-                }
                 // html += "</tbody></table>";
 
                 CreateBinningListTable();

@@ -44,8 +44,8 @@
             <div class="navigation-trigger hidden-xl-up">
                 <div class="navigation-trigger__inner">
                     <!--<i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>-->
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
                     <a href="ImportOperations.html"><i style="font-size:2rem !important;" class="zmdi zmdi-chevron-left zmdi-hc-2x"></i></a>
 
                 </div>
@@ -87,13 +87,13 @@
 
                 <div class="col-7">
                     <div class="form-group">
-                        <input type="text" inputmode="text" enterkeyhint="Go" maxlength="30" id="txtScanMAWB" onkeypress="return blockSpecialChar(event)" autofocus style="height: 30px;color:#2196F3;font-weight:bold;" class="textfieldClass" placeholder="">
+                        <input type="text" inputmode="text" enterkeyhint="Go" maxlength="30"   id="txtScanMAWB" onkeypress="return blockSpecialChar(event)" autofocus style="height: 30px;color:#2196F3;font-weight:bold;" class="textfieldClass" placeholder="">
                     </div>
                 </div>
                 <!--<div class="col-3">
-                <button type="button" onclick="searchAWBNo();" id="btnSearch" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-search"></i></button>
-                <button onclick="openScanner();" class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i class="zmdi zmdi-scanner"></i></button>
-            </div>-->
+                    <button type="button" onclick="searchAWBNo();" id="btnSearch" class="btn btn--icon login__block__btn login__block__btn_margin"><i class="zmdi zmdi-search"></i></button>
+                    <button onclick="openScanner();" class="btn btn--icon login__block__btn login__block__btn_margin scannerBG"><i class="zmdi zmdi-scanner"></i></button>
+                </div>-->
                 <div class="col-5">
                     <div class="form-group vtMargin">
                         <label class="lbl" id="lblAWBNo">AWB No.</label>
@@ -102,8 +102,8 @@
                 <div class="col-7">
                     <div class="form-group">
                         <input type="text" enterkeyhint="go" id="txtAWBNo" onkeypress="return blockSpecialChar(event)"
-                               onkeyup="NumberOnly(event);" style="height: 30px;text-align:right;" class="textfieldClass"
-                               placeholder="">
+                                onkeyup="NumberOnly(event);" style="height: 30px;text-align:right;" class="textfieldClass"
+                                placeholder="">
 
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                     <label class="lbl" id="lblComCode">Com. Code</label>
                 </div>
                 <div class="col-7">
-
+                   
                     <select class="textfieldClass" id="ddlComCode"></select>
                 </div>
 
@@ -148,7 +148,7 @@
                     <label class="lbl" id="lblNOG">NOG</label>
                 </div>
                 <div class="col-7">
-                    <input type="text" id="txtNOG" onkeypress="return blockSpecialChar(event)" class="textfieldClass" placeholder="">
+                    <input type="text"  id="txtNOG" onkeypress="return blockSpecialChar(event)" class="textfieldClass" placeholder="" >
                 </div>
 
                 <div class="col-5" style="text-align:left;">
@@ -240,8 +240,8 @@
                             <input type="text" id="txtPopHwabPieces" onkeypress="return blockSpecialChar(event)" onkeyup="NumberOnly(event);" class="textfieldClass" placeholder="" style="width:100% !important;text-align:right;">
                         </div>
                         <!--<div class="col-3">
-                        <label class="lbl">Weight </label>
-                    </div>-->
+                            <label class="lbl">Weight </label>
+                        </div>-->
                         <div class="col-4">
                             <input type="text" id="txtPopHwabWeight" onkeypress="return blockSpecialChar(event)" onkeyup="NumberOnly(event);" class="textfieldClass" placeholder="" style="width:100% !important;text-align:right;">
                         </div>
@@ -270,7 +270,7 @@
                         </div>
                         <hr />
                         <div class="col-6">
-                            <label class="lbl"><b id="lbldmgType">Damage Type</b></label>
+                            <label class="lbl" ><b id="lbldmgType">Damage Type</b></label>
                         </div>
                         <div class="col-6">
                             <label class="lbl"><b id="lblNOP">NOP</b></label>
@@ -423,34 +423,13 @@
             </div>
         </div>
 
-
-
-        <div class="modal fade" id="remarkPriorityShow" tabindex="-1" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content" style="border:solid thin #000;">
-                    <div class="modal-header">
-                        <h5 class="modal-title pull-left" id="lblPhoto">AWB Remarks</h5><button type="button" class="" data-dismiss="modal">X</button>
-                    </div>
-                    <div class="modal-body contacts row">
-                        <div class="col-12" id="dvRemarkShow">
-                            
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnBack1" data-dismiss="modal">Ok</button>
-                        <!--<button type="button" class="btn btn-primary" id="btnSave2" onclick="saveCameraPhoto();">Save</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!--<div>
-        <footer class="footer">
-            <div class="container">
-                <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
-            </div>
-        </footer>
-    </div>-->
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
     </main>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

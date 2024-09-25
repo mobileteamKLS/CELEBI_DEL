@@ -106,15 +106,5 @@ function DisplayScreen(Mode) {
     } else if (Mode == "Unitization") {
         localStorage.setItem('EXP_Unitization', 'EXP_Unitization');
         window.location.href = "EXP_Unitization.html";
-    } else if (Mode == "AWBRemarks") {
-        localStorage.setItem('Is_I_E', 'E');
-        window.location.href = "IMP_AWBRemarks.html";
-    } else if (Mode == "GateInStatus") {
-        localStorage.setItem('GateInStatus', 'GateInStatus');
-        window.location.href = "EXP_GateInStatus.html";
-    } else if (Mode == "Checklist") {
-        localStorage.setItem('Checklist', 'Checklist');
-        window.location.href = "EXP_Checklist.html";
     }
-
 }

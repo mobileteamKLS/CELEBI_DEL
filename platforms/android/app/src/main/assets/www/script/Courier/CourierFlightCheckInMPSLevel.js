@@ -593,7 +593,8 @@ searchRecord = function () {
                         }
                         
 
-                       
+
+                        
 
 
                         //if (index == 0 && $("#ddlFlightNoDate").val() != "0") {
@@ -605,17 +606,6 @@ searchRecord = function () {
 
                     //if ($('#ddlFlightNoDate').children('option').length == 1) {
 
-                    $('#dvRemarkShow').empty();
-                    var Remark = '';
-                    $(xmlDoc).find('Table3').each(function (index) {
-
-                        Remark = $(this).find('Remark').text();
-                        // Date = $(this).find('Date').text();
-                        IsHighPriority = $(this).find('IsHighPriority').text();
-                        $('#dvRemarkShow').append(Remark);
-                        $('#remarkPriorityShow').modal('show');
-
-                    });
 
 
                     //}
@@ -690,9 +680,6 @@ GetFlightChangeCourierDetails = function (FlightVal) {
 
 
                     });
-
-
-
 
                     onSubmitFunction();
 

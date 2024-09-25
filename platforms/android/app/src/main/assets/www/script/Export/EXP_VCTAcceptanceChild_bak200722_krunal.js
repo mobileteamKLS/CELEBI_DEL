@@ -936,7 +936,6 @@ function setHAWBNo(i) {
 
 
             if ($(this).find("HAWBNo").is(':empty')) {
-                
                 fullHawb = '';
                 RemainingPkg = $(this).find('RemainingPkg').text();
                 RemainingWt = $(this).find('RemainingWt').text();

@@ -129,14 +129,7 @@ UserLogin = function (pUserID, pPassword) {
                     window.localStorage.setItem("Language", $('#ddlLanguage').find('option:selected').text());
                     window.location = "Dashboard.html";
                 });
-                localStorage.removeItem('Column1ForBeakdown');
-                localStorage.removeItem('PARAMETER_NAME');
 
-                $(xmlDoc).find('Table1').each(function (index) {
-                    window.localStorage.setItem("Column1ForBeakdown", $(this).find('Column1').text());
-                    window.localStorage.setItem("PARAMETER_NAME", $(this).find('PARAMETER_NAME').text());
-                   
-                });
             } else {
 
                 HideLoader();

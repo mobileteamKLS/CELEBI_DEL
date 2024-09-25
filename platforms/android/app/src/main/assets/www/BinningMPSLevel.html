@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
@@ -43,8 +44,8 @@
             <div class="navigation-trigger hidden-xl-up">
                 <div class="navigation-trigger__inner">
                     <!--<i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>
-                <i class="navigation-trigger__line"></i>-->
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>-->
                     <!--<a class="btnHome" style="color:#fff;"><i class="zmdi zmdi-home"></i></a>-->
                     <a href="Courier.html" class="btnHome" style="font-size:2rem !important;color:#fff !important;">
                         <i style="" class="zmdi zmdi-chevron-left"></i>
@@ -88,8 +89,8 @@
 
                 <div class="col-8">
 
-                    <input type="text" id="txtScanGroupID" inputmode="numeric" enterkeyhint="Go" onkeyup="ChkMaxLength(this, '30');" style="height: 30px;color:#2196F3;font-weight:bold;"
-                           autofocus class="textfieldClass" placeholder="">
+                    <input type="text" id="txtScanGroupID" inputmode="numeric" enterkeyhint="Go" onkeyup="ChkMaxLength(this, '20');" style="height: 30px;color:#2196F3;font-weight:bold;"
+                         autofocus  class="textfieldClass" placeholder="">
                 </div>
 
                 <div class="col-4">
@@ -149,7 +150,7 @@
                 </div>
 
                 <div class="col-4">
-                    <button type="button" id="btnSave" class="btnClass btn-primary btnHome"
+                    <button type="button"  id="btnSave" class="btnClass btn-primary btnHome"
                             onclick="UpdateImportLocationV3()">
                         SUBMIT
                     </button>
@@ -164,40 +165,40 @@
                 <div id="tableRecords">
                     <!--<table class='col-12 table  table-bordered' id='tblNews' border='1' style='table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;'>
 
-                    <thead class='theadClass'>
-                        <tr>
-                            <th>HAWB No.</th>
-                            <th>MPS No.</th>
-                            <th>Pcs</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody id='tbTable'>
-                        <tr>
-                            <td>77445522111</td>
-                            <td>77445522111</td>
-                            <td style="text-align:right;">1</td>
-                            <td style="text-align:center;color:red;font-size:medium;"><i class="zmdi zmdi-delete"></i></td>
-                        </tr>
-                        <tr>
-                            <td>77445522111</td>
-                            <td>77445522111</td>
-                            <td style="text-align:right;">1</td>
-                            <td style="text-align:center;color:red;font-size:medium;"><i class="zmdi zmdi-delete"></i></td>
-                        </tr>
-                        <tr>
-                            <td>77445522111</td>
-                            <td>77445522111</td>
-                            <td style="text-align:right;">1</td>
-                            <td style="text-align:center;color:red;font-size:medium;"><i class="zmdi zmdi-delete"></i></td>
-                        </tr>
+                        <thead class='theadClass'>
+                            <tr>
+                                <th>HAWB No.</th>
+                                <th>MPS No.</th>
+                                <th>Pcs</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id='tbTable'>
+                            <tr>
+                                <td>77445522111</td>
+                                <td>77445522111</td>
+                                <td style="text-align:right;">1</td>
+                                <td style="text-align:center;color:red;font-size:medium;"><i class="zmdi zmdi-delete"></i></td>
+                            </tr>
+                            <tr>
+                                <td>77445522111</td>
+                                <td>77445522111</td>
+                                <td style="text-align:right;">1</td>
+                                <td style="text-align:center;color:red;font-size:medium;"><i class="zmdi zmdi-delete"></i></td>
+                            </tr>
+                            <tr>
+                                <td>77445522111</td>
+                                <td>77445522111</td>
+                                <td style="text-align:right;">1</td>
+                                <td style="text-align:center;color:red;font-size:medium;"><i class="zmdi zmdi-delete"></i></td>
+                            </tr>
 
-                    </tbody>
+                        </tbody>
 
-                </table>-->
+                    </table>-->
 
                 </div>
-                <table id="tblCountShow" class='col-12 table  table-bordered' border='1' style='font-weight:bold;;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;'>
+                <table id="tblCountShow" class='col-12 table  table-bordered'  border='1' style='font-weight:bold;;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;'>
 
                     <tr>
                         <td style="text-align:center;">HAWB Count </td>
@@ -208,7 +209,7 @@
                 </table>
 
                 <div class="col-8">
-
+                   
                 </div>
 
                 <div class="col-4">
@@ -222,32 +223,15 @@
 
 
         </section>
-        <div class="modal fade" id="remarkPriorityShow" tabindex="-1" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content" style="border:solid thin #000;">
-                    <div class="modal-header">
-                        <h5 class="modal-title pull-left" id="lblPhoto">AWB Remarks</h5><button type="button" class="" data-dismiss="modal">X</button>
-                    </div>
-                    <div class="modal-body contacts row">
-                        <div class="col-12" id="dvRemarkShow">
 
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnBack1" data-dismiss="modal">Ok</button>
-                        <!--<button type="button" class="btn btn-primary" id="btnSave2" onclick="saveCameraPhoto();">Save</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!--<div>
-        <footer class="footer">
-            <div class="container">
-                <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
-            </div>
-        </footer>
-    </div>-->
+            <footer class="footer">
+                <div class="container">
+                    <center><p class="text-muted" id="RightsReserved"> © Kale Logistics Solutions Private Limited. 2019</p></center>
+                </div>
+            </footer>
+        </div>-->
     </main>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
