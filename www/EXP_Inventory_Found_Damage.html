@@ -195,7 +195,7 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" id="txtFoundMAWB" autocomplete="off" class="form-control" maxlength="11">
+                                    <input type="text" id="txtFoundMAWB" autocomplete="off" class="form-control" maxlength="11" onblur="getFoundCargoDetails('S')">
                                 </div>
                             </div>
                             <!-- <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="col-xs-6 NoPadding">
                                     <input  type="text" id="txtGroupID"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '40');">
+                                           class="form-control" onkeyup="ChkMaxLength(this, '40');" onblur="getFoundCargoDetails('S')">
                                 </div>
                             </div>
                         </div>

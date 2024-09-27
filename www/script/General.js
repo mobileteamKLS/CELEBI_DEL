@@ -193,11 +193,21 @@ function NumberOnly(e) {
     e.target.value = e.target.value.replace(/[^0-9\.]/g, '');
     return false;
 }
+// function ChkMaxLength(txt, len) {
+//     if ($('#' + txt.id).val().length > parseInt(len)) {
+//         $('#' + txt.id).val($('#' + txt.id).val().substring(0, len));
+//     }
+// }
+
 function ChkMaxLength(txt, len) {
-    if ($('#' + txt.id).val().length > parseInt(len)) {
-        $('#' + txt.id).val($('#' + txt.id).val().substring(0, len));
+    var val = $('#' + txt.id).val();
+    
+    // Allow only valid number (including decimal point)
+    if (val.length > parseInt(len)) {
+        $('#' + txt.id).val(val.substring(0, len));
     }
 }
+
 
 function ChkMinLength(txt, len) {
     if ($('#' + txt.id).val().length < parseInt(len)) {

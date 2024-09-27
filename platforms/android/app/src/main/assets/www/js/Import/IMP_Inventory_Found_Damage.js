@@ -27,7 +27,7 @@ $(function () {
     $("input").keyup(function () {
         var string = $(this).val();
         // var string = $('#txtOrigin').val();
-        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/)) {
             /*$('#txtOrigin').val('');*/
             $(this).val('');
             return true;    // Contains at least one special character or space
@@ -302,15 +302,15 @@ function getFoundCargoDetails(operation){
     $(".ibiSuccessMsg1").text('');
     if(operation=="S"){
         if ($("#txtFoundMAWB").val() == "") {
-            errmsg = "Please enter Mawb No.</br>";
-            $.alert(errmsg);
+            // errmsg = "Please enter Mawb No.</br>";
+            // $.alert(errmsg);
             return;
         }
     }
     else{
         if ($("#txtGroupID").val() == "") {
-            errmsg = "Please enter Group ID</br>";
-            $.alert(errmsg);
+            // errmsg = "Please enter Group ID</br>";
+            // $.alert(errmsg);
             return;
         }
     }
@@ -346,8 +346,8 @@ function getFoundCargoDetails(operation){
                     var outMsg=$(this).find('Message').text();
 
                     if (status == 'E') {
-                        $(".ibiSuccessMsg1").text(outMsg).css({ "color": "Red", "font-weight": "bold" });
-                        
+                        clearALL();
+                        $(".ibiSuccessMsg1").text(outMsg).css({ "color": "Red", "font-weight": "bold" });               
                         return;
                     }
                 });
@@ -413,7 +413,7 @@ function saveDamageCargoDetails(){
                 'pi_dcDamageWt':$("#txtDamageWt").val(),
                 'pi_DamageType': $("#ddlDamageType").val(),
                 'pi_strDamageRemarks':$("#txtRemark").val(),
-                'pi_strUser': '',
+                'pi_strUser':UserID,
                 'po_strStatus': '',
                 'po_strMessage': '',
 
@@ -507,10 +507,10 @@ function saveFoundCargoDetails(){
                 'pi_dcFoundWt': parseFloat($("#txtFoundPkgsWt").val()),
                 'pi_intDamageNop': parseInt($("#txtDamagePkgs").val()),
                 'pi_dcDamageWt': parseFloat($("#txtDamageWt").val()),
-                'pi_DamageType': '',
+                'pi_DamageType': $("#ddlDamageType").val(),
                 'pi_strRemarks':$("#txtRemark").val(),
                 'pi_ReferenceMawbNo':referenceMawbNo,
-                'pi_strUser':'',
+                'pi_strUser':UserID,
                 'po_strStatus':'',
                 'po_strMessage':'',
             }),

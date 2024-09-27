@@ -26,7 +26,7 @@ $(function () {
     $("input").keyup(function () {
         var string = $(this).val();
         // var string = $('#txtOrigin').val();
-        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/)) {
             /*$('#txtOrigin').val('');*/
             $(this).val('');
             return true;    // Contains at least one special character or space
@@ -281,6 +281,99 @@ function getDamageTypes(){
                     }
                     $("#ddlDamageType").append($("<option></option>").val($(this).find('damageCode').text()).html($(this).find('damageDesc').text()));
 
+                });
+                
+                
+            },
+            error: function (msg) {
+                $("body").mLoading('hide');
+                $.alert('Some error occurred while fetching data');
+            }
+        });
+        return false;
+    }
+}
+
+function clearFoundCargoDetailsForGet() {
+    $('#txtFoundPkgs').val('');
+    $('#txtFoundPkgsWt').val('');
+    $('#txtDamagePkgs').val('');
+    $('#txtDamageWt').val('');
+    $('#ddlDamageType').val('0');
+    $('#spnErrormsg').text('');
+    $(".ibiSuccessMsg1").text('');
+    $("#txtRemark").val('');
+}
+
+function getFoundCargoDetails(operation){
+    $(".ibiSuccessMsg1").text('');
+    if(operation=="S"){
+        if ($("#txtFoundMAWB").val() == "") {
+            return;
+        }
+        
+    }
+    else{
+        if ($("#txtFoundGroupID").val() == "") {
+            // errmsg = "Please enter Group ID</br>";
+            // $.alert(errmsg);
+            return;
+        }
+    }
+    var connectionStatus = navigator.onLine ? 'online' : 'offline'
+    var errmsg = "";
+    if (errmsg == "" && connectionStatus == "online") {
+        $.ajax({
+            type: "POST",
+            url: CMSserviceURL + "Inventory_GetFoundCargoDetails",
+            data: JSON.stringify({
+                'strModule': 'E',
+                'Selection': operation,
+                'MawbNo': $('#txtFoundMAWB').val(),
+                'SBorHawb': '',
+                'GroupId': $("#txtFoundGroupID").val(),
+                'UserId': UserID
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function doStuff() {
+                //$('.dialog-background').css('display', 'block');
+                $('body').mLoading({
+                    text: "Please Wait..",
+                });
+            },
+            success: function (response) {
+                $("body").mLoading('hide');
+                response = response.d;
+                var xmlDoc = $.parseXML(response);
+
+                $(xmlDoc).find('Table').each(function (index) {
+                    var status = $(this).find('Status').text();
+                    var outMsg=$(this).find('Message').text();
+
+                    if (status == 'E') {
+                        clearFoundCargoDetailsForGet()
+                        $(".ibiSuccessMsg1").text(outMsg).css({ "color": "Red", "font-weight": "bold" });
+                        
+                        return;
+                    }
+                });
+                
+                $(xmlDoc).find('Table1').each(function (index) {
+                    $('#txtFoundMAWB').val($(this).find('MawbNo').text());
+                    $('#txtFoundHAWB').val($(this).find('HawbNo').text());
+                    $('#txtFoundGroupID').val($(this).find('GroupID').text());
+                    $('#txtFoundPkgs').val($(this).find('FoundNop').text());
+                    $('#txtFoundPkgsWt').val($(this).find('FoundWt').text());
+                    $('#txtDamagePkgs').val($(this).find('DamageNop').text());
+                    $('#txtDamageWt').val($(this).find('DamageWt').text());
+                    if($(this).find('DamageType').text()==""){
+                        $('#ddlDamageType').val("0");
+                    }
+                    else{
+                        $('#ddlDamageType').val($(this).find('DamageType').text());
+                    }
+                    $('#txtRemark').val($(this).find('Remarks').text());
                 });
                 
                 

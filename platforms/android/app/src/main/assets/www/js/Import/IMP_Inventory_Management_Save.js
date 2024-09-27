@@ -40,7 +40,7 @@ $(function () {
     $("input").keyup(function () {
         var string = $(this).val();
         // var string = $('#txtOrigin').val();
-        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/)) {
             /*$('#txtOrigin').val('');*/
             $(this).val('');
             return true;    // Contains at least one special character or space
@@ -223,7 +223,7 @@ function getHawbFromMawb() {
                         }
                     }
                 });
-               if(outMsg=="S"){
+               if(outMsg=="S" || outMsg==""){
                 if ($("#ddlHAWB option:selected").val() == '' || $("#ddlHAWB option:selected").val() == '0') {
                     GetLocationDetails();
                 }
@@ -396,6 +396,7 @@ function GetLocationDetails() {
                     window.localStorage.setItem("InvLocId",LocID);
                     window.localStorage.setItem("InvLocation",Location);
                     window.localStorage.setItem("Groupid",groupId);
+                    window.localStorage.setItem("RefMawbNo",$("#txtAWBNo").val());
                 });
 
                 $(xmlDoc).find('Table2').each(function (index) {
@@ -846,21 +847,21 @@ function getFoundCargoDetails(operation){
         if ($("#txtFoundMAWB").val() == "") {
             return;
         }
-        if ($('#txtFoundMAWB').val() != '') {
-            if ($('#txtFoundMAWB').val().length != '11') {
-                if ($('#txtFoundMAWB').val().length != '13') {
-                    errmsg = "Please enter valid AWB No.";
-                    $.alert(errmsg);
-                    $('#txtAWBNo').val('');
-                    return;
-                }
-            }
-        }
+        // if ($('#txtFoundMAWB').val() != '') {
+        //     if ($('#txtFoundMAWB').val().length != '11') {
+        //         if ($('#txtFoundMAWB').val().length != '13') {
+        //             errmsg = "Please enter valid AWB No.";
+        //             $.alert(errmsg);
+        //             $('#txtAWBNo').val('');
+        //             return;
+        //         }
+        //     }
+        // }
     }
     else{
         if ($("#txtFoundGroupID").val() == "") {
-            errmsg = "Please enter Group ID</br>";
-            $.alert(errmsg);
+            // errmsg = "Please enter Group ID</br>";
+            // $.alert(errmsg);
             return;
         }
     }
@@ -896,6 +897,7 @@ function getFoundCargoDetails(operation){
                     var outMsg=$(this).find('Message').text();
 
                     if (status == 'E') {
+                        clearFoundCargoDetails()
                         $(".ibiSuccessMsg2").text(outMsg).css({ "color": "Red", "font-weight": "bold" });
                         
                         return;
@@ -986,7 +988,7 @@ function saveFoundCargoDetails(){
                 'pi_DamageType': '',
                 'pi_strRemarks':$("#txtRemark").val(),
                 'pi_ReferenceMawbNo':'',
-                'pi_strUser':'',
+                'pi_strUser':UserID,
                 'po_strStatus':'',
                 'po_strMessage':'',
             }),
@@ -1007,11 +1009,11 @@ function saveFoundCargoDetails(){
                     var status = $(this).find('Status').text();
                     var msg = $(this).find('Message').text()
                     if (status == "S") {
-                        clearALL();
+                        clearFoundCargoDetails();
                         $(".ibiSuccessMsg2").text(msg).css({ "color": "Green", "font-weight": "bold" });
                     }
                     else {
-                        clearALL();
+                        clearFoundCargoDetails();
                         $(".ibiSuccessMsg2").text(msg).css({ "color": "Red", "font-weight": "bold" });
                     }
                 });

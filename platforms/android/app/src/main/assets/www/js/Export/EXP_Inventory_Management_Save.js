@@ -39,7 +39,7 @@ $(function () {
     $("input").keyup(function () {
         var string = $(this).val();
         // var string = $('#txtOrigin').val();
-        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+        if (string.match(/[`!₹£•√Π÷×§∆€¥¢©®™✓π@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/)) {
             /*$('#txtOrigin').val('');*/
             $(this).val('');
             return true;    // Contains at least one special character or space
@@ -633,6 +633,19 @@ function getDamageTypes(){
         return false;
     }
 }
+function clearFoundCargoDetails() {
+    $('#txtFoundMAWB').val('');
+    $('#txtFoundHAWB').val('');
+    $('#txtFoundGroupID').val('');
+    $('#txtFoundPkgs').val('');
+    $('#txtFoundPkgsWt').val('');
+    $('#txtDamagePkgs').val('');
+    $('#txtDamageWt').val('');
+    $('#ddlDamageType').val('0');
+    $('#spnErrormsg').text('');
+    $(".ibiSuccessMsg2").text('');
+    $("#txtRemark").val('');
+}
 
 function getFoundCargoDetails(operation){
     $(".ibiSuccessMsg2").text('');
@@ -640,21 +653,12 @@ function getFoundCargoDetails(operation){
         if ($("#txtFoundMAWB").val() == "") {
             return;
         }
-        if ($('#txtFoundMAWB').val() != '') {
-            if ($('#txtFoundMAWB').val().length != '11') {
-                if ($('#txtFoundMAWB').val().length != '13') {
-                    errmsg = "Please enter valid AWB No.";
-                    $.alert(errmsg);
-                    $('#txtAWBNo').val('');
-                    return;
-                }
-            }
-        }
+        
     }
     else{
         if ($("#txtFoundGroupID").val() == "") {
-            errmsg = "Please enter Group ID</br>";
-            $.alert(errmsg);
+            // errmsg = "Please enter Group ID</br>";
+            // $.alert(errmsg);
             return;
         }
     }
@@ -690,6 +694,7 @@ function getFoundCargoDetails(operation){
                     var outMsg=$(this).find('Message').text();
 
                     if (status == 'E') {
+                        clearFoundCargoDetails()
                         $(".ibiSuccessMsg2").text(outMsg).css({ "color": "Red", "font-weight": "bold" });
                         
                         return;
