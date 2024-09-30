@@ -246,6 +246,18 @@ function clearALL() {
     $("#txtRemark").val('');
 }
 
+function clearFoundCargoDetailsForGet() {
+
+    $('#txtFoundPkgs').val('');
+    $('#txtFoundPkgsWt').val('');
+    $('#txtDamagePkgs').val('');
+    $('#txtDamageWt').val('');
+    $('#ddlDamageType').val('0');
+    $('#spnErrormsg').text('');
+    $(".ibiSuccessMsg1").text('');
+    $("#txtRemark").val('');
+}
+
 function ClearError(ID) {
     $("#" + ID).css("background-color", "#e7ffb5");
 }
@@ -346,7 +358,7 @@ function getFoundCargoDetails(operation){
                     var outMsg=$(this).find('Message').text();
 
                     if (status == 'E') {
-                        clearALL();
+                        clearFoundCargoDetailsForGet();
                         $(".ibiSuccessMsg1").text(outMsg).css({ "color": "Red", "font-weight": "bold" });               
                         return;
                     }

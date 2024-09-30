@@ -224,9 +224,28 @@ function getHawbFromMawb() {
                     }
                 });
                if(outMsg=="S" || outMsg==""){
-                if ($("#ddlHAWB option:selected").val() == '' || $("#ddlHAWB option:selected").val() == '0') {
-                    GetLocationDetails();
-                }
+                 
+                   var hasMoreThanSelect = $('#ddlHAWB option').filter(function () {
+                       return $(this).val() !== "Select" && $(this).val() !== "0"; // Adjust as per your "Select" option value
+                   }).length > 0;
+
+                   if (!hasMoreThanSelect) {
+                       if ($("#ddlHAWB option:selected").val() == '' || $("#ddlHAWB option:selected").val() == '0') {
+                           GetLocationDetails();
+                       }
+                   } else{
+                    $('#txtLoc').val('');
+                    $('#txtPcs').val('');
+                    $('#txtInvPcs').val('');
+                    $('#txtDamagePkgs').val('');
+                    $('#txtDamagePkgsView').val('');
+                    $('#txtDamageWt').val('');
+                    $('#txtDamageWtView').val('');
+                    $('#ddlDamageType').val('0');
+                    $('#txtRemark').val('');
+                   }
+
+                
                }
 
             },
@@ -687,6 +706,7 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').hide();
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
+        $(".ibiSuccessMsg1").text('');
 
     }
     else if(document.getElementById('rdoGroupID').checked){
@@ -702,6 +722,7 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').hide();
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
+        $(".ibiSuccessMsg1").text('');
     }
     else{
         $("#divNormalCargo").hide();
@@ -713,6 +734,7 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').show();
         $('#foundCargoHint').show();
         $('#divFoundbutton').show();
+        $(".ibiSuccessMsg1").text('');
 
 
     }

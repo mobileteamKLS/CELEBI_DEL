@@ -17,6 +17,7 @@ $(function () {
 
     $("#ddlShed").change(function () {
         selectedShed = $(this).find(":selected").val();
+        localStorage.setItem('impShedDDL', selectedShed);
         if(selectedShed=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -32,6 +33,7 @@ $(function () {
 
     $("#ddlArea").change(function () {
         var selectedArea = $(this).find(":selected").val();
+        localStorage.setItem('impAreaDDL', selectedArea);
         if(selectedArea=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -244,7 +246,9 @@ function getStatus(Terminal,Area){
                     if (invStatus == "Pending") {
                         buttons[0].condition = true; // Enable Start
                     } else if (invStatus == "Paused") {
-                        buttons[1].condition = true; // Enable Continue
+                        buttons[1].condition = true;
+                          buttons[2].condition = true; // Enable Reset
+                        buttons[3].condition = true; // Enable Complete // Enable Continue
                     } else if (invStatus == "Completed") {
                         buttons[4].condition = true; // Enable Modify
                     } else if (invStatus == "In-Progress") {

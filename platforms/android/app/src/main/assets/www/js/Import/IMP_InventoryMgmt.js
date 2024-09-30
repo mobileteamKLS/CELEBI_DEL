@@ -245,6 +245,8 @@ function getStatus(Terminal,Area){
                         buttons[0].condition = true; // Enable Start
                     } else if (invStatus == "Paused") {
                         buttons[1].condition = true; // Enable Continue
+                        buttons[2].condition = true; // Enable Reset
+                        buttons[3].condition = true; // Enable Complete
                     } else if (invStatus == "Completed") {
                         buttons[4].condition = true; // Enable Modify
                     } else if (invStatus == "In-Progress") {

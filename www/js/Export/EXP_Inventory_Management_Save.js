@@ -426,6 +426,7 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').hide();
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
+        $(".ibiSuccessMsg1").text('');
 
     }
     else if(document.getElementById('rdoGroupID').checked){
@@ -443,6 +444,7 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').hide();
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
+        $(".ibiSuccessMsg1").text('');
     }
     else{
         $("#divNormalCargo").hide();
@@ -454,6 +456,7 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').show();
         $('#foundCargoHint').show();
         $('#divFoundbutton').show();
+        $(".ibiSuccessMsg1").text('');
 
 
     }

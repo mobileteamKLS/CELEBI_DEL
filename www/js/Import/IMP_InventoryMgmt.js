@@ -8,7 +8,7 @@ var randomNum;
 var availableLoc=[];
 $(function () {
     console.log("MGMT");
-    getLocationType();
+    getLocationType();    
     randomNumb();
     $("#ddlLocationType").change(function () {
         selectedLoc = $(this).find(":selected").val();
@@ -17,6 +17,7 @@ $(function () {
 
     $("#ddlShed").change(function () {
         selectedShed = $(this).find(":selected").val();
+        localStorage.setItem('impShedDDL', selectedShed);
         if(selectedShed=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -32,6 +33,7 @@ $(function () {
 
     $("#ddlArea").change(function () {
         var selectedArea = $(this).find(":selected").val();
+        localStorage.setItem('impAreaDDL', selectedArea);
         if(selectedArea=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -135,6 +137,11 @@ function getTerminalsByLoc(Loc){
                     $("#ddlShed").append($("<option></option>").val($(this).find('Shed').text()).html($(this).find('Shed').text()));
 
                 });
+
+                var savedValue1 = localStorage.getItem('impShedDDL');
+                if (savedValue1) {
+                    $('#ddlShed').val(savedValue1).trigger('change');
+                }
                 
             },
             error: function (msg) {
@@ -176,6 +183,11 @@ function getAreaFromTerminal(Terminal){
                     $("#ddlArea").append($("<option></option>").val($(this).find('Area').text()).html($(this).find('Area').text()));
 
                 });
+
+                var savedValue2 = localStorage.getItem('impAreaDDL');
+                if (savedValue2) {
+                    $('#ddlArea').val(savedValue2).trigger('change');
+                }
               
                 
             },
@@ -245,6 +257,8 @@ function getStatus(Terminal,Area){
                         buttons[0].condition = true; // Enable Start
                     } else if (invStatus == "Paused") {
                         buttons[1].condition = true; // Enable Continue
+                        buttons[2].condition = true; // Enable Reset
+                        buttons[3].condition = true; // Enable Complete
                     } else if (invStatus == "Completed") {
                         buttons[4].condition = true; // Enable Modify
                     } else if (invStatus == "In-Progress") {
