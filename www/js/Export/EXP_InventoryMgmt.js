@@ -17,7 +17,7 @@ $(function () {
 
     $("#ddlShed").change(function () {
         selectedShed = $(this).find(":selected").val();
-        localStorage.setItem('impShedDDL', selectedShed);
+        localStorage.setItem('expShedDDL', selectedShed);
         if(selectedShed=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -33,7 +33,7 @@ $(function () {
 
     $("#ddlArea").change(function () {
         var selectedArea = $(this).find(":selected").val();
-        localStorage.setItem('impAreaDDL', selectedArea);
+        localStorage.setItem('expAreaDDL', selectedArea);
         if(selectedArea=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -134,6 +134,10 @@ function getTerminalsByLoc(Loc){
                     $("#ddlShed").append($("<option></option>").val($(this).find('Shed').text()).html($(this).find('Shed').text()));
 
                 });
+                var savedValue1 = localStorage.getItem('expShedDDL');
+                if (savedValue1) {
+                    $('#ddlShed').val(savedValue1).trigger('change');
+                }
                 
             },
             error: function (msg) {
@@ -175,7 +179,10 @@ function getAreaFromTerminal(Terminal){
                     $("#ddlArea").append($("<option></option>").val($(this).find('Area').text()).html($(this).find('Area').text()));
 
                 });
-              
+                var savedValue2 = localStorage.getItem('expAreaDDL');
+                if (savedValue2) {
+                    $('#ddlArea').val(savedValue2).trigger('change');
+                }
                 
             },
             error: function (msg) {
