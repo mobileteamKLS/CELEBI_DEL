@@ -83,11 +83,11 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     }
   ];
   module.exports.metadata = {
+    "cordova-plugin-androidx-adapter": "1.1.3",
     "cordova-plugin-barcodescanner": "0.7.4",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-dialogs": "1.3.0",
     "cordova-plugin-network-information": "1.3.0",
-    "cordova-plugin-splashscreen": "4.0.0",
-    "cordova-plugin-androidx-adapter": "1.1.3"
+    "cordova-plugin-splashscreen": "4.0.0"
   };
 });

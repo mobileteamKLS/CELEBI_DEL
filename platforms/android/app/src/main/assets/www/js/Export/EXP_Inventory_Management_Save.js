@@ -21,6 +21,17 @@ $(function () {
 
     getLocationCode(Terminal, Area);
     getDamageTypes();
+    var savedValue1 = localStorage.getItem('ExpAWBNo');
+    if (savedValue1) {
+        $('#txtAWBNo').val(savedValue1);
+        $('#txtScanLocation').val(localStorage.getItem('ExpLocCode'));
+        GetEWRNo();
+        // localStorage.getItem('ImpLocCode');
+        // localStorage.getItem('ImpAWBNo');
+        // localStorage.getItem('ImpGroupId');
+        // localStorage.getItem('ImpHawbNo');     
+        // $('#ddlShed').val(savedValue1).trigger('change');
+    }
     $("#txtScanLocation").autocomplete({
         source: function (request, response) {
             var filteredLoc = availableLoc.filter(function (loc) {
@@ -52,6 +63,7 @@ $(function () {
 
 function getLocationCode(Terminal, Area) {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     var connectionStatus = navigator.onLine ? 'online' : 'offline'
     var errmsg = "";
     if (errmsg == "" && connectionStatus == "online") {
@@ -185,6 +197,7 @@ function GetEWRNo() {
 
 function GetLocationDetails() {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     $('#txtPcs').val('');
     $('#txtInvPcs').val('');
     $('#txtDamagePkgs').val('');
@@ -310,6 +323,7 @@ function GetLocationDetails() {
 
 function SaveLocationDetails() {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     if ($("#txtScanLocation").val() == "") {
         errmsg = "Please enter location.</br>";
         $.alert(errmsg);
@@ -396,6 +410,10 @@ function goToDamage(type) {
         return;
     }
     localStorage.setItem('comeFromDamage', type);
+    localStorage.setItem('ExpLocCode', $("#txtScanLocation").val());
+    localStorage.setItem('ExpAWBNo', $("#txtAWBNo").val());
+    // localStorage.setItem('ImpGroupId', type);
+    // localStorage.setItem('ImpHawbNo', type);
     window.location.href = 'EXP_Inventory_Found_Damage.html'
 }
 
@@ -426,6 +444,8 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').hide();
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
+        $(".ibiSuccessMsg1").text('');
+        $('#spnErrormsg').text('');
 
     }
     else if(document.getElementById('rdoGroupID').checked){
@@ -443,6 +463,8 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').hide();
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
+        $(".ibiSuccessMsg1").text('');
+        $('#spnErrormsg').text('');
     }
     else{
         $("#divNormalCargo").hide();
@@ -454,8 +476,23 @@ function EnableFoundCargo() {
         $('#divFoundCgoDetails1').show();
         $('#foundCargoHint').show();
         $('#divFoundbutton').show();
+        $(".ibiSuccessMsg1").text('');
+        $('#spnErrormsg').text('');
 
 
+    }
+}
+
+function checkInvPcs() {
+    var awbPCS = parseInt($('#txtPcs').val());
+    var InvPcs = parseInt($('#txtInvPcs').val());
+    $(".ibiSuccessMsg1").text('');
+    if($('#txtPcs').val()==""){
+        return;
+    }
+    if (InvPcs > awbPCS) {
+        $('.ibiSuccessMsg1').text('Inventory Pieces should not greater than AWB Pieces.').css('color', 'red');
+        $('#txtInvPcs').val('');
     }
 }
 
@@ -466,8 +503,6 @@ function checkDamagePcs() {
         $('#spnErrormsg').text('Damage Pieces should not greater than Found Pieces.').css('color', 'red');
         $('#txtDamagePkgs').val('');
     }
-
-
 }
 
 function checkDamageWt() {
@@ -564,6 +599,7 @@ function updateStatusToPause(path){
 
 function clearBeforePopulate(){
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     $('#ddlEWRNo').empty();
     $('#txtLoc').val('');
     $('#txtPcs').val('');
@@ -656,6 +692,7 @@ function clearFoundCargoDetailsForGet() {
     $('#ddlDamageType').val('0');
     $('#spnErrormsg').text('');
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     $("#txtRemark").val('');
 }
 

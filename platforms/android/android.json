@@ -275,7 +275,7 @@
               "count": 1
             },
             {
-              "xml": "<string name=\"msg_camera_framework_bug\">Sorry, the Android camera encountered a problem. You may need to\n                restart the device.\n            </string>",
+              "xml": "<string name=\"msg_camera_framework_bug\">Sorry, the Android camera encountered a problem. You may need to\r\n                restart the device.\r\n            </string>",
               "count": 1
             },
             {
@@ -319,11 +319,11 @@
               "count": 1
             },
             {
-              "xml": "<string name=\"msg_install_google_shopper\">Google Shopper combines barcode scanning with online and local\n                prices, reviews and more without opening the browser. Would you like to try it?\n            </string>",
+              "xml": "<string name=\"msg_install_google_shopper\">Google Shopper combines barcode scanning with online and local\r\n                prices, reviews and more without opening the browser. Would you like to try it?\r\n            </string>",
               "count": 1
             },
             {
-              "xml": "<string name=\"msg_intent_failed\">Sorry, the requested application could not be launched. The barcode\n                contents may be invalid.\n            </string>",
+              "xml": "<string name=\"msg_intent_failed\">Sorry, the requested application could not be launched. The barcode\r\n                contents may be invalid.\r\n            </string>",
               "count": 1
             },
             {
@@ -363,7 +363,7 @@
               "count": 1
             },
             {
-              "xml": "<string name=\"msg_share_explanation\">You can share data by displaying a barcode on your screen and scanning\n                it with another phone.\n            </string>",
+              "xml": "<string name=\"msg_share_explanation\">You can share data by displaying a barcode on your screen and scanning\r\n                it with another phone.\r\n            </string>",
               "count": 1
             },
             {
@@ -403,7 +403,7 @@
               "count": 1
             },
             {
-              "xml": "<string formatted=\"false\" name=\"preferences_custom_product_search_summary\">Substitutions: %s = contents, %f\n                = format, %t = type\n            </string>",
+              "xml": "<string formatted=\"false\" name=\"preferences_custom_product_search_summary\">Substitutions: %s = contents, %f\r\n                = format, %t = type\r\n            </string>",
               "count": 1
             },
             {
@@ -439,7 +439,7 @@
               "count": 1
             },
             {
-              "xml": "<string name=\"preferences_front_light_summary\">Improves scanning in low light on some phones, but may cause\n                glare. Does not work on all phones.\n            </string>",
+              "xml": "<string name=\"preferences_front_light_summary\">Improves scanning in low light on some phones, but may cause\r\n                glare. Does not work on all phones.\r\n            </string>",
               "count": 1
             },
             {
@@ -459,7 +459,7 @@
               "count": 1
             },
             {
-              "xml": "<string name=\"preferences_remember_duplicates_summary\">Store multiple scans of the same barcode in History\n            </string>",
+              "xml": "<string name=\"preferences_remember_duplicates_summary\">Store multiple scans of the same barcode in History\r\n            </string>",
               "count": 1
             },
             {
@@ -487,7 +487,7 @@
               "count": 1
             },
             {
-              "xml": "<string name=\"preferences_supplemental_summary\">Try to retrieve more information about the barcode\n                contents\n            </string>",
+              "xml": "<string name=\"preferences_supplemental_summary\">Try to retrieve more information about the barcode\r\n                contents\r\n            </string>",
               "count": 1
             },
             {
@@ -564,29 +564,13 @@
             }
           ]
         }
-      },
-      "app/src/main/AndroidManifest.xml": {
-        "parents": {
-          "/manifest/application": [
-            {
-              "xml": "<application usesCleartextTraffic=\"true\" />",
-              "count": 1,
-              "mode": "merge",
-              "id": "config.xml",
-              "oldAttrib": {
-                "android:hardwareAccelerated": "true",
-                "android:icon": "@mipmap/ic_launcher",
-                "android:label": "@string/app_name",
-                "android:supportsRtl": "true",
-                "usesCleartextTraffic": "true"
-              }
-            }
-          ]
-        }
       }
     }
   },
   "installed_plugins": {
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "com.Galaxy_App"
+    },
     "cordova-plugin-barcodescanner": {
       "PACKAGE_NAME": "com.Galaxy_App"
     },
@@ -600,9 +584,6 @@
       "PACKAGE_NAME": "com.Galaxy_App"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.Galaxy_App"
-    },
-    "cordova-plugin-androidx-adapter": {
       "PACKAGE_NAME": "com.Galaxy_App"
     }
   },
@@ -691,11 +672,11 @@
     }
   ],
   "plugin_metadata": {
+    "cordova-plugin-androidx-adapter": "1.1.3",
     "cordova-plugin-barcodescanner": "0.7.4",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-dialogs": "1.3.0",
     "cordova-plugin-network-information": "1.3.0",
-    "cordova-plugin-splashscreen": "4.0.0",
-    "cordova-plugin-androidx-adapter": "1.1.3"
+    "cordova-plugin-splashscreen": "4.0.0"
   }
 }

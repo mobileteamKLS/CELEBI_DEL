@@ -63,11 +63,11 @@ function GetShipmentStatus() {
         return;
     }
 
-    if (AWBNo.length != '11') {
-        errmsg = "Please enter valid AWB No.";
-        $.alert(errmsg);
-        return;
-    }
+    //if (AWBNo.length != '11') {
+    //    errmsg = "Please enter valid AWB No.";
+    //    $.alert(errmsg);
+    //    return;
+    //}
 
     if ($('#chkAWBNo').prop('checked')) {
         strType = "A";
@@ -81,7 +81,7 @@ function GetShipmentStatus() {
         $.ajax({
             type: 'POST',
             url: CMSserviceURL + "GetAWBHistory_PDA",
-            data: JSON.stringify({ 'pi_strAWBNo': AWBNo, 'strType': strType }),
+            data: JSON.stringify({ 'pi_strAWBNo': AWBNo, 'pi_strType': strType }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             beforeSend: function doStuff() {

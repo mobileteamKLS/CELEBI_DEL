@@ -22,6 +22,17 @@ $(function () {
 
     getLocationCode(Terminal, Area);
     getDamageTypes();
+    var savedValue1 = localStorage.getItem('ImpAWBNo');
+    if (savedValue1) {
+        $('#txtAWBNo').val(savedValue1);
+        $('#txtScanLocation').val(localStorage.getItem('ImpLocCode'));
+        getHawbFromMawb()
+        // localStorage.getItem('ImpLocCode');
+        // localStorage.getItem('ImpAWBNo');
+        // localStorage.getItem('ImpGroupId');
+        // localStorage.getItem('ImpHawbNo');     
+        // $('#ddlShed').val(savedValue1).trigger('change');
+    }
     $("#txtScanLocation").autocomplete({
         source: function (request, response) {
             var filteredLoc = availableLoc.filter(function (loc) {
@@ -107,6 +118,7 @@ function getDamageTypes(){
 
 function getLocationCode(Terminal, Area) {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     var connectionStatus = navigator.onLine ? 'online' : 'offline'
     var errmsg = "";
     if (errmsg == "" && connectionStatus == "online") {
@@ -145,6 +157,7 @@ function getLocationCode(Terminal, Area) {
 
 function getHawbFromMawb() {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     $('#ddlHAWB').empty();
     var newOption = $('<option></option>');
     newOption.val(0).text('Select');
@@ -258,72 +271,74 @@ function getHawbFromMawb() {
     }
 }
 
-function getIGMFromHAWB() {
-    $(".ibiSuccessMsg1").text('');
-    if (errmsg == "" && connectionStatus == "online") {
-        $.ajax({
-            type: 'POST',
-            url: CMSserviceURL + "GetHAWBNumbersForMAWBNumber_PDA",
-            data: JSON.stringify({ 'pi_strMAWBNo': MAWBNo, 'pi_strHAWBNo': HAWBNo, 'pi_strAirport': AirportCity, 'pi_strEvent': 'I' }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            beforeSend: function doStuff() {
-                $('body').mLoading({
-                    text: "Loading..",
-                });
-            },
-            success: function (response) {
-                //debugger;                
-                $("body").mLoading('hide');
-                response = response.d;
-                var xmlDoc = $.parseXML(response);
+// function getIGMFromHAWB() {
+//     $(".ibiSuccessMsg1").text('');
+//     $('#spnErrormsg').text('');
+//     if (errmsg == "" && connectionStatus == "online") {
+//         $.ajax({
+//             type: 'POST',
+//             url: CMSserviceURL + "GetHAWBNumbersForMAWBNumber_PDA",
+//             data: JSON.stringify({ 'pi_strMAWBNo': MAWBNo, 'pi_strHAWBNo': HAWBNo, 'pi_strAirport': AirportCity, 'pi_strEvent': 'I' }),
+//             contentType: "application/json; charset=utf-8",
+//             dataType: "json",
+//             beforeSend: function doStuff() {
+//                 $('body').mLoading({
+//                     text: "Loading..",
+//                 });
+//             },
+//             success: function (response) {
+//                 //debugger;                
+//                 $("body").mLoading('hide');
+//                 response = response.d;
+//                 var xmlDoc = $.parseXML(response);
 
-                $(xmlDoc).find('Table').each(function () {
+//                 $(xmlDoc).find('Table').each(function () {
 
-                    var outMsg = $(this).find('Status').text();
+//                     var outMsg = $(this).find('Status').text();
 
-                    if (outMsg == 'E') {
-                        $.alert($(this).find('StrMessage').text());
-                        return;
-                    }
-                    else {
+//                     if (outMsg == 'E') {
+//                         $.alert($(this).find('StrMessage').text());
+//                         return;
+//                     }
+//                     else {
 
-                        var IGMid = $(this).find('Process').text();
-                        var IGMNo = $(this).find('IGMNo').text();
+//                         var IGMid = $(this).find('Process').text();
+//                         var IGMNo = $(this).find('IGMNo').text();
 
-                        if (IGMNo != '') {
+//                         if (IGMNo != '') {
 
-                            var newOption = $('<option></option>');
-                            newOption.val(IGMid).text(IGMNo);
-                            newOption.appendTo('#ddlIGM');
-                        }
-                    }
-                });
+//                             var newOption = $('<option></option>');
+//                             newOption.val(IGMid).text(IGMNo);
+//                             newOption.appendTo('#ddlIGM');
+//                         }
+//                     }
+//                 });
 
-            },
-            error: function (msg) {
-                //debugger;
-                $("body").mLoading('hide');
-                var r = jQuery.parseJSON(msg.responseText);
-                $.alert(r.Message);
-            }
-        });
-    }
-    else if (connectionStatus == "offline") {
-        $("body").mLoading('hide');
-        $.alert('No Internet Connection!');
-    }
-    else if (errmsg != "") {
-        $("body").mLoading('hide');
-        $.alert(errmsg);
-    }
-    else {
-        $("body").mLoading('hide');
-    }
-}
+//             },
+//             error: function (msg) {
+//                 //debugger;
+//                 $("body").mLoading('hide');
+//                 var r = jQuery.parseJSON(msg.responseText);
+//                 $.alert(r.Message);
+//             }
+//         });
+//     }
+//     else if (connectionStatus == "offline") {
+//         $("body").mLoading('hide');
+//         $.alert('No Internet Connection!');
+//     }
+//     else if (errmsg != "") {
+//         $("body").mLoading('hide');
+//         $.alert(errmsg);
+//     }
+//     else {
+//         $("body").mLoading('hide');
+//     }
+// }
 
 function GetLocationDetails() {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     $('#txtPcs').val('');
     $('#txtInvPcs').val('');
     $('#txtDamagePkgs').val('');
@@ -449,6 +464,7 @@ function GetLocationDetails() {
 
 function GetLocationDetailsByGroupId() {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     $('#txtPcs').val('');
     $('#txtInvPcs').val('');
     $('#txtDamagePkgs').val('');
@@ -584,6 +600,7 @@ function GetLocationDetailsByGroupId() {
 
 function SaveLocationDetails() {
     $(".ibiSuccessMsg1").text('');
+    $('#spnErrormsg').text('');
     if ($("#txtScanLocation").val() == "") {
         errmsg = "Please enter location.</br>";
         $.alert(errmsg);
@@ -675,6 +692,10 @@ function goToDamage(type) {
         return;
     }
     localStorage.setItem('comeFromDamage', type);
+    localStorage.setItem('ImpLocCode', $("#txtScanLocation").val());
+    localStorage.setItem('ImpAWBNo', $("#txtAWBNo").val());
+    // localStorage.setItem('ImpGroupId', type);
+    // localStorage.setItem('ImpHawbNo', type);
     localStorage.setItem('isMasterPresent', "1");
     window.location.href = 'IMP_Inventory_Found_Damage.html'
 }
@@ -707,6 +728,7 @@ function EnableFoundCargo() {
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
         $(".ibiSuccessMsg1").text('');
+        $('#spnErrormsg').text('');
 
     }
     else if(document.getElementById('rdoGroupID').checked){
@@ -723,6 +745,7 @@ function EnableFoundCargo() {
         $('#foundCargoHint').hide();
         $('#divFoundbutton').hide();
         $(".ibiSuccessMsg1").text('');
+        $('#spnErrormsg').text('');
     }
     else{
         $("#divNormalCargo").hide();
@@ -735,8 +758,21 @@ function EnableFoundCargo() {
         $('#foundCargoHint').show();
         $('#divFoundbutton').show();
         $(".ibiSuccessMsg1").text('');
+        $('#spnErrormsg').text('');
 
+    }
+}
 
+function checkInvPcs() {
+    var awbPCS = parseInt($('#txtPcs').val());
+    var InvPcs = parseInt($('#txtInvPcs').val());
+    $(".ibiSuccessMsg1").text('');
+    if($('#txtPcs').val()==""){
+        return;
+    }
+    if (InvPcs > awbPCS) {
+        $('.ibiSuccessMsg1').text('Inventory Pieces should not greater than AWB Pieces.').css('color', 'red');
+        $('#txtInvPcs').val('');
     }
 }
 

@@ -167,19 +167,20 @@
                              style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
-                                <div class="col-xs-3 col-form-label NoPadding">
+                                <div class="col-xs-6 col-form-label NoPadding">
                                     <input type="radio" name="radSize" id="rdoAWBNo" value="FoundCargo" onchange="EnableFoundCargo()" checked>
                                     <label for="sizeLarge">AWB No.</label>
                                 </div>
 
-                                <div class="col-xs-3 col-form-label NoPadding">
-                                        <input type="radio" name="radSize" id="rdoGroupID" value="DamageCargo" onchange="EnableFoundCargo()">
+                                <div class="col-xs-3 col-form-label NoPadding" style="display: none;">
+                                        <input type="radio" name="radSize" id="rdoGroupID" value="DamageCargo" onchange="EnableFoundCargo()" disabled>
                                         <label for="sizeLarge">Group ID</label>
                                     
-                                </div><div class="col-xs-5 col-form-label NoPadding">
+                                </div>
+                                <div class="col-xs-6 col-form-label NoPadding">
                              
                                         <input type="radio" name="radSize" id="rdoNewFoundCargo" value="NewFoundCargo" onchange="EnableFoundCargo()">
-                                        <label for="sizeLarge">New Found Cargo</label>
+                                        <label for="sizeLarge">Found Cargo</label>
                                     
                                 </div>
 
@@ -205,7 +206,6 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <!--<input type="text" id="txtScanHAWBNo" class="form-control" maxlength="11">-->
                                     <input type="text" id="txtGroupID" class="form-control" maxlength="30">
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                                     <label id="lblRcvdRem" for="txtRcvdRem" class="control-label labelFont">Inv. Pieces</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" style="text-align:right;" id="txtInvPcs" class="form-control" onkeyup="ChkMaxLength(this, '3');oneNumberCheck(this);">
+                                    <input type="text" style="text-align:right;" id="txtInvPcs" class="form-control" onkeyup="ChkMaxLength(this, '3');oneNumberCheck(this); ">
                                 </div>
 
                             </div>
@@ -349,15 +349,15 @@
                             </div>
 
                         </div>
-                        <div class="row" id="divNormalCargoButton1" style="margin-top:10px;">
+                        <div class="row" id="divNormalCargoButton1" style="margin-top:10px; align-items: center; padding-left: 25%; padding-right: 25%;">
 
-                            <div class="form-group col-xs-6 col-sm-3 col-md-3">
+                            <!-- <div class="form-group col-xs-6 col-sm-3 col-md-3">
                                 <input type="button" id="btnClear" class="form-control ButtonColor" value="Found Cargo"
                                        onclick="goToDamage('F');">
-                            </div>
+                            </div> -->
 
 
-                            <div class="form-group col-xs-6 col-sm-3 col-md-3">
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Damage Cargo"
                                        onclick="goToDamage('D');">
                             </div>
@@ -377,7 +377,7 @@
                                     <input type="text" id="txtFoundMAWB" autocomplete="off" class="form-control" maxlength="11" onblur="getFoundCargoDetails('S')">
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                            <!-- <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblHAWBNo" for="txtFoundHAWB" class="control-label labelFont">
                                         HAWB
@@ -387,9 +387,9 @@
                                 <div class="col-xs-6 NoPadding">
                                     <input type="text" id="txtFoundHAWB" autocomplete="off" class="form-control" maxlength="30" onblur="getFoundCargoDetails('S')">
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                            <!-- <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblGroupID" for="txtFoundGroupID"
                                            class="control-label labelFont">GroupID</label>
@@ -398,7 +398,7 @@
                                     <input  type="text" id="txtFoundGroupID"
                                            class="form-control" onkeyup="ChkMaxLength(this, '40');" onblur="getFoundCargoDetails('G')">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row" id="divFoundCgoDetails" style="display:none;">
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
