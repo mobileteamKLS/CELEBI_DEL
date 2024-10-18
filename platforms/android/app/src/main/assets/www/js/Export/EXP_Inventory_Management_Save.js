@@ -42,6 +42,16 @@ $(function () {
         }
     });
 
+    $("#txtScanLocationFD").autocomplete({
+        source: function (request, response) {
+            var filteredLoc = availableLoc.filter(function (loc) {
+                return loc.toLowerCase().startsWith(request.term.toLowerCase());
+            });
+            var topLoc = filteredLoc.slice(0, 8);
+            response(topLoc);
+        }
+    });
+
     $('#ddlDamageType').change(function () {
         dmgType = $(this).val();
     });
@@ -272,13 +282,16 @@ function GetLocationDetails() {
                         return;
                     }
                     if(outMsg=="I"){
-                        $(".ibiSuccessMsg1").text($(this).find('Message').text()).css({ "color": "Green", "font-weight": "bold" });
-                       
+                        $(".ibiSuccessMsg1").html($(this).find('Message').text().replace(/\n/g, '<br/>')).css({ "color": "Green", "font-weight": "bold" });                  
                     }
+                    $("#btnSaveLoc").prop("disabled",false);
                 });
-
+                var lastLoc="0";
                 $(xmlDoc).find('Table1').each(function (index) {
-                    $('#txtLoc').val($(this).find('Location').text());
+                    lastLoc=$(this).find('Location').text();
+                    var newOption = $('<option></option>');
+                    newOption.val($(this).find('Location').text()).text($(this).find('Location').text());
+                    newOption.appendTo('#txtLoc');
                     $('#txtPcs').val($(this).find('locPcs').text());
                     AWBId = parseInt($(this).find('AwbrowID').text());
                     EWRNo = $(this).find('EWRNo').text();
@@ -286,16 +299,16 @@ function GetLocationDetails() {
                     var Location=$(this).find('Location').text();
                     window.localStorage.setItem("AwbrowID",AWBId);
                     window.localStorage.setItem("AwbRefNo",$("#txtAWBNo").val());
-                    window.localStorage.setItem("EWRNO",EWRNo);
+                    window.localStorage.setItem("EWRNo",EWRNo);
                     window.localStorage.setItem("InvLocId",LocID);
                     window.localStorage.setItem("InvLocation",Location);
                     window.localStorage.setItem("Groupid",groupId);
                 });
-
+                $('#txtLoc').val(lastLoc);
                 $(xmlDoc).find('Table2').each(function (index) {
                     $('#txtDamagePkgsView').val($(this).find('DamagedNOP').text());
                     $('#txtDamageWtView').val($(this).find('DamagedWt').text());
-                    if($(this).find('DamageType').text()==''){
+                    if($(this).find('DamageType').text()=='' || $(this).find('DamageType').text()==null){
                         ('#ddlDamageType').val('0');
                     }
                     else{
@@ -303,8 +316,14 @@ function GetLocationDetails() {
                     }
                     
                     $('#txtRemark').val($(this).find('DamageRemarks').text());
-                    var dNop=parseFloat($(this).find('DamagedNOP').text());
-                    var dWT=parseFloat($(this).find('DamagedWt').text());
+                    var dNop=parseFloat($(this).find('WHDamagedNOP').text());
+                    var dWT=parseFloat($(this).find('WHDamagedWt').text());
+                    if(dNop==null){
+                        dNop="";
+                    }
+                    if(dWT==null){
+                        dWT="";
+                    }
                     window.localStorage.setItem("DamagedNOP",dNop);
                     window.localStorage.setItem("DamagedWt",dWT);
                     
@@ -357,6 +376,8 @@ function SaveLocationDetails() {
             url: CMSserviceURL + "Inventory_EXP_SaveLocationDetails",
             data: JSON.stringify({
                 'pi_intAwbId': AWBId,
+                'pi_strShed':Terminal,
+                'pi_strArea':Area,
                 'pi_EWRNo': $('#ddlEWRNo').val(),
                 'pi_strFromLocation': $("#txtLoc").val(),
                 'pi_strToLocation': $("#txtScanLocation").val(),
@@ -403,6 +424,7 @@ function SaveLocationDetails() {
 }
 
 function goToDamage(type) {
+    $(".ibiSuccessMsg1").text('');
     if ($("#txtAWBNo").val() == "" && $("#txtInvPcs").val() == "" ) {
         errmsg = "Please enter Master details</br>";
         localStorage.setItem('isMasterPresent', "0");
@@ -497,6 +519,7 @@ function checkInvPcs() {
 }
 
 function checkDamagePcs() {
+    $('#spnErrormsg').text('');
     var foundPcs = parseInt($('#txtFoundPkgs').val());
     var damagePcs = parseInt($('#txtDamagePkgs').val());
     if (damagePcs > foundPcs) {
@@ -506,6 +529,7 @@ function checkDamagePcs() {
 }
 
 function checkDamageWt() {
+    $('#spnErrormsg').text('');
     var foundPcs = parseFloat($('#txtFoundPkgsWt').val());
     var damagePcs = parseFloat($('#txtDamageWt').val());
     if (damagePcs > foundPcs) {
@@ -520,11 +544,12 @@ function SelectElement(id, valueToSelect) {
 }
 
 function clearALL() {
+    $(".ibiSuccessMsg1").text('');
     $('#txtScanLocation').val('');
     $('#txtGroupID').val('');
     $('#txtAWBNo').val('');
     $('#ddlEWRNo').empty();
-    $('#txtLoc').val('');
+    $('#txtLoc').empty();
     $('#txtPcs').val('');
     $('#txtInvPcs').val('');
     $('#txtDamagePkgs').val('');
@@ -578,13 +603,18 @@ function updateStatusToPause(path){
                    var msg=$(this).find('Message').text()
                    if(status=="S"){
                     $(".ibiSuccessMsg1").text(msg).css({ "color": "Green", "font-weight": "bold" });
-                    setTimeout(function () {
-                        window.location.href = path;
-                    }, 2000);                
+                                   
                    }
-                   else{
-                    $(".ibiSuccessMsg1").text(msg).css({ "color": "Red", "font-weight": "bold" });
-                   }
+                //    else{
+                //     $(".ibiSuccessMsg1").text(msg).css({ "color": "Red", "font-weight": "bold" });
+                //    }
+                localStorage.removeItem("ExpLocCode");
+                localStorage.removeItem("ExpAWBNo"); 
+                 
+                setTimeout(function () {
+                    window.location.href = path;
+                }, 2000); 
+
                 });
                 
             },
@@ -601,7 +631,7 @@ function clearBeforePopulate(){
     $(".ibiSuccessMsg1").text('');
     $('#spnErrormsg').text('');
     $('#ddlEWRNo').empty();
-    $('#txtLoc').val('');
+    $('#txtLoc').empty();
     $('#txtPcs').val('');
     $('#txtInvPcs').val('');
     $('#txtDamagePkgs').val('');
@@ -616,6 +646,10 @@ function goBack(){
     updateStatusToPause('EXP_Inventory_Management.html');
 }
 function goToHome(){
+    localStorage.removeItem("expShedDDL");
+    localStorage.removeItem("expAreaDDL");
+    localStorage.removeItem("ExpLocCode");
+    localStorage.removeItem("ExpAWBNo"); 
     updateStatusToPause('GalaxyHome.html');
 }
 
@@ -630,7 +664,7 @@ function getDamageTypes(){
             type: "POST",
             url: CMSserviceURL + "Inventory_GetDamagetypeMaster",
             data: JSON.stringify({
-                'pi_strfilter': "", 
+                'pi_strfilter': "export", 
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -677,10 +711,15 @@ function clearFoundCargoDetails() {
     $('#txtFoundPkgsWt').val('');
     $('#txtDamagePkgs').val('');
     $('#txtDamageWt').val('');
-    $('#ddlDamageType').val('0');
+    $('#ddlDamageTypeFD').val('0');
     $('#spnErrormsg').text('');
     $(".ibiSuccessMsg2").text('');
-    $("#txtRemark").val('');
+    $("#txtRemarkFD").val('');
+    $("#txtScanLocationFD").val('');
+    $("#txtFoundPkgs").prop('disabled', false);
+    $("#txtFoundPkgsWt").prop('disabled', false);
+    $('#txtDamagePkgsViewFD').val("");
+    $('#txtDamageWtViewFD').val("");
 }
 
 function clearFoundCargoDetailsForGet() {
@@ -689,20 +728,24 @@ function clearFoundCargoDetailsForGet() {
     $('#txtFoundPkgsWt').val('');
     $('#txtDamagePkgs').val('');
     $('#txtDamageWt').val('');
-    $('#ddlDamageType').val('0');
+    $('#ddlDamageTypeFD').val('0');
     $('#spnErrormsg').text('');
     $(".ibiSuccessMsg1").text('');
     $('#spnErrormsg').text('');
-    $("#txtRemark").val('');
+    $("#txtRemarkFD").val('');
+    $("#txtFoundPkgs").prop('disabled', false);
+    $("#txtFoundPkgsWt").prop('disabled', false);
+    $('#txtDamagePkgsViewFD').val("");
+    $('#txtDamageWtViewFD').val("");
 }
 
 function getFoundCargoDetails(operation){
     $(".ibiSuccessMsg2").text('');
+    clearFoundCargoDetailsForGet()
     if(operation=="S"){
         if ($("#txtFoundMAWB").val() == "") {
             return;
-        }
-        
+        }  
     }
     else{
         if ($("#txtFoundGroupID").val() == "") {
@@ -721,8 +764,8 @@ function getFoundCargoDetails(operation){
                 'strModule': 'E',
                 'Selection': operation,
                 'MawbNo': $('#txtFoundMAWB').val(),
-                'SBorHawb': $('#txtFoundHAWB').val(),
-                'GroupId': $("#txtFoundGroupID").val(),
+                'SBorHawb': "",
+                'GroupId': "",
                 'UserId': UserID
             }),
             contentType: "application/json; charset=utf-8",
@@ -751,20 +794,23 @@ function getFoundCargoDetails(operation){
                 });
                 
                 $(xmlDoc).find('Table1').each(function (index) {
+                    $('#txtScanLocationFD').val($(this).find('Location').text());
                     $('#txtFoundMAWB').val($(this).find('MawbNo').text());
                     $('#txtFoundHAWB').val($(this).find('HawbNo').text());
                     $('#txtFoundGroupID').val($(this).find('GroupID').text());
                     $('#txtFoundPkgs').val($(this).find('FoundNop').text());
                     $('#txtFoundPkgsWt').val($(this).find('FoundWt').text());
-                    $('#txtDamagePkgs').val($(this).find('DamageNop').text());
-                    $('#txtDamageWt').val($(this).find('DamageWt').text());
-                    if($(this).find('DamageType').text()==""){
-                        $('#ddlDamageType').val("0");
+                    $('#txtDamagePkgsViewFD').val($(this).find('DamageNop').text());
+                    $('#txtDamageWtViewFD').val($(this).find('DamageWt').text());
+                    $("#txtFoundPkgs").prop('disabled', true);
+                    $("#txtFoundPkgsWt").prop('disabled', true);
+                    if($(this).find('DamageType').text()=="" || $(this).find('DamageType').text()==null){
+                        $('#ddlDamageTypeFD').val("0");
                     }
                     else{
-                        $('#ddlDamageType').val($(this).find('DamageType').text());
+                        $('#ddlDamageTypeFD').val($(this).find('DamageType').text());
                     }
-                    $('#txtRemark').val($(this).find('Remarks').text());
+                    $('#txtRemarkFD').val($(this).find('Remarks').text());
                 });
                 
                 
@@ -785,11 +831,11 @@ function saveFoundCargoDetails(){
         return;
     }
 
-    if ($("#txtGroupID").val() == "") {
-        errmsg = "Please enter SB No.</br>";
-        $.alert(errmsg);
-        return;
-    }
+    // if ($("#txtGroupID").val() == "") {
+    //     errmsg = "Please enter SB No.</br>";
+    //     $.alert(errmsg);
+    //     return;
+    // }
 
     if ($("#txtFoundPkgs").val() == "") {
         errmsg = "Please enter Found Pieces</br>";
@@ -801,24 +847,22 @@ function saveFoundCargoDetails(){
         $.alert(errmsg);
         return;
     }
-    if ($("#txtDamagePkgs").val() == "") {
-        errmsg = "Please enter Damaged Pieces</br>";
-        $.alert(errmsg);
-        return;
-    }
-    if ($("#txtDamageWt").val() == "") {
-        errmsg = "Please enter Damaged Weight</br>";
-        $.alert(errmsg);
-        return;
-    }
+    // if ($("#txtDamagePkgs").val() == "") {
+    //     errmsg = "Please enter Damaged Pieces</br>";
+    //     $.alert(errmsg);
+    //     return;
+    // }
+    // if ($("#txtDamageWt").val() == "") {
+    //     errmsg = "Please enter Damaged Weight</br>";
+    //     $.alert(errmsg);
+    //     return;
+    // }
     // if ($("#ddlDamageTypeFD option:selected").val() == '' || $("#ddlDamageTypeFD option:selected").val() == '0'){
     //     errmsg = "Please select Damage Type</br>";
     //     $.alert(errmsg);
     //     return;
     // }
-    if(AWBrefNo==null){
-        AWBrefNo="";
-    }
+    
     var connectionStatus = navigator.onLine ? 'online' : 'offline'
     var errmsg = "";
     if (errmsg == "" && connectionStatus == "online") {
@@ -827,15 +871,15 @@ function saveFoundCargoDetails(){
             url: CMSserviceURL + "Inventory_EXP_SaveFoundCargoDetails",
             data: JSON.stringify({
                 'pi_strAwbNo': $("#txtFoundMAWB").val(),
-                'pi_strSBNo':AWBrefNo,
+                'pi_strSBNo':"",
                 'pi_intFoundNop': parseInt($("#txtFoundPkgs").val()),
                 'pi_dcFoundWt': parseFloat($("#txtFoundPkgsWt").val()),
-                'pi_intDamageNop': parseInt($("#txtDamagePkgs").val()),
-                'pi_dcDamageWt': parseFloat($("#txtDamageWt").val()),
-                'pi_DamageType': $("#ddlDamageType").val(),
-                'pi_strRemarks':$("#txtRemark").val(),
+                'pi_intDamageNop':$("#txtDamagePkgs").val()==""?0: parseInt($("#txtDamagePkgs").val()),
+                'pi_dcDamageWt':$("#txtDamageWt").val()==""?0.0: parseFloat($("#txtDamageWt").val()),
+                'pi_DamageType': $("#ddlDamageTypeFD").val(),
+                'pi_strRemarks':$("#txtRemarkFD").val(),
                 'pi_strUser':UserID,
-                'pi_strGroupID':'',
+                'pi_strGroupID':""+","+$("#txtScanLocationFD").val(),
                 'po_strStatus':'',
                 'po_strMessage':'',
             }),
@@ -856,11 +900,11 @@ function saveFoundCargoDetails(){
                     var status = $(this).find('Status').text();
                     var msg = $(this).find('Message').text()
                     if (status == "S") {
-                        clearALL();
+                        clearFoundCargoDetails();
                         $(".ibiSuccessMsg2").text(msg).css({ "color": "Green", "font-weight": "bold" });
                     }
                     else {
-                        clearALL();
+                        clearFoundCargoDetails();
                         $(".ibiSuccessMsg2").text(msg).css({ "color": "Red", "font-weight": "bold" });
                     }
                 });

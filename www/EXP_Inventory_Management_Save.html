@@ -243,8 +243,9 @@
                                            class="control-label labelFont">Location</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input disabled type="text" id="txtLoc"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '40');">
+                                    <select type="text" id="txtLoc" class="form-control">
+                                        <option value="0">Select</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -264,7 +265,7 @@
                                     <label id="lblRcvdRem" for="txtRcvdRem" class="control-label labelFont">Inv. Pieces</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" style="text-align:right;" id="txtInvPcs" class="form-control" onkeyup="ChkMaxLength(this, '3');oneNumberCheck(this); ">
+                                    <input type="text" style="text-align:right;" id="txtInvPcs" class="form-control" onkeyup="ChkMaxLength(this, '3');oneNumberCheck(this); NumberOnly(event);">
                                 </div>
 
                             </div>
@@ -319,7 +320,7 @@
                                    
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <textarea id="txtRemark" onkeyup="ChkMaxLength(this, '30');" class="form-control"></textarea>
+                                    <textarea id="txtRemark" onkeyup="ChkMaxLength(this, '50');" class="form-control"></textarea>
                                 </div>
                             </div>
 
@@ -344,8 +345,8 @@
                             </div>
 
                             <div class="form-group col-xs-4 col-sm-2 col-md-2">
-                                <input type="button" id="btnClear" class="form-control ButtonColor" value="Submit"
-                                       onclick="SaveLocationDetails();">
+                                <input type="button" id="btnSaveLoc" class="form-control ButtonColor" value="Submit"
+                                       onclick="SaveLocationDetails();" disabled>
                             </div>
 
                         </div>
@@ -367,6 +368,18 @@
 
                         <div class="row" id="divFoundCargo" style="display:none;">
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="">
+                                    <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
+                                        <label id="lblGroupID" for="txtScanLocation" class="control-label labelFont">
+                                            Scan Location
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="text" id="txtScanLocationFD" class="form-control ui-autocomplete-input" maxlength="30" >
+                                    </div>
+                                </div>
+
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblAwbNo" for="txtAwbNo" class="control-label labelFont">
                                         MAWB
@@ -433,7 +446,7 @@
                                            class="form-control" onblur="checkDamagePcs();" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
                                 </div>
                                 <div class="col-xs-3 NoPadding">
-                                    <input type="text" style="text-align:right;" id="txtDamagePkgsView" disabled
+                                    <input type="text" style="text-align:right;" id="txtDamagePkgsViewFD" disabled
                                            class="form-control" onkeyup="ChkMaxLength(this, '4');" >
                                 </div>
                             </div>
@@ -448,7 +461,7 @@
                                            class="form-control" onkeyup="ChkMaxLength(this, '10');">
                                 </div>
                                 <div class="col-xs-3 NoPadding">
-                                    <input type="number" style="text-align:right;" id="txtDamageWtView"
+                                    <input type="number" style="text-align:right;" id="txtDamageWtViewFD"
                                            class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
                                 </div>
                             </div>
@@ -470,7 +483,7 @@
                                     <!--<font color="red">*</font>-->
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <textarea id="txtRemark" onkeyup="ChkMaxLength(this, '30');" class="form-control"></textarea>
+                                    <textarea id="txtRemarkFD" onkeyup="ChkMaxLength(this, '50');" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
@@ -495,7 +508,7 @@
                         <div class="row" id="divFoundbutton" style="display:none;">
                             <div class="form-group col-xs-4 col-sm-4 col-md-4">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Back"
-                                       onclick="btnBack();">
+                                       onclick="goBack();">
                             </div>
                 
                 

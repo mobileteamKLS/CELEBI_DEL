@@ -3,10 +3,12 @@ var CMSserviceURL = window.localStorage.getItem("CMSserviceURL");
 var GHAExportFlightserviceURL = window.localStorage.getItem("GHAExportFlightserviceURL");
 var AirportCity = window.localStorage.getItem("SHED_AIRPORT_CITY");
 var UserId = window.localStorage.getItem("UserID");
+var UserName = window.localStorage.getItem("UserName");
 var AWBNumber = window.localStorage.getItem("AWBNumber");
 var AWBid;
 var type;
-
+var _XmlForSHCCode;
+var joinAllValuesWithComma = '';
 var d = new Date(),
     n = d.getMonth() + 1,
     y = d.getFullYear()
@@ -17,6 +19,12 @@ $(function () {
     if (window.localStorage.getItem("RoleExpTDG") == '0') {
         window.location.href = 'EXP_Dashboard.html';
     }
+
+    $("#btnOpenSHCModal").click(function () {
+        $("#spnValdatemsg").text('');
+        SHCCodePopupField();
+
+    });
 
 
 
@@ -38,6 +46,116 @@ $(function () {
     }
 });
 
+function SHCCodePopupField() {
+    $('#dvSHCCode').empty();
+    //var allSHCCodeSave = '';
+    //var joinAllValuesWithComma = '';
+
+    html = '';
+    html += '<table id="tblSHCCode"  class="table  table-bordered table-striped mb-0" style="border: 1px solid #eee;">';
+    html += '<thead class="theadClass">';
+    html += '<tr>';
+    html += '<th id="lblRemark">Sr No</th>';
+    html += '<th id="lbRemark">SHC Code</th>';
+
+    html += '</tr>';
+    html += '</thead>';
+    html += '<tbody class="">';
+    var ShcForSave = joinAllValuesWithComma.replace(/\"/g, "")
+    if (joinAllValuesWithComma != '') {
+        var newSpanSHC = ShcForSave.split(',');
+        //var newSpanSHC = newSpanSHC_.replace(/\"/g, "");
+        for (var n = 0; n < 9; n++) {
+
+            html += '<tr id="row1 ' + n + '">';
+            html += '<td style="text-align:center;">' + (n + 1) + '</td>';
+            html += "<td><input onkeypress='return blockSpecialChar(event)' maxlength='3' value='" + newSpanSHC[n] + "' type='text' id='txtSHC " + n + "' class='form-control' placeholder='' style='text-transform: uppercase;'></td>";
+            html += '</tr>';
+        }
+    } else {
+        var newSpanSHC = _XmlForSHCCode.split(',');
+        var filtered = newSpanSHC.filter(function (el) {
+            return el != "";
+        });
+
+        for (var n = 0; n < filtered.length; n++) {
+            var blink = filtered[n].split('~');
+            html += '<tr id="row1 ' + n + '">';
+            html += '<td style="text-align:center;">' + (n + 1) + '</td>';
+            html += '<td><input onkeypress="return blockSpecialChar(event)" maxlength="3" value="' + blink[0] + '" type="text" id="txtSHC ' + n + '" class="textfieldClass" placeholder="" style="text-transform: uppercase;"></td>';
+            html += '</tr>';
+        }
+    }
+
+
+
+    html += "</tbody></table>";
+    $('#dvSHCCode').append(html);
+    $('#SHCCode').modal('show');
+}
+
+
+function getAllSHCCodefromPopup() {
+    var inputName = "";
+    var values = "";
+    var htmlVal = '';
+    var jionOfComma = '';
+    $('#dvSHCCode tr').each(function (i, el) {
+
+        $(this).find("input").each(function () {
+            inputName = $(this).attr("Value");
+            values = $(this).val();
+            if (i == 1) {
+                htmlVal += 'SHC1="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 2) {
+                htmlVal += 'SHC2="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 3) {
+                htmlVal += 'SHC3="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 4) {
+                htmlVal += 'SHC4="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 5) {
+                htmlVal += 'SHC5="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 6) {
+                htmlVal += 'SHC6="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 7) {
+                htmlVal += 'SHC7="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 8) {
+                htmlVal += 'SHC8="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase() + '","'
+            }
+            if (i == 9) {
+                htmlVal += 'SHC9="' + values.toUpperCase() + '" ';
+                jionOfComma += values.toUpperCase()
+            }
+        });
+
+    });
+
+    allSHCCodeSave = htmlVal;
+    joinAllValuesWithComma = jionOfComma;
+    console.log("Values====", joinAllValuesWithComma)
+    ValidateSHCCodes();
+}
+
+
+
+
+
+
 function rdoAWBChecked() {
     clearALL();
     type = 'A';
@@ -52,6 +170,67 @@ function rdoSlotChecked() {
     $('#divAWB').css('display', 'none');
     $('#divSlot').css('display', 'block');
     $('#txtSlotNo').focus();
+}
+
+function ValidateSHCCodes() {
+    var awbid = '"' + AWBid + '"';
+    var uname = '"' + UserName + '"';
+    var connectionStatus = navigator.onLine ? 'online' : 'offline'
+    var errmsg = "";
+    var InputXML = '<SHCInfo><SHCDetail ALRowId=' + awbid + ' ' + allSHCCodeSave + '  CreatedBy =' + uname + '/></SHCInfo>';
+    console.log("InputXML====   ", InputXML)
+    if (errmsg == "" && connectionStatus == "online") {
+        $.ajax({
+            type: 'POST',
+            url: CMSserviceURL + "TDGAcceptanceUpdateSHC_PDA",
+            data: JSON.stringify({ 'pi_strSHCDetails': InputXML }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function doStuff() {
+                //$('.dialog-background').css('display', 'block');
+                $('body').mLoading({
+                    text: "Loading..",
+                });
+            },
+            success: function (response) {
+                $("body").mLoading('hide');
+                var str = response.d;
+                if (str != null && str != "") {
+
+                    var xmlDoc = $.parseXML(str);
+                    $(xmlDoc).find('Table').each(function (index) {
+
+                        Status = $(this).find('Status').text();
+                        StrMessage = $(this).find('OutMsg').text();
+                        if (Status == 'E') {
+                            $("#spnValdatemsg").text(StrMessage).css({ "color": "Red", "font-weight": "bold" });
+                            allSHCCodeSave = '';
+                            joinAllValuesWithComma = '';
+                        } else if (Status == 'S') {
+                            $("#spnValdatemsg").text('');
+                            $('#SHCCode').modal('hide');
+                            GetShipmentDetailsForTDG();
+                        }
+
+                    });
+
+                }
+                else {
+
+                }
+
+            },
+            error: function (msg) {
+                $("body").mLoading('hide');
+                var r = jQuery.parseJSON(msg.responseText);
+                $.alert(r.Message);
+            }
+        });
+    }
+}
+
+function cleatInvalidSHCCode() {
+    allSHCCodeSave = '';
 }
 
 function GetAWBForSlotNumber() {
@@ -186,7 +365,7 @@ function GetShipmentDetailsForTDG(valu = false) {
 
 
                     var xmlDoc = $.parseXML(str);
-
+                    console.log(xmlDoc)
                     $(xmlDoc).find('Table').each(function (index) {
                         //debugger;
                         if (index == 0) {
@@ -241,6 +420,10 @@ function GetShipmentDetailsForTDG(valu = false) {
                             $('#txtIataCode').text($(this).find('IATA').text());
                             $('#txtCHACode').text($(this).find('CHA').text());
 
+                            SHCAll = $(this).find('SHCAll').text();
+
+                            _XmlForSHCCode = SHCAll;
+                            SHCSpanHtml(SHCAll);
 
                             if ($(this).find('TDGStatus').text() == 'true') {
 
@@ -278,9 +461,22 @@ function GetShipmentDetailsForTDG(valu = false) {
                                 $('#txtRcvdchrgWt').text($(this).find('ActualChWt').text());
 
 
+                            if ($(this).find('BAGStatus').text() == 'false') {
+                                $('#divShowHideSHC').show();
+                            } else {
+                                $('#divShowHideSHC').hide();
+                            }
+
+                            //if ($(this).find('TDGStartStatus').text() == 'true') {
+
+                            //} else {
+                            //    $('#divShowHideSHC').hide();
+                            //}
                         }
 
                     });
+
+
                     $(xmlDoc).find('Table').each(function () {
                         if ($(this).find('OutMsg').text().length > Number(5)) {
 
@@ -291,6 +487,8 @@ function GetShipmentDetailsForTDG(valu = false) {
 
                             $("#btnStartTDGAcceptance").attr("disabled", "disabled");
                             $("#btnCompleteTDGAcceptance").attr("disabled", "disabled");
+                        } else {
+
                         }
                     });
                     isTDG = 0;
@@ -339,6 +537,42 @@ function GetShipmentDetailsForTDG(valu = false) {
     else {
         $("body").mLoading('hide');
     }
+}
+
+
+function SHCSpanHtml(newSHC) {
+    $("#SHCCodeTbl").empty();
+    var spanStr = "<tr class=''>";
+    var newSpanSHC = newSHC.split(',');
+    var filtered = newSpanSHC.filter(function (el) {
+        return el != "";
+    });
+
+    for (var n = 0; n < filtered.length; n++) {
+        var blink = filtered[n].split('~');
+
+        if (filtered[n].indexOf('~') > -1) {
+            if (blink[1] == 'Y' && filtered[n] != '~Y') {
+                spanStr += "<td class='blink_me'>" + blink[0] + "</td>";
+                console.log(filtered[n])
+            }
+        }
+
+        if (filtered[n].indexOf('~') > -1) {
+            if (blink[1] == 'N' && filtered[n] != '~N') {
+                spanStr += "<td class='foo'>" + blink[0] + "</td>";
+                console.log(filtered[n])
+            }
+        }
+    }
+    spanStr += "</tr>";
+
+    $("#SHCCodeTbl").html(spanStr);
+    $("#dvForEditBtn").show();
+    $("#dvForEditBtn").show();
+
+    return spanStr;
+
 }
 
 function GetHAWBDetailsForTDG() {
@@ -524,6 +758,7 @@ function SaveTDGDetails() {
     var xml = "";
     xml = '<TDGInfo><TDGDetail ALRowId="' + AWBid + '" ScannedPkgs="' + txtReceivedPkgs + '" ScannedGrossWt="' + GrossWt + '" VolumetricWt="' + ChargablWt + '" EuroPalletNo="' + EuroPalletNo + '" IsPalletWiseScan="0" CreatedBy="' + window.localStorage.getItem("UserName") + '" Remarks="" TDGDate="' + n + "/" + t + "/" + y + '"/></TDGInfo>';
     console.log(xml);
+  
     if (errmsg == "" && connectionStatus == "online") {
         $.ajax({
             type: "POST",
@@ -604,6 +839,8 @@ function clearALL() {
         $('#txtAWBNo').focus();
     $('#ddlAWBno').empty();
     $('#divAddLocation').empty();
+    $('#SHCCodeTbl').empty();
+    $('#divShowHideSHC').hide();
 
 
 }

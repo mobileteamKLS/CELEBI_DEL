@@ -35,6 +35,93 @@
         .col-form-label {
             padding-left: 11px !important;
         }
+
+        #SHCCodeTbl td.foo:nth-child(7n+1) {
+            background-color: rgb(177,112,136);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+2) {
+            background-color: rgb(27,81,141);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+3) {
+            background-color: rgb(13,150,68);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+4) {
+            background-color: rgb(35,29,31);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+5) {
+            background-color: rgb(157,124,43);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+6) {
+            background-color: rgb(14,76,166);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+7) {
+            background-color: rgb(206,84,209);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+8) {
+            background-color: rgb(143,74,219);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl td.foo:nth-child(7n+9) {
+            background-color: rgb(198,139,74);
+            color: white;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #SHCCodeTbl > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            font-size: 11px;
+        }
+
+        #SHCCodeTbl {
+            margin-bottom: 0px !important;
+            margin-top: 5px;
+        }
+
+        .blink_me {
+            animation: blinker 1s linear infinite;
+            background-color: yellow;
+            padding: 15px;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bolder;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -111,13 +198,14 @@
                                     padding-right: 0px;
                                     padding-left: 8px;
                                 }
+
                                 .caseLow {
                                     text-transform: capitalize;
                                 }
-                                }
+                                
                             </style>
                             <div class="row form-group" style="margin-top:5px;">
-                                <div class="form-group col-xs-6 col-sm-4 col-md-4 exPAdding" >
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4 exPAdding">
                                     <input type="button" id="btnClear" class="form-control ButtonColor caseLow" value="Clear" onclick="clearALL(); FocusSlot();">
                                 </div>
                                 <div class="form-group col-xs-6 col-sm-4 col-md-4 exPAdding">
@@ -142,6 +230,18 @@
                 <div class="forms">
                     <div class="form-body">
 
+                        <div id="divShowHideSHC" class="row form-group" style="margin-top: 5px; display: none;">
+                            <div class="form-group col-xs-6 col-sm-4 col-md-4 exPAdding">
+                                <label for="txtSlotNo">SHC</label>
+                            </div>
+                            <div id="dvForEditBtn" style="text-align:right;display:none;" class="form-group col-xs-6 col-sm-4 col-md-4 exPAdding">
+                                <input type="button" id="btnOpenSHCModal" class="form-control ButtonColor caseLow" value="SHC">
+                            </div>
+                        </div>
+
+                        <div class="row form-group" style="margin-top:5px;">
+                            <table class="table" id="SHCCodeTbl"></table>
+                        </div>
 
                         <table class="table table-striped table-bordered ">
                             <tr>
@@ -160,7 +260,7 @@
                                 <th>Destination</th>
                                 <td id="txtAWBDestination"></td>
                             </tr>
-                            
+
                         </table>
 
                         <div class="row">
@@ -421,6 +521,64 @@
             <div id="temp">
                 <br />
             </div>
+
+
+            <!--<div class="modal fade" id="SHCCode" tabindex="-1" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content" style="border:solid thin #000;">
+                        <div class="modal-header">
+                            <h5 class="modal-title pull-left" id="lblPhoto">Add SHC</h5><button type="button" class="" data-dismiss="modal">X</button>
+                        </div>
+                        <div class="modal-body contacts row">
+                            <div class="col-12" id="dvSHCCode">
+
+                            </div>
+                            <span id="spnValdatemsg"></span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btnOk" onclick="getAllSHCCodefromPopup();">Ok</button>
+                            <button type="button" class="btn btn-primary" id="btnCancelSHCCode" data-dismiss="modal" onclick="cleatInvalidSHCCode();">Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!-- Modal -->
+            <div class="modal fade" id="SHCCode" role="dialog" data-backdrop="static">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#065da1;">
+                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                            <h5 style="text-align:center;color:rgb(224, 243, 215);">Add SHC</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div id="dvSHCCode">
+                                </div>
+                                <span id="spnValdatemsg"></span>
+                            </div>
+                            <!--<div class="modal-footer">
+                                <button type="button" id="btnOk" onclick="getAllSHCCodefromPopup();" class="form-control ButtonColor"
+                                        >
+                                    Save
+                                </button>
+                                <button type="button"  id="btnCancelSHCCode" data-dismiss="modal" onclick="cleatInvalidSHCCode();" class="form-control ButtonColor"
+                                        >
+                                    Clear
+                                </button>
+                            </div>-->
+                            <div class="modal-footer">
+                                <button type="button" id="btnOk" onclick="cleatInvalidSHCCode();" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="btnCancelSHCCode"  onclick="getAllSHCCodefromPopup();" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div>

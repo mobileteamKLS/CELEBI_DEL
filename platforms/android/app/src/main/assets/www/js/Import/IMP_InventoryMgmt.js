@@ -18,6 +18,7 @@ $(function () {
     $("#ddlShed").change(function () {
         selectedShed = $(this).find(":selected").val();
         localStorage.setItem('impShedDDL', selectedShed);
+        localStorage.removeItem("impAreaDDL");
         if(selectedShed=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -106,6 +107,12 @@ function randomNumb(){
      randomNum=Math.floor(Math.random()*100+1);
     
    }
+
+function clearLocStorage(){
+    localStorage.removeItem("impShedDDL");
+    localStorage.removeItem("impAreaDDL");
+}
+
 function getTerminalsByLoc(Loc){
     $(".ibiSuccessMsg1").text('');
     var connectionStatus = navigator.onLine ? 'online' : 'offline'

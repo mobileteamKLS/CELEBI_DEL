@@ -84,7 +84,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
-                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();clearLocStorage();">
                 <a href="#" id="navhdr" class="loggedinUser"></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -103,7 +103,7 @@
 
                                 <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" style="text-align:center;box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);">
                                     <label id="lblGPNo" for="txtGPNo" class="control-label labelFont">
-                                        Inventory Status
+                                        Import Inventory Status
                                     </label>
                                 </div>
 
@@ -217,7 +217,7 @@
 
 
             <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
-                <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+                <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="clearLocStorage();window.location.href = 'IMP_Dashboard.html'">
             </div>
             <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
                 <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="clearALL()">

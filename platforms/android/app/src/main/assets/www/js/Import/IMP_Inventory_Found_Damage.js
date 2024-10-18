@@ -15,14 +15,15 @@ var CMSserviceURL = window.localStorage.getItem("CMSserviceURL");
 var referenceMawbNo=window.localStorage.getItem("RefMawbNo");
 
 $(function () {
-    
+    getDamageTypes()
     $('#txtDamagePkgsView').val(DamNOP);
     $('#txtDamageWtView').val(DamWt);
-    console.log(UserID+"@@@@@@");
-    $('#ddlDamageType').change(function () {
-        dmgType = $(this).val();
+    console.log(DamNOP+"@@@@@@");
+    console.log(DamWt+"===");
+    // $('#ddlDamageType').change(function () {
+    //     dmgType = $(this).val();
 
-    });
+    // });
 
     $("input").keyup(function () {
         var string = $(this).val();
@@ -204,6 +205,7 @@ function foundCargoCheckChange() {
 }
 
 function checkDamagePcs() {
+    $('#spnErrormsg').text('');
     var foundPcs = parseInt($('#txtFoundPkgs').val());
     var damagePcs = parseInt($('#txtDamagePkgs').val());
     if (damagePcs > foundPcs) {
@@ -213,6 +215,7 @@ function checkDamagePcs() {
 }
 
 function checkDamageWt() {
+    $('#spnErrormsg').text('');
     var foundPcs = parseFloat($('#txtFoundPkgsWt').val());
     var damagePcs = parseFloat($('#txtDamageWt').val());
     if (damagePcs > foundPcs) {
@@ -276,7 +279,7 @@ function getDamageTypes(){
             type: "POST",
             url: CMSserviceURL + "Inventory_GetDamagetypeMaster",
             data: JSON.stringify({
-                'pi_strfilter': "", 
+                'pi_strfilter': "import", 
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -372,7 +375,7 @@ function getFoundCargoDetails(operation){
                     $('#txtFoundPkgsWt').val($(this).find('FoundWt').text());
                     $('#txtDamagePkgs').val($(this).find('DamageNop').text());
                     $('#txtDamageWt').val($(this).find('DamageWt').text());
-                    if($(this).find('DamageType').text()==""){
+                    if($(this).find('DamageType').text()=="" || $(this).find('DamageType').text()==null){
                         $('#ddlDamageType').val("0");
                     }
                     else{

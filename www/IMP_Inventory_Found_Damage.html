@@ -173,14 +173,14 @@
                                         <input type="checkbox" id="chkModify" onclick="" autocomplete="off">Modify
                                     </label>
                                 </div>
-                                <div class="col-xs-5 col-form-label NoPadding">
+                                <div class="col-xs-5 col-form-label NoPadding" style="display:none;">
                                     <input type="radio" name="radSize" id="rdoFoundCargo" value="FoundCargo" onchange="EnableFoundCargo()" checked>
                                     <label for="sizeLarge">Found Cargo</label>
                                 </div>
 
                                 <div class="col-xs-5 col-form-label NoPadding">
                                     <label style="line-height: 1.7;" class="checkbox-inline">
-                                        <input type="radio" name="radSize" id="rdoDamageCargo" value="DamageCargo" onchange="EnableFoundCargo()">
+                                        <input style="display:none;" type="radio" name="radSize" id="rdoDamageCargo" value="DamageCargo" onchange="EnableFoundCargo()">
                                         Damage Cargo
                                     </label>
                                 </div>
@@ -213,7 +213,7 @@
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblGroupID" for="txtGroupID"
-                                           class="control-label labelFont">GroupID</label>
+                                           class="control-label labelFont">Group ID</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
                                     <input  type="text" id="txtGroupID"
@@ -291,7 +291,7 @@
                                     <!--<font color="red">*</font>-->
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <textarea id="txtRemark" onkeyup="ChkMaxLength(this, '30');" class="form-control"></textarea>
+                                    <textarea id="txtRemark" onkeyup="ChkMaxLength(this, '50');" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">

@@ -5,6 +5,7 @@ var UserName = window.localStorage.getItem("UserName");
 var selectedLoc;
 var selectedShed;
 var randomNum;
+var selectedArea
 var availableLoc=[];
 $(function () {
     console.log("MGMT");
@@ -18,6 +19,7 @@ $(function () {
     $("#ddlShed").change(function () {
         selectedShed = $(this).find(":selected").val();
         localStorage.setItem('expShedDDL', selectedShed);
+        localStorage.removeItem("expAreaDDL");
         if(selectedShed=="0"){
             $("#lblStatus").text('');
             $('#btnStart').attr("disabled", "disabled").removeClass("button-enabled").addClass("button-disabled");
@@ -32,7 +34,7 @@ $(function () {
     });
 
     $("#ddlArea").change(function () {
-        var selectedArea = $(this).find(":selected").val();
+         selectedArea = $(this).find(":selected").val();
         localStorage.setItem('expAreaDDL', selectedArea);
         if(selectedArea=="0"){
             $("#lblStatus").text('');
@@ -58,6 +60,11 @@ $(function () {
     });
 
 });
+
+function clearLocStorage(){
+    localStorage.removeItem("expShedDDL");
+    localStorage.removeItem("expAreaDDL");
+}
 
 function getLocationType(){
     $(".ibiSuccessMsg1").text('');
@@ -320,11 +327,14 @@ function updateStatus(action){
                    var msg=$(this).find('Message').text()
                    if(status=="S"){
                     $(".ibiSuccessMsg1").text(msg).css({ "color": "Green", "font-weight": "bold" });
-                    if(action!="CL"){
+                    if(action!="CL" && action!="R"){
                         setTimeout(function () {
                             window.localStorage.setItem("LocationType",$("#ddlLocationType").val());
                             window.location.href = 'EXP_Inventory_Management_Save.html';
                         }, 2000);
+                    }
+                    else{
+                        getStatus(selectedShed,selectedArea);
                     }
                     
                    }

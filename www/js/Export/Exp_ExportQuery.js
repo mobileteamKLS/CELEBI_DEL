@@ -50,6 +50,21 @@ $(function () {
 
 });
 
+
+function onChangeLenthCheckForScanID() {
+    if ($('#txtAWBNo').val().length == 11) {
+        GetShipmentStatus();
+        return
+    }
+
+    if ($('#txtAWBNo').val().length == 15) {
+        GetShipmentStatus();
+    }
+
+
+}
+
+
 function GetShipmentStatus() {
 
     var connectionStatus = navigator.onLine ? 'online' : 'offline'
@@ -98,15 +113,17 @@ function GetShipmentStatus() {
                     $('#divAddLocation').empty();
                     html = '';
 
-                    html = "<table id='tblNews' border='1' style='width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;'>";
+                    html = "<table id='tblNews1' border='1' style='width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;'>";
                     html += "<thead><tr>";
                     html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>Event Name</th>";
-                    html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>Final Datetime</th>";
-                    html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>UserName</th>";
+                    html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>Final Date Time</th>";
+                    html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>User Name</th>";
                     html += "</tr></thead>";
                     html += "<tbody>";
 
                     var xmlDoc = $.parseXML(str);
+
+                    console.log(xmlDoc)
 
                     $(xmlDoc).find('Table').each(function (index) {
 
@@ -127,12 +144,71 @@ function GetShipmentStatus() {
                         dateTime = $(this).find('EventDateTime').text();
                         userName = $(this).find('Username').text();
 
+                        AWBNo = $(this).find('AWBNo').text();
+                        ScreeningMethod = $(this).find('ScreeningMethod').text();
+                        ScanTimeStamp = $(this).find('ScanTimeStamp').text();
+
                         AddTableLocation(eventName, dateTime, userName);
+
                     });
 
                     html += "</tbody></table>";
 
                     $('#divAddLocation').append(html);
+
+
+                    html = '';
+
+                    html = "<table id='tblNews' border='1' style='width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;'>";
+                    html += "<thead><tr>";
+                    html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>Screening Method</th>";
+                    html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>Scan Time Stamp</th>";
+                    html += "<th height='30' style='background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px' align='center'font-weight:'bold'>UserName</th>";
+                    html += "</tr></thead>";
+                    html += "<tbody>";
+
+                    var xmlDoc = $.parseXML(str);
+                    fl = '0';
+                    $(xmlDoc).find('Table').each(function (index) {
+
+                        var outMsg = $(this).find('OutMsg').text();
+
+                        if (outMsg != '') {
+                            $.alert(outMsg);
+                            $('#divAddLocation').empty();
+                            html = '';
+                            return;
+                        }
+
+                        var eventName;
+                        var dateTime;
+                        var userName;
+
+                        eventName = $(this).find('EventName').text();
+                        dateTime = $(this).find('EventDateTime').text();
+                        userName = $(this).find('Username').text();
+
+                        AWBNo = $(this).find('AWBNo').text();
+                        ScreeningMethod = $(this).find('ScreeningMethod').text();
+                        ScanTimeStamp = $(this).find('ScanTimeStamp').text();
+
+                        //  AddTableLocation(eventName, dateTime, userName);
+                        if (ScreeningMethod != '') {
+                            fl = '1';
+                            if (AWBNo != '') {
+                                $('#txtAWBNoOnly').val(AWBNo);
+                                $('#divAWBNo').show();
+                            }
+
+                            fnScreeningMethod(ScreeningMethod, ScanTimeStamp, userName);
+
+                        }
+                    });
+                    if (fl != '0') {
+                        html += "</tbody></table>";
+
+                        $('#divAddLocation').append(html);
+                    }
 
                 }
                 else {
@@ -150,6 +226,18 @@ function GetShipmentStatus() {
     }
 }
 
+function fnScreeningMethod(ScreeningMethod, ScanTimeStamp, userName) {
+    html += "<tr>";
+
+    html += "<td height='30' style='background: rgb(224, 243, 215);padding-left: 4px;font-size:14px'align='left'>" + ScreeningMethod + "</td>";
+
+    html += "<td height='30' style='background: rgb(224, 243, 215);padding-left: 4px;font-size:14px'align='left'>" + ScanTimeStamp + "</td>";
+
+    html += "<td height='30' style='background: rgb(224, 243, 215);padding-left: 4px;font-size:14px'align='center'>" + userName + "</td>";
+
+    html += "</tr>";
+}
+
 function AddTableLocation(eventName, dateTime, userName) {
     html += "<tr>";
 
@@ -164,7 +252,10 @@ function AddTableLocation(eventName, dateTime, userName) {
 
 function clearBeforePopulate() {
     $('#txtAWBNo').val('');
+    $('#txtAWBNoOnly').val('');
+    $('#divAWBNo').hide();
     $('#divAddLocation').empty();
+
 }
 
 function ClearError(ID) {

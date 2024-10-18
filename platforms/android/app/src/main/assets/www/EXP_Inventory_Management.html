@@ -87,7 +87,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;padding-left: 50px;"></a>
-                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();clearLocStorage();">
                 <a href="#" id="navhdr" class="loggedinUser"></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -220,7 +220,7 @@
 
 
             <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
-                <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+                <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit" onclick="clearLocStorage(); window.location.href = 'EXP_Dashboard.html'">
             </div>
             <div class="form-group col-xs-6 col-sm-6 col-md-6" style="margin-top:15px">
                 <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear" onclick="clearALL()">
