@@ -285,6 +285,7 @@ function GetLocationDetails() {
                         $(".ibiSuccessMsg1").html($(this).find('Message').text().replace(/\n/g, '<br/>')).css({ "color": "Green", "font-weight": "bold" });                  
                     }
                     $("#btnSaveLoc").prop("disabled",false);
+                    $("#btnEditLoc").prop("disabled",false);
                 });
                 var lastLoc="0";
                 $(xmlDoc).find('Table1').each(function (index) {
@@ -340,7 +341,7 @@ function GetLocationDetails() {
 
 }
 
-function SaveLocationDetails() {
+function SaveLocationDetails(isEdit) {
     $(".ibiSuccessMsg1").text('');
     $('#spnErrormsg').text('');
     if ($("#txtScanLocation").val() == "") {
@@ -386,6 +387,7 @@ function SaveLocationDetails() {
                 'pi_strUser': UserID,
                 'po_strStatus': '',
                 'po_strMessage': '',
+                'pi_isEdit': isEdit=='1'?"1":"0"
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
