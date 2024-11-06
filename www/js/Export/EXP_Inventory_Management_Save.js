@@ -387,7 +387,7 @@ function SaveLocationDetails(isEdit) {
                 'pi_strUser': UserID,
                 'po_strStatus': '',
                 'po_strMessage': '',
-                'pi_isEdit': isEdit=='1'?"1":"0"
+                'pi_IsEdit': isEdit=='1'?"1":"0"
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

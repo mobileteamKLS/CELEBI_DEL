@@ -30,7 +30,7 @@
     <script src="scripts/alert.mob.js"></script>
     <link href="css/Loader.css" rel="stylesheet" />
     <link href="css/dialog.css" rel="stylesheet" />
-    <link href="css/alert.mob.css" rel="stylesheet"/>
+    <link href="css/alert.mob.css" rel="stylesheet" />
     <script src="js/amplify.min.js"></script>
     <script src="js/Export/EXP_Inventory_Management_Save.js"></script>
     <style>
@@ -97,12 +97,12 @@
             text-align: center;
         }
 
-        .table > tbody > tr > td,
-        .table > tbody > tr > th,
-        .table > tfoot > tr > td,
-        .table > tfoot > tr > th,
-        .table > thead > tr > td,
-        .table > thead > tr > th {
+        .table>tbody>tr>td,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>td,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>thead>tr>th {
             font-size: 12px;
         }
 
@@ -126,12 +126,12 @@
             }
         }
 
-        .table > tbody > tr > td,
-        .table > tbody > tr > th,
-        .table > tfoot > tr > td,
-        .table > tfoot > tr > th,
-        .table > thead > tr > td,
-        .table > thead > tr > th {
+        .table>tbody>tr>td,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>td,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>thead>tr>th {
             vertical-align: inherit;
         }
     </style>
@@ -142,7 +142,7 @@
         <div class="container-fluid">
             <div class="navbar-header" style="background-color:#065da1;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
-                        data-target="#myNavbar">
+                    data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -164,24 +164,27 @@
 
 
                         <div class="row"
-                             style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
+                            style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);padding:5px;margin-bottom:5px;background-color: lightgoldenrodyellow;">
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div class="col-xs-6 col-form-label NoPadding">
-                                    <input type="radio" name="radSize" id="rdoAWBNo" value="FoundCargo" onchange="EnableFoundCargo()" checked>
+                                    <input type="radio" name="radSize" id="rdoAWBNo" value="FoundCargo"
+                                        onchange="EnableFoundCargo()" checked>
                                     <label for="sizeLarge">AWB No.</label>
                                 </div>
 
                                 <div class="col-xs-3 col-form-label NoPadding" style="display: none;">
-                                        <input type="radio" name="radSize" id="rdoGroupID" value="DamageCargo" onchange="EnableFoundCargo()" disabled>
-                                        <label for="sizeLarge">Group ID</label>
-                                    
+                                    <input type="radio" name="radSize" id="rdoGroupID" value="DamageCargo"
+                                        onchange="EnableFoundCargo()" disabled>
+                                    <label for="sizeLarge">Group ID</label>
+
                                 </div>
                                 <div class="col-xs-6 col-form-label NoPadding">
-                             
-                                        <input type="radio" name="radSize" id="rdoNewFoundCargo" value="NewFoundCargo" onchange="EnableFoundCargo()">
-                                        <label for="sizeLarge">Found Cargo</label>
-                                    
+
+                                    <input type="radio" name="radSize" id="rdoNewFoundCargo" value="NewFoundCargo"
+                                        onchange="EnableFoundCargo()">
+                                    <label for="sizeLarge">Found Cargo</label>
+
                                 </div>
 
                             </div>
@@ -195,11 +198,13 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" id="txtScanLocation" class="form-control ui-autocomplete-input" maxlength="30" >
+                                    <input type="text" id="txtScanLocation" class="form-control ui-autocomplete-input"
+                                        maxlength="30">
                                 </div>
                             </div>
-                            
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divGroupID" style="display:none;">
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divGroupID"
+                                style="display:none;">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblGroupID" for="txtGroupID" class="control-label labelFont">
                                         Group ID
@@ -217,7 +222,8 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" id="txtAWBNo" onblur="GetEWRNo()" class="form-control" maxlength="11">
+                                    <input type="text" id="txtAWBNo" onblur="GetEWRNo()" class="form-control"
+                                        maxlength="11">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" id="divHAWB">
@@ -229,8 +235,7 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <select class="form-control" id="ddlEWRNo" onchange="GetLocationDetails()"
-                                            >
+                                    <select class="form-control" id="ddlEWRNo" onchange="GetLocationDetails()">
                                         <option value="0">Select</option>
                                     </select>
                                     <!--<input class="form-control" id="hawbLists" style="display: none;">-->
@@ -239,8 +244,7 @@
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblMPSNo" for="txtMPSNo"
-                                           class="control-label labelFont">Location</label>
+                                    <label id="lblMPSNo" for="txtMPSNo" class="control-label labelFont">Location</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
                                     <select type="text" id="txtLoc" class="form-control">
@@ -252,20 +256,24 @@
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblRcvdRem" for="txtRcvdRem" class="control-label labelFont">Pieces</label>
+                                    <label id="lblRcvdRem" for="txtRcvdRem"
+                                        class="control-label labelFont">Pieces</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" style="text-align:right;" id="txtPcs" class="form-control" onkeyup="ChkMaxLength(this, '1');oneNumberCheck(this);" disabled="disabled">
+                                    <input type="text" style="text-align:right;" id="txtPcs" class="form-control"
+                                        onkeyup="ChkMaxLength(this, '1');oneNumberCheck(this);" disabled="disabled">
                                 </div>
 
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblRcvdRem" for="txtRcvdRem" class="control-label labelFont">Inv. Pieces</label>
+                                    <label id="lblRcvdRem" for="txtRcvdRem" class="control-label labelFont">Inv.
+                                        Pieces</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" style="text-align:right;" id="txtInvPcs" class="form-control" onkeyup="ChkMaxLength(this, '3');oneNumberCheck(this); NumberOnly(event);">
+                                    <input type="text" style="text-align:right;" id="txtInvPcs" class="form-control"
+                                        onkeyup="ChkMaxLength(this, '3');oneNumberCheck(this); NumberOnly(event);">
                                 </div>
 
                             </div>
@@ -273,8 +281,8 @@
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblDamagePkgs" for="txtDamagePkgs"
-                                           class="control-label labelFont">Damage NoP</label>
+                                    <label id="lblDamagePkgs" for="txtDamagePkgs" class="control-label labelFont">Damage
+                                        NoP</label>
                                 </div>
                                 <!-- <div class="col-xs-3 NoPadding">
                                     <input type="text" style="text-align:right;" id="txtDamagePkgs"
@@ -282,14 +290,14 @@
                                 </div> -->
                                 <div class="col-xs-6 NoPadding">
                                     <input type="text" style="text-align:right;" id="txtDamagePkgsView"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '4');" disabled>
+                                        class="form-control" onkeyup="ChkMaxLength(this, '4');" disabled>
                                 </div>
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblDamagePkgs" for="txtDamagePkgs"
-                                           class="control-label labelFont">Damage Weight</label>
+                                    <label id="lblDamagePkgs" for="txtDamagePkgs" class="control-label labelFont">Damage
+                                        Weight</label>
                                 </div>
                                 <!-- <div class="col-xs-3 NoPadding">
                                     <input type="number" onblur="checkDamageWt();" style="text-align:right;" id="txtDamageWt"
@@ -297,18 +305,18 @@
                                 </div> -->
                                 <div class="col-xs-6 NoPadding">
                                     <input type="number" style="text-align:right;" id="txtDamageWtView"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
+                                        class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
                                 </div>
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblDamageType" for="ddlDamageType"
-                                           class="control-label labelFont">Damage Type</label>
+                                    <label id="lblDamageType" for="ddlDamageType" class="control-label labelFont">Damage
+                                        Type</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
                                     <select class="form-control" id="ddlDamageType" disabled>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -317,10 +325,11 @@
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblRemark" for="">Remark</label>
-                                   
+
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <textarea id="txtRemark" onkeyup="ChkMaxLength(this, '50');" class="form-control"></textarea>
+                                    <textarea id="txtRemark" onkeyup="ChkMaxLength(this, '50');"
+                                        class="form-control"></textarea>
                                 </div>
                             </div>
 
@@ -328,7 +337,7 @@
                                 <div class="col">
                                     <label class="ibiSuccessMsg1"></label>
                                 </div>
-                            </div>   
+                            </div>
 
 
 
@@ -336,31 +345,31 @@
                         <div class="row" id="divNormalCargoButton" style="margin-top:10px;">
                             <div class="form-group col-xs-4 col-sm-2 col-md-2">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Back"
-                                       onclick="goBack()">
+                                    onclick="goBack()">
                             </div>
 
                             <div class="form-group col-xs-4 col-sm-2 col-md-2">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Clear"
-                                       onclick="clearALL()">
+                                    onclick="clearALL()">
                             </div>
 
                             <div class="form-group col-xs-4 col-sm-2 col-md-2">
                                 <input type="button" id="btnSaveLoc" class="form-control ButtonColor" value="Submit"
-                                       onclick="SaveLocationDetails();" disabled>
+                                    onclick="SaveLocationDetails('0');" disabled>
                             </div>
 
                         </div>
-                        <div class="row" id="divNormalCargoButton1" style="margin-top:10px; align-items: center; padding-left: 25%; padding-right: 25%;">
+                        <div class="row" id="divNormalCargoButton1" style="margin-top:10px; align-items: center; ">
 
-                            <!-- <div class="form-group col-xs-6 col-sm-3 col-md-3">
-                                <input type="button" id="btnClear" class="form-control ButtonColor" value="Found Cargo"
-                                       onclick="goToDamage('F');">
-                            </div> -->
+                            <div class="form-group col-xs-6 col-sm-2 col-md-2">
+                                <input type="button" id="btnEditLoc" class="form-control ButtonColor" value="Modify"
+                                    onclick="SaveLocationDetails('1');" disabled>
+                            </div>
 
 
-                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                            <div class="form-group col-xs-6 col-sm-3 col-md-3">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Damage Cargo"
-                                       onclick="goToDamage('D');">
+                                    onclick="goToDamage('D');">
                             </div>
 
 
@@ -376,7 +385,8 @@
                                         </label>
                                     </div>
                                     <div class="col-xs-6 NoPadding">
-                                        <input type="text" id="txtScanLocationFD" class="form-control ui-autocomplete-input" maxlength="30" >
+                                        <input type="text" id="txtScanLocationFD"
+                                            class="form-control ui-autocomplete-input" maxlength="30">
                                     </div>
                                 </div>
 
@@ -387,7 +397,8 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <input type="text" id="txtFoundMAWB" autocomplete="off" class="form-control" maxlength="11" onblur="getFoundCargoDetails('S')">
+                                    <input type="text" id="txtFoundMAWB" autocomplete="off" class="form-control"
+                                        maxlength="11" onblur="getFoundCargoDetails('S')">
                                 </div>
                             </div>
                             <!-- <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
@@ -416,63 +427,64 @@
                         <div class="row" id="divFoundCgoDetails" style="display:none;">
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblArrivedPkgs" for="txtFoundPkgs"
-                                           class="control-label labelFont">Found NoP</label>
+                                    <label id="lblArrivedPkgs" for="txtFoundPkgs" class="control-label labelFont">Found
+                                        NoP</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
                                     <input type="number" style="text-align:right;" id="txtFoundPkgs"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                                        class="form-control" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblArrivedPkgs" for="txtFoundPkgsWt"
-                                           class="control-label labelFont">Found NoP Wt</label>
+                                        class="control-label labelFont">Found NoP Wt</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
                                     <input type="number" style="text-align:right;" id="txtFoundPkgsWt"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '10');">
+                                        class="form-control" onkeyup="ChkMaxLength(this, '10');">
                                 </div>
                             </div>
                         </div>
                         <div class="row" id="divFoundCgoDetails1" style="display:none;">
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblDamagePkgs" for="txtDamagePkgs"
-                                           class="control-label labelFont">Damage NoP</label>
+                                    <label id="lblDamagePkgs" for="txtDamagePkgs" class="control-label labelFont">Damage
+                                        NoP</label>
                                 </div>
                                 <div class="col-xs-3 NoPadding">
-                                    <input type="text" style="text-align:right;" id="txtDamagePkgs" 
-                                           class="form-control" onblur="checkDamagePcs();" onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
+                                    <input type="text" style="text-align:right;" id="txtDamagePkgs" class="form-control"
+                                        onblur="checkDamagePcs();"
+                                        onkeyup="ChkMaxLength(this, '4'); NumberOnly(event);">
                                 </div>
                                 <div class="col-xs-3 NoPadding">
                                     <input type="text" style="text-align:right;" id="txtDamagePkgsViewFD" disabled
-                                           class="form-control" onkeyup="ChkMaxLength(this, '4');" >
+                                        class="form-control" onkeyup="ChkMaxLength(this, '4');">
                                 </div>
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
-                                    <label id="lblDamagePkgs" for="txtDamagePkgs"
-                                           class="control-label labelFont">Damage Weight</label>
+                                    <label id="lblDamagePkgs" for="txtDamagePkgs" class="control-label labelFont">Damage
+                                        Weight</label>
                                 </div>
                                 <div class="col-xs-3 NoPadding">
-                                    <input type="number" onblur="checkDamageWt();" style="text-align:right;" id="txtDamageWt"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '10');">
+                                    <input type="number" onblur="checkDamageWt();" style="text-align:right;"
+                                        id="txtDamageWt" class="form-control" onkeyup="ChkMaxLength(this, '10');">
                                 </div>
                                 <div class="col-xs-3 NoPadding">
                                     <input type="number" style="text-align:right;" id="txtDamageWtViewFD"
-                                           class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
+                                        class="form-control" onkeyup="ChkMaxLength(this, '7');" disabled>
                                 </div>
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                 <div style="padding-left: 0px;" class="col-xs-6 col-form-label">
                                     <label id="lblDamageType" for="ddlDamageTypeFD"
-                                           class="control-label labelFont">Damage Type</label>
+                                        class="control-label labelFont">Damage Type</label>
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <select class="form-control" id="ddlDamageTypeFD" >
+                                    <select class="form-control" id="ddlDamageTypeFD">
                                         <!--<option value="0">Select</option>'-->
                                     </select>
                                 </div>
@@ -483,7 +495,8 @@
                                     <!--<font color="red">*</font>-->
                                 </div>
                                 <div class="col-xs-6 NoPadding">
-                                    <textarea id="txtRemarkFD" onkeyup="ChkMaxLength(this, '50');" class="form-control"></textarea>
+                                    <textarea id="txtRemarkFD" onkeyup="ChkMaxLength(this, '50');"
+                                        class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
@@ -508,20 +521,20 @@
                         <div class="row" id="divFoundbutton" style="display:none;">
                             <div class="form-group col-xs-4 col-sm-4 col-md-4">
                                 <input type="button" id="btnBack" class="form-control ButtonColor" value="Back"
-                                       onclick="goBack();">
+                                    onclick="goBack();">
                             </div>
-                
-                
+
+
                             <div class="form-group col-xs-4 col-sm-4 col-md-4">
                                 <input type="button" id="btnClear" class="form-control ButtonColor" value="Clear"
-                                       onclick="clearFoundCargoDetails();">
+                                    onclick="clearFoundCargoDetails();">
                             </div>
-                
+
                             <div class="form-group col-xs-4 col-sm-4 col-md-4">
                                 <input type="button" id="btnSubmit" class="form-control ButtonColor" value="Submit"
-                                       onclick="saveFoundCargoDetails();" >
+                                    onclick="saveFoundCargoDetails();">
                             </div>
-                
+
                         </div>
                     </div>
 
